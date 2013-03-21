@@ -23,6 +23,8 @@ if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
    shopt -s dirspell #Correct directory spelling during word completion
 fi
 
+export EDITOR="vim -p"
+
 ####################
 #  PS1 prettifier  #
 ####################
