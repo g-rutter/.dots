@@ -18,7 +18,7 @@ function prompt_command {
 
 # create a $fill of all screen width minus the time string and a space:
 directory=$(pwd)
-jobn=`jobs | wc -l`
+jobn=`jobs | wc -l | sed 's/^ *//'`
 
 let fillsize=$(( ${COLUMNS}-24-${#directory} ))
 
