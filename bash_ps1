@@ -1,0 +1,51 @@
+# Fill with minuses
+# (this is recalculated every time the prompt is shown in function prompt_command):
+reset_style='\[\033[00m\]'
+yellow=$reset_style'\[\033[0;33m\]'
+bold_yellow=$reset_style'\[\033[1;33m\]'
+bold_white=$reset_style'\[\033[1;29m\]'
+bold_green=$reset_style'\[\033[1;32m\]'
+
+# Prompt variable:
+
+PS1="$bold_yellow"'${directory}${jobindicator} '"$yellow"'${fill} \d · \t\n'"$yellow"'\! > '"$bold_green"
+
+# Reset color for command output
+# (this one is invoked every time before a command is executed):
+trap 'echo -ne "\033[00m"' DEBUG
+
+function prompt_command {
+
+# create a $fill of all screen width minus the time string and a space:
+directory=$(pwd)
+jobn=`jobs | wc -l`
+
+let fillsize=$(( ${COLUMNS}-24-${#directory} ))
+
+if [ "$jobn" -gt "0" ]; then
+   jobindicator=" [$jobn]"
+else
+   jobindicator=""
+fi
+
+let fillsize=$(( ${fillsize}-${#jobindicator}))
+
+fill=""
+while [ "$fillsize" -gt "0" ]
+do
+   fill="―${fill}" # fill with continuous dash
+   let fillsize=$((${fillsize}-1))
+done
+
+#If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+bname=`basename "${PWD/$HOME/~}"`
+echo -ne "\033]0;${bname}: ${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
+;;
+*)
+;;
+esac
+
+}
+PROMPT_COMMAND=prompt_command

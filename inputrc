@@ -1,0 +1,31 @@
+set editing-mode vi
+
+$if mode=vi
+   #normal mode
+   set keymap vi-command
+   "\e[A": history-search-backward
+   "\e[B": history-search-forward
+   "j": history-search-forward
+   "k": history-search-backward
+
+   #insert mode
+   set keymap vi-insert
+   "\e[A": history-search-backward
+   "\e[B": history-search-forward
+   "\ej": history-search-forward
+   "\ek": history-search-backward
+   "\eh": backward-char
+   "\el": forward-char
+   "\eH": backward-word
+   "\eL": forward-word
+
+   #insert mode for mac
+   "∆": history-search-forward
+   "˚": history-search-backward
+   "˙": backward-char
+   "¬": forward-char
+   "Ó": backward-word
+   "Ò": forward-word
+
+$endif
+
