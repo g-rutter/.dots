@@ -54,6 +54,7 @@ alias w3m="w3m -num -no-mouse -cookie"
 #Shortcuts for moving around
 alias d="cd ~/Documents"      #Typing d will take you to your documents.
 alias ~="cd ~"                #Typing ~ will do cd ~, which takes you to your home directory.
+alias dots="cd ~/.dots"
 alias lammps="cd $HOME2/lammps/"
 alias dynamo="cd $HOME2/dynamo/"
 alias votesim="cd $HOME2/votesim/"
