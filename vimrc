@@ -13,10 +13,9 @@ if has ( "conceal" )
 endif
 set backup                         " keep a backup file
 set backupdir=~/.vim/backup        " where to put backup files
-set directory=~/.vim/swp           " where to put swap files
 set noerrorbells                   " don't make noise
 set browsedir=current              " which directory to use for the file browser
-set history=50                     " keep 50 lines of command line history
+set history=500                    " keep N lines of command line history
 set hlsearch                       " highlight the last used search pattern
 set incsearch                      " do incremental searching
 set mouse=                         " disable the use of the mouse
@@ -179,7 +178,6 @@ cnoremap <Esc>k <C-Up>
 cnoremap <Esc>h <Left>
 cnoremap <Esc>l <Right>
 
-"Make scrolloff compatible with H, L
 function! Fixtabs(spaces)
  let old_space_tab = repeat(' ', a:spaces)
  let new_space_tab = repeat(' ', g:tab_size)
@@ -191,17 +189,7 @@ function! Fixtabs(spaces)
  execute l:substitution
 endfunction
 
-"Open all arguments as files in tabs
-function! Tabsfunc(...)
-   for s in a:000
-      echo s
-      execute 'tabe '.s
-   endfor
-endfunction
-
-"Open a list of files with :Tabs <filenames>
-command! -nargs=+ -complete=file Tabs :call Tabsfunc(<f-args>)
-
+"Make scrolloff compatible with H, L
 execute 'nnoremap H H'.&l:scrolloff.'k'
 execute 'nnoremap L L'.&l:scrolloff.'j'
 execute 'vnoremap H H'.&l:scrolloff.'k'
