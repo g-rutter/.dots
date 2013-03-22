@@ -68,6 +68,8 @@ alias 4..="cd .. && cd .. && cd .. && cd .."
 alias vimrc="vim ~/.vimrc"
 alias tmuxrc="vim ~/.tmux.conf"
 alias inputrc="vim ~/.inputrc"
+alias bashrc="vim ~/.bashrc"
+alias bashrc_local="vim ~/.bashrc_local"
 alias h="history|grep"        #Search your command history by typing 'h <query>'
 alias f="find . |grep"        #Search from your current directory downwards for matches in file name by typing 'f <query>'
 alias p="ps aux |grep"
@@ -96,10 +98,6 @@ alias qme="qstat -u phrlaq -t | tail -n +4 | sed 's/NDS  /  NDS/' | sed 's/^\(.\
 alias qn="qstat | grep nazgul | sed 's/\([0-9]\+\)\(\.[a-zA-Z]\+ \)/\1 \2/' | sed 's/\(^[0-9]*\)\(.*\)\( phrlaq \)/$bblue\1$reset\2$bblue\3$reset/' | sed 's/ nazgul *$//'"
 alias qda="qdel all 2>&1 | grip -v '\(Deletion\)\|\(Unauthorized Request\)" #delete all my jobs without bothing me about other jobs.
 alias kbn="killbyname"
-
-# Edit bashrc files
-alias bashrc="vim ~/.vim/bashrc"
-alias bashrc_local="vim ~/.vim/bashrc_local"
 
 ###############
 #  Functions  #
@@ -163,7 +161,9 @@ mkcd () { #Make a new dir and cd into it.
 #  Local-only settings  #
 #########################
 
-source ~/.bashrc_local
+if [ -a ~/.bashrc_local ]; then
+   source ~/.bashrc_local
+fi
 
 #################
 #  Get TMUX up  #
