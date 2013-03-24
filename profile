@@ -24,6 +24,7 @@ if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
 fi
 
 export EDITOR="vim -p"
+export PLATFORM=`uname -s`
 
 ####################
 #  PS1 prettifier  #
