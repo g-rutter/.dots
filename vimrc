@@ -386,7 +386,7 @@ let g:Powerline_stl_path_style = 'full'
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 let Powerline_cache_enabled = 1
 call Pl#Theme#InsertSegment('currhigroup', 'after', 'fileinfo')
-let Powerline_colorscheme = 'skwp'
+let Powerline_colorscheme = 'solarized256'
 
 "-------------------------------------------------------------------------------
 " Folding and visual fold cuing

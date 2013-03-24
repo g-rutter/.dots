@@ -1,0 +1,43 @@
+snippet "v(el(ocity)?)?c(reate)?" "Velocity create command http://lammps.sandia.gov/doc/velocity.html" !br
+velocity ${1:all} create ${3:[Temperature]} ${4:[Random number seed]} ${5:mom ${6:yes}} ${7:rot ${8:yes}} ${9:sum ${10:yes}} ${11:dist ${12:gaussian}}
+endsnippet
+
+snippet "[Nn][Vv]([Tt])?" "Create NVT thermostat http://lammps.sandia.gov/doc/fix_nh.html" !br
+fix ${1:NVTfix} ${2:all} nvt temp ${3:[Temperature]} $3 ${4:[Tdamp]}
+endsnippet
+
+snippet "[Nn][Vv]([Ee])?" "Create NVE thermostat http://lammps.sandia.gov/doc/fix_nve.html" !br
+fix ${1:NVEfix} ${2:all} nve
+endsnippet
+
+snippet "bound(ary)?p?" "Periodic 3D boundary conditions http://lammps.sandia.gov/doc/boundary.html" !br
+boundary p p p
+endsnippet
+
+snippet "bound(ary)?f?" "Fixed 3D boundary conditions http://lammps.sandia.gov/doc/boundary.html" !br
+boundary f f f
+endsnippet
+
+snippet "[Dd][Cc][Dd]" "Dump DCD file http://lammps.sandia.gov/doc/dump.html" !br
+dump ${1:DCD_dump} ${2:all} dcd ${3:100} `!v expand("%:r")`$3.dcd
+endsnippet
+
+snippet "fixmom" "Zero linear and/or angular momentum every N timesteps" !br
+fix ${1:zeromomfix} ${2:all} momentum ${3:[N]} ${4:linear 1 1 1} ${5:angular}
+endsnippet
+
+snippet "fixre(cent[re]{2})?" "Adjust the centre-of-mass position of a group of atoms every timestep" !br
+fix ${1:recenterfix} ${2:all} recenter ${3:0.5 0.5 0.5} ${4:units fraction} ${5:shift ${6:all}}
+endsnippet
+
+snippet "fix(spring)?rg" "Apply a spring force towards a target radius of gyration." !br
+fix ${1:rgfix} ${2:all} spring/rg ${3:[spring constant]} ${4:[target rg]}
+endsnippet
+
+snippet "fixtether" "Apply a spring force to the COM of a group of atoms." !br
+fix ${1:tetherfix} ${2:all} spring tether ${3:[spring constant]} ${4:0.0 0.0 0.0} ${5:[equilibrium distance]}
+endsnippet
+
+snippet "min(imi[sz]e)?" "Perform an energy minimization of the system, by iteratively adjusting atom coordinates." !br
+minimize ${1:[energy tolerance (unitless)]} ${2:[force tolerance (force units)]} ${3:[max iterations]} ${4:[max evaluations]}
+endsnippet
