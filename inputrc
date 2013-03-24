@@ -19,6 +19,8 @@ $if mode=vi
    "\eH": backward-word
    "\eL": forward-word
 
+   C-g: " | grip"
+
    #insert mode for mac
    "∆": history-search-forward
    "˚": history-search-backward
