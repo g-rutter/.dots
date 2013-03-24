@@ -6,14 +6,18 @@ bold_yellow=$reset_style'\[\033[1;33m\]'
 bold_white=$reset_style'\[\033[1;29m\]'
 bold_green=$reset_style'\[\033[1;32m\]'
 bold_magenta=$reset_style'\033[0;35m'
+bold_red=$reset_style'\033[1;31m'
+
 
 PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
-echo $PLATFORM
 
-if [ $PLATFORM == "mac" ]; then
+if [ $PLATFORM == "darwin" ]; then
    ln_dir_options="-svFfh"
 elif [ $PLATFORM == "linux" ]; then
-   ln_dir_options="--symbolic -sfnv --symbolic"
+   ln_dir_options="-sfnv"
+else
+   echo -e "$bold_red""System $PLATFORM not recognised. Update this file to include: $PLATFORM.""$reset_style"
+   exit
 fi
 
 ln  -sv  ~/.dots/profile     ~/.profile
