@@ -1,13 +1,16 @@
 #!/bin/bash
 
+#############################
+#  Enable colourful output  #
+#############################
+
 reset_style='\033[00m'
-yellow=$reset_style'\033[0;33m'
-bold_yellow=$reset_style'\[\033[1;33m\]'
-bold_white=$reset_style'\[\033[1;29m\]'
-bold_green=$reset_style'\[\033[1;32m\]'
 bold_magenta=$reset_style'\033[0;35m'
 bold_red=$reset_style'\033[1;31m'
 
+#####################################
+#  Config before creating symlinks  #
+#####################################
 
 PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
 
@@ -20,14 +23,26 @@ else
    exit
 fi
 
+#############################
+#  Create general symlinks  #
+#############################
+
 ln  -sv  ~/.dots/profile     ~/.profile
 ln  -sv  ~/.dots/tmux.conf   ~/.tmux.conf
 ln  -sv  ~/.dots/bash_ps1    ~/.bash_ps1
 ln  -sv  ~/.dots/inputrc     ~/.inputrc
 
+##################
+#  ssh symlinks  #
+##################
+
 echo -e "$bold_magenta""\nInstalling ssh config file.""$reset_style"
 mkdir -v ~/.ssh
 ln  -sv  ~/.dots/ssh_config  ~/.ssh/config
+
+##################
+#  Vim symlinks  #
+##################
 
 echo -e "$bold_magenta""\nInstalling .vimrc and bundles.""$reset_style"
 mkdir -v     ~/.vim
