@@ -1,4 +1,10 @@
 set editing-mode vi
+set show-all-if-ambiguous on
+set visible-stats on
+
+$if Bash
+   Space: magic-space
+$endif
 
 $if mode=vi
    #normal mode
