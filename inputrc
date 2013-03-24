@@ -14,6 +14,8 @@ $if mode=vi
    "j": history-search-forward
    "k": history-search-backward
 
+   ":": ";"
+
    #insert mode
    set keymap vi-insert
    "\e[A": history-search-backward
