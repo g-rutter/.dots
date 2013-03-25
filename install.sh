@@ -45,10 +45,17 @@ ln  -sv  ~/.dots/ssh_config  ~/.ssh/config
 ##################
 
 echo -e "$bold_magenta""\nInstalling .vimrc and bundles.""$reset_style"
-mkdir -v     ~/.vim
-mkdir -v     ~/.vim/backup
-ln    -sv    ~/.dots/vimrc          ~/.vimrc
+
+mkdir -v ~/.vim
+mkdir -v ~/.vim/backup
+
+ln -sv ~/.dots/vimrc ~/.vimrc
+
 ln    $ln_dir_options ~/.dots/vim/bundle     ~/.vim/bundle
 ln    $ln_dir_options ~/.dots/vim/colors     ~/.vim/colors
 ln    $ln_dir_options ~/.dots/vim/Ultisnips  ~/.vim/Ultisnips
+
+git submodule init
+git submodule update
+
 echo -e "$bold_magenta""Now run :BundleInstall inside Vim.""$reset_style"
