@@ -478,6 +478,5 @@ if exists("+showtabline")
 
    endfunction
 
-   set stal=2
    set tabline=%!MyTabLine()
 endif
