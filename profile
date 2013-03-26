@@ -25,6 +25,7 @@ fi
 
 export EDITOR="vim -p"
 export PLATFORM=`uname -s`
+export LESS=-RFX
 
 ####################
 #  PS1 prettifier  #
