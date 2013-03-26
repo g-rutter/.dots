@@ -108,9 +108,9 @@ endif
 
 " save and quit shortcuts
 nnoremap <Leader>a :wall<CR>
-nnoremap <Leader>Q :q!<CR>
-nnoremap <Leader>q :q!<CR>
+nnoremap <Leader>q :q<CR>
 nnoremap <Leader>x :x<CR>
+nnoremap <Leader>! :qall!<CR>
 
 " Enter command mode quickly
 nnoremap ; :
@@ -200,7 +200,7 @@ vnoremap <leader>a :<c-u>execute ":'<,'>Tabular /".nr2char(getchar())<cr>
 
 "define a macro that inserts a line printing its line number in a variety of
 "languages
-au FileType c noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");', line('.'))<Enter>
+au FileType cpp,c noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");', line('.'))<Enter>
 au FileType sh noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>
 au FileType python noremap <Leader>p o<Esc>:s/^/\=printf('print "Line %d."', line('.'))<Enter>
 au FileType vim noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>
