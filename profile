@@ -171,7 +171,8 @@ fi
 #  Get TMUX up  #
 #################
 
-if [ "$TMUX" == '' ]
+# No nesting, and no tmux in PBS interactive environment.
+if [ "$TMUX" == '' ] && [ "$PBS_ENVIRONMENT" == '' ]
 then
    existing_session_count=$(tmux ls | grep . -c)
    if [ $existing_session_count -eq '0' ]

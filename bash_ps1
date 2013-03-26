@@ -8,7 +8,7 @@ bold_green=$reset_style'\[\033[1;32m\]'
 
 # Prompt variable:
 
-PS1="$bold_yellow"'${directory}${jobindicator} '"$yellow"'${fill} \d · \t\n'"$yellow"'\! > '"$bold_green"
+PS1="$bold_yellow"'${directory}${jobindicator}${hostindicator} '"$yellow"'${fill} \d · \t\n'"$yellow"'\! > '"$bold_green"
 
 # Reset color for command output
 # (this one is invoked every time before a command is executed):
@@ -22,6 +22,22 @@ jobn=`jobs | wc -l | sed 's/^ *//'`
 
 let fillsize=$(( ${COLUMNS}-24-${#directory} ))
 
+##############################
+#  PBS login node indicator  #
+##############################
+
+if [ "$PBS_ENVIRONMENT" != "" ]; then
+   hostindicator=" [$HOSTNAME]"
+else
+   hostindicator=""
+fi
+
+let fillsize=$(( ${fillsize}-${#hostindicator}))
+
+##############################
+#  Background job indicator  #
+##############################
+
 if [ "$jobn" -gt "0" ]; then
    jobindicator=" [$jobn]"
 else
@@ -30,10 +46,14 @@ fi
 
 let fillsize=$(( ${fillsize}-${#jobindicator}))
 
+###############################
+#  Fill with continuous dash  #
+###############################
+
 fill=""
 while [ "$fillsize" -gt "0" ]
 do
-   fill="―${fill}" # fill with continuous dash
+   fill="―${fill}"
    let fillsize=$((${fillsize}-1))
 done
 

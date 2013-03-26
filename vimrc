@@ -44,6 +44,7 @@ set thesaurus+=~/.vim/mthesaur.txt
 set autoread                       " Reload file when changed.
 set suffixes+=,                    " Lower matching priority to files without extension (likely binary)
 set suffixes-=.h                   " Remove .h from low priority group
+set showtabline=1                  " Show tabline when there is more than 1 tab.
 
 "-------------------------------------------------------------------------------
 " Persistent undo!
@@ -306,6 +307,8 @@ highlight   LineNr       ctermfg=15    ctermbg=53
 highlight   Conceal      ctermfg=11    ctermbg=16
 highlight   Pmenu        ctermbg=53    ctermfg=15
 highlight   VertSplit    ctermfg=53    ctermbg=53
+highlight   TabLine      ctermfg=255   ctermbg=236 cterm=bold
+highlight   TabLineSel   ctermfg=10    ctermbg=0   cterm=bold
 
 " Make Vimdiff tolerable
 hi DiffAdd ctermbg=24 ctermfg=15 cterm=bold
@@ -443,3 +446,38 @@ vnoremap <silent> # :<C-U>
 \gvy?<C-R><C-R>=substitute(
 \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
 \gV:call setreg('"', old_reg, old_regtype)<CR>
+
+"""""""""""""""""
+"  Window tabs  "
+"""""""""""""""""
+
+if exists("+showtabline")
+   function! MyTabLine()
+      let s = ''
+      let t = tabpagenr()
+      let i = 1
+
+      while i <= tabpagenr('$')
+
+         let buflist = tabpagebuflist(i)
+         let winnr = tabpagewinnr(i)
+         let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
+         let file = bufname(buflist[winnr - 1])
+         let file = fnamemodify(file, ':p:t')
+
+         if file == ''
+            let file = '[No Name]'
+         endif
+
+         let s .= ' ' . i . ":" . file  . ' ' . '%#TabLine#'
+         let i = i + 1
+
+      endwhile
+
+      return s
+
+   endfunction
+
+   set stal=2
+   set tabline=%!MyTabLine()
+endif
