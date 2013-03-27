@@ -27,7 +27,7 @@ set showcmd                        " Show the command being typed in the bottom 
 set iskeyword+=95                  " Now a word with an underscore will be seen as one word, e.g. big_output is one word.
 set laststatus=2                   " Always show me the file name.
 set ruler                          " Show % through a file.
-set autochdir                      " always switch to the current file directory
+"set autochdir                      " always switch to the current file directory
 set synmaxcol=10000                " Maximum number of characters on a line that will be syntax highlighted.
 set cursorline                     " Highlight current cursor line.
 set timeoutlen=600                 " Don't wait so long for the next keypress.
@@ -469,7 +469,7 @@ if exists("+showtabline")
             let file = '[No Name]'
          endif
 
-         let s .= ' ' . i . ":" . file  . ' ' . '%#TabLine#'
+         let s .= ' ' . i . ': ' . file  . ' ' . '%#TabLine#' . '│'
          let i = i + 1
 
       endwhile
