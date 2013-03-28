@@ -307,8 +307,11 @@ highlight   LineNr       ctermfg=15    ctermbg=53
 highlight   Conceal      ctermfg=11    ctermbg=16
 highlight   Pmenu        ctermbg=53    ctermfg=15
 highlight   VertSplit    ctermfg=53    ctermbg=53
+
+" Tabline
 highlight   TabLine      ctermfg=255   ctermbg=236 cterm=bold
 highlight   TabLineSel   ctermfg=10    ctermbg=0   cterm=bold
+highlight   TabLineFill                ctermbg=236 cterm=NONE
 
 " Make Vimdiff tolerable
 hi DiffAdd ctermbg=24 ctermfg=15 cterm=bold
@@ -473,6 +476,8 @@ if exists("+showtabline")
          let i = i + 1
 
       endwhile
+
+      let s.= '%#TabLineFill#'
 
       return s
 
