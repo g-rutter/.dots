@@ -53,7 +53,7 @@ ln -sv ~/.dots/vimrc ~/.vimrc
 
 ln    $ln_dir_options ~/.dots/vim/bundle     ~/.vim/bundle
 ln    $ln_dir_options ~/.dots/vim/colors     ~/.vim/colors
-ln    $ln_dir_options ~/.dots/vim/Ultisnips  ~/.vim/Ultisnips
+ln    $ln_dir_options ~/.dots/vim/UltiSnips  ~/.vim/UltiSnips
 
 rm -rf ~/.dots/vim/bundle/vundle
 git submodule init
