@@ -51,9 +51,21 @@ echo -e                  "#  Setting SSH aliases  #"
 echo -e                  "#########################""$reset_style"
 echo -e ""
 
-
 mkdir -v ~/.ssh
 ln  -sv  ~/.dots/ssh_config  ~/.ssh/config
+
+#################
+#  Install ack  #
+#################
+
+echo -e ""
+echo -e "$message_colour""####################"
+echo -e                  "#  Installing ack  #"
+echo -e                  "####################""$reset_style"
+echo -e ""
+
+mkdir -v ~/bin
+sh -c "curl http://betterthangrep.com/ack-standalone > ~/bin/ack && chmod 0755 ~/bin/ack"
 
 ##################
 #  Vim symlinks  #
