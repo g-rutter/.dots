@@ -26,6 +26,7 @@ fi
 export EDITOR="vim -p"
 export PLATFORM=`uname -s`
 export LESS=-RFX
+export PATH="$PATH:$HOME/bin"
 
 ####################
 #  PS1 prettifier  #
