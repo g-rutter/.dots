@@ -44,6 +44,7 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$
 
 #Change default options for basic commands
 alias lg="ll | grep "
+alias l1="ls -1"
 alias rm="rm -iv"             #-i: Ask you to confirm before deletions. Can be overridden at any time by using the -f option. -v: be verbose. Makes it say exactly what it is doing.
 alias rmd="rm -rf" #remove a directory silently without asking
 alias cp="cp -v"              #-v: Verbose
