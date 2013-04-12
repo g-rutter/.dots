@@ -17,7 +17,12 @@ trap 'echo -ne "\033[00m"' DEBUG
 function prompt_command {
 
 # create a $fill of all screen width minus the time string and a space:
-directory=$(pwd | sed "s,$HOME,~," | sed "s,$HOME2,♥," )
+directory=$(pwd | sed "s,$HOME,~," )
+
+if [[ $HOME2 ]]; then
+   directory=$( echo $directory | sed "s,$HOME2,♥," )
+fi
+
 jobn=`jobs | wc -l | sed 's/^ *//'`
 
 let fillsize=$(( ${COLUMNS}-24-${#directory} ))
