@@ -87,7 +87,7 @@ alias sp="vim -o" # opens a vertical split
 alias python3="LD_PRELOAD='' python3"
 alias py="ipython"
 
-alias makelmp="make openmpi2 && make makelib && make -f Makefile.lib openmpi2 && cp liblammps_openmpi2.a ~/lib/ && cp lmp_openmpi2 ~/bin/"
+alias makelmp="make openmpi2 && make makelib && make -f Makefile.lib openmpi2 && cp liblammps_openmpi2.a ~/lib/ && cp lmp_openmpi2 ~/bin/ && cp library.h ~/include/liblmp.h"
 
 alias ack="ack --color-match=\"red bold\""
 alias ick="ack -i --color-match=\"red bold\""
