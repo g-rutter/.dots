@@ -65,7 +65,7 @@ echo -e                  "####################""$reset_style"
 echo -e ""
 
 mkdir -v ~/bin
-sh -c "curl http://betterthangrep.com/ack-standalone > ~/bin/ack && chmod 0755 ~/bin/ack"
+sh -c "curl http://beyondgrep.com/ack-2.04-single-file > ~/bin/ack && chmod 0755 ~/bin/ack"
 
 ##################
 #  Vim symlinks  #
