@@ -123,14 +123,6 @@ killbyname () { # Kills ALL processes that match the name e.g. 'killbyname firef
    echo "Killed $(($Nresults_before - $Nresults_after)) process(es)."
 }
 
-hn () { # Print the first N lines of a file by typing 'hn N file', e.g. 'hn 50 readme.txt.' Mnemonic: Head N.
-   head -n $1 $2
-}
-
-tn () { # Print the last N lines. Mnemonic: Tail N. 
-   tail -n $1 $2
-}
-
 desc () { #print the description of a job folder
    cat $1/description 2> /dev/null
 }
@@ -159,6 +151,27 @@ h- () { #Print command history with negative index so that !-N:x-y type commands
 mkcd () { #Make a new dir and cd into it.
    mkdir -p "$*"
    cd "$*"
+}
+
+vt () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs
+   echo "Opening the following files for editing:"
+
+   LIST=""
+
+   for FILE in `file * | ack ':.*ASCII.*text' | sed  's/:.*ASCII.*text//'`; do
+
+      FILESIZE=$(stat -c%s "$FILE")
+
+      if [[ $FILESIZE -lt 104857600 ]]; then
+         printf "$FILE "
+         LIST+="$FILE "
+      fi
+
+   done
+
+   echo ""
+
+   vim -p $LIST
 }
 
 #########################
