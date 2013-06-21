@@ -153,25 +153,27 @@ mkcd () { #Make a new dir and cd into it.
    cd "$*"
 }
 
-vt () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs
-   echo "Opening the following files for editing:"
+t () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs, if they match $1
 
    LIST=""
 
-   for FILE in `file * | ack ':.*ASCII.*text' | sed  's/:.*ASCII.*text.*//'`; do
+   for FILE in `file * | ack ':.*ASCII.*text' | sed  's/:.*ASCII.*text.*//' | ack "$1"`; do
 
       FILESIZE=$(stat -c%s "$FILE")
 
       if [[ $FILESIZE -lt 104857600 ]]; then
-         printf "$FILE "
          LIST+="$FILE "
       fi
 
    done
 
-   echo ""
-
-   vim -p $LIST
+   if [[ ${#LIST} -ge 1 ]]; then
+      echo "Opening the following files for editing:"
+      echo $LIST
+      $EDITOR $LIST
+   else
+      echo "Nothing to open."
+   fi
 }
 
 #########################
