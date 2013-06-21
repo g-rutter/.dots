@@ -158,7 +158,7 @@ vt () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs
 
    LIST=""
 
-   for FILE in `file * | ack ':.*ASCII.*text' | sed  's/:.*ASCII.*text//'`; do
+   for FILE in `file * | ack ':.*ASCII.*text' | sed  's/:.*ASCII.*text.*//'`; do
 
       FILESIZE=$(stat -c%s "$FILE")
 
