@@ -171,7 +171,7 @@ t () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs,
    if [[ ${#LIST} -ge 1 ]]; then
       echo "Opening the following files for editing:"
       echo $LIST
-      #$EDITOR $LIST
+      $EDITOR $LIST
    else
       echo "Nothing to open."
    fi
