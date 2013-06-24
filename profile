@@ -153,11 +153,12 @@ mkcd () { #Make a new dir and cd into it.
    cd "$*"
 }
 
-t () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs, if they match $1
+t () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs, if they match any of the following arguments
 
+   search=`echo $*| sed 's/ /|/g'`
    LIST=""
 
-   for FILE in `file * | ack ':.*ASCII.*text' | sed  's/:.*ASCII.*text.*//' | ack "$1"`; do
+   for FILE in `file * | ack ':.*text' | sed  's/:.*text.*//' | ack "$search"`; do
 
       FILESIZE=$(stat -c%s "$FILE")
 
@@ -170,7 +171,7 @@ t () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs,
    if [[ ${#LIST} -ge 1 ]]; then
       echo "Opening the following files for editing:"
       echo $LIST
-      $EDITOR $LIST
+      #$EDITOR $LIST
    else
       echo "Nothing to open."
    fi
@@ -197,5 +198,6 @@ then
       tmux -2
    else
       tmux attach -d
+      tmux rename-window dotfiles
    fi
 fi
