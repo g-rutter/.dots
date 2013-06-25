@@ -58,6 +58,18 @@ if has ("persistent_undo")
 endif
 
 "-------------------------------------------------------------------------------
+" Set extra filetypes
+"-------------------------------------------------------------------------------
+
+if expand('%:t') =~? 'bash-fc-\d\+' "Temp bash files
+ setfiletype sh
+endif
+
+if expand('%:t') =~? '\.in$'
+ setfiletype lammps
+endif
+
+"-------------------------------------------------------------------------------
 " Keyboard
 "-------------------------------------------------------------------------------
 
@@ -214,32 +226,33 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 "let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+"Bundle 'gmarik/vundle'
 
 ""Github bundles here:
+"Bundle 'Valloric/YouCompleteMe'
 "Bundle 'kien/ctrlp.vim'
 "Bundle 'kshenoy/vim-signature'
+"Bundle 'maxbrunsfeld/vim-yankstack'
+"Bundle 'nathanaelkane/vim-indent-guides'
+"Bundle 'scrooloose/nerdtree'
 "Bundle 'scrooloose/syntastic'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/vim-powerline'
-"Bundle 'Valloric/YouCompleteMe'
 Bundle 'godlygeek/tabular'
 Bundle 'guns/xterm-color-table.vim'
 Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'maxbrunsfeld/vim-yankstack'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'rson/vim-conque'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
+Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/vimproc.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-eunuch'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'vim-scripts/a.vim'
 Bundle 'vim-scripts/CmdlineComplete.git'
 Bundle 'vim-scripts/InsertChar'
 Bundle 'vim-scripts/TagHighlight'
-Bundle 'vim-scripts/a.vim'
 
 if has('python')
   Bundle 'SirVer/ultisnips'
@@ -261,12 +274,22 @@ let g:NERDCustomDelimiters = { 'lammps' : { 'left' : '#' } }
 
 filetype plugin indent on "required!
 
-nnoremap þ yankstack_substitute_older_paste
-nnoremap Þ yankstack_substitute_newer_paste
-call yankstack#setup()
+"nnoremap þ yankstack_substitute_older_paste
+"nnoremap Þ yankstack_substitute_newer_paste
+"call yankstack#setup()
 nnoremap Y y$
 
 nnoremap ŋ :GundoToggle<CR>
+
+"Unite
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_history_yank_enable = 1
+let g:unite_winheight = 10
+
+nnoremap <C-p> :Unite -start-insert file_rec/async<cr>
+nnoremap <leader>y :Unite register<cr>
+
 ""-------------------------------------------------------------------------------
 "" Colours and such
 ""-------------------------------------------------------------------------------
@@ -399,6 +422,7 @@ set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 let Powerline_cache_enabled = 1
 call Pl#Theme#InsertSegment('currhigroup', 'after', 'fileinfo')
 let Powerline_colorscheme = 'solarized256'
+"Add PWD then short/relative path
 
 "-------------------------------------------------------------------------------
 " Folding and visual fold cuing
@@ -426,14 +450,6 @@ endfunction
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=30
-
-"-------------------------------------------------------------------------------
-" Set filetype to shell when working with temp bash files
-"-------------------------------------------------------------------------------
-
-if expand('%:t') =~?'bash-fc-\d\+'
- setfiletype sh
-endif
 
 "-------------------------------------------------------------------------------
 " Search for selected text, forwards or backwards.
