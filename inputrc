@@ -13,7 +13,6 @@ $if mode=vi
    "\e[B": history-search-forward
    "j": history-search-forward
    "k": history-search-backward
-
    ":": ";"
 
    #insert mode
@@ -28,6 +27,7 @@ $if mode=vi
    "\eL": forward-word
 
    C-g: " | ick "
+   C-n: " >/dev/null"
 
    #insert mode for mac
    "∆": history-search-forward
