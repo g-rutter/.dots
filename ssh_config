@@ -6,6 +6,10 @@ Host godzilla
    Hostname godzilla.csc.warwick.ac.uk
    User phrlaq
 
+Host minerva
+   Hostname minerva.csc.warwick.ac.uk
+   User phrlaq
+
 Host dubhe
    Hostname dubhe.csc.warwick.ac.uk
    User phrlaq
