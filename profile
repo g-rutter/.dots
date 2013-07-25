@@ -77,7 +77,7 @@ alias bashrc_local="vim ~/.bashrc_local"
 alias h="history|grep"        #Search your command history by typing 'h <query>'
 alias f="find . |grep"        #Search from your current directory downwards for matches in file name by typing 'f <query>'
 alias p="ps aux |grep"
-alias o="kde-open"            #Open a file in the default program that it would open in if you went to the file explorer and double clicked it eg 'o intro.pdf' to open it in the GUI pdf program.
+alias o="gnome-open 2>/dev/null"            #Open a file in the default program that it would open in if you went to the file explorer and double clicked it eg 'o intro.pdf' to open it in the GUI pdf program.
 
 #Get into vim faster
 alias v="vim -p" # open with tabs by default
@@ -156,22 +156,24 @@ mkcd () { #Make a new dir and cd into it.
 t () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs, if they match any of the following arguments
 
    search=`echo $*| sed 's/ /|/g'`
-   LIST=""
+   FINAL_LIST=""
+
+   TEXT_FILES=`file * | ack ':.*text' | sed  's/:.*text.*//' | ack "$search"`
 
    for FILE in `file * | ack ':.*text' | sed  's/:.*text.*//' | ack "$search"`; do
 
       FILESIZE=$(stat -c%s "$FILE")
 
       if [[ $FILESIZE -lt 104857600 ]]; then
-         LIST+="$FILE "
+         FINAL_LIST+="$FILE "
       fi
 
    done
 
-   if [[ ${#LIST} -ge 1 ]]; then
+   if [[ ${#FINAL_LIST} -ge 1 ]]; then
       echo "Opening the following files for editing:"
-      echo $LIST
-      $EDITOR $LIST
+      echo $FINAL_LIST
+      $EDITOR $FINAL_LIST
    else
       echo "Nothing to open."
    fi

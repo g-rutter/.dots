@@ -284,11 +284,11 @@ nnoremap ŋ :GundoToggle<CR>
 "Unite
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:unite_source_history_yank_enable = 1
-let g:unite_source_history_yank_enable = 1
 let g:unite_winheight = 10
 
-nnoremap <C-p> :Unite -start-insert file_rec/async<cr>
-nnoremap <leader>y :Unite register<cr>
+nnoremap \p :Unite -start-insert file_rec/async<cr>
+nnoremap \y :Unite history/yank<cr>
+nnoremap \l :Unite -start-insert line<cr>
 
 ""-------------------------------------------------------------------------------
 "" Colours and such
