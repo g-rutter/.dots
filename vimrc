@@ -81,19 +81,8 @@ nnoremap <Leader>o o<Esc>
 nnoremap <Leader>O O<Esc>
 nnoremap <Leader>l o<Esc>O
 
-" pressing jj in insert mode goes to normal mode. JJ also saves changes.
-inoremap jj <Esc>
-inoremap JJ <Esc>:wall<CR>
-inoremap Jj <Esc>:wall<CR>
-inoremap jv <Esc>v
-inoremap Jv <Esc>:wall<CR>v
-inoremap jV <Esc>V
-inoremap JV <Esc>:wall<CR>V
-inoremap jR <Esc>R
-inoremap JR <Esc>:wall<CR>R
-inoremap jq <Esc>:q<CR>
-inoremap Jq <Esc>:wall<CR>:q<CR>
-inoremap j! <Esc>:q!<CR>
+" ,, is Esc.
+noremap <leader><leader> <Esc>
 
 " make zz/zt/zb work nicely with visual selections
 vnoremap <silent> zz :<C-u>call setpos('.',[0,(line("'>")-line("'<"))/2+line("'<"),0,0])<Bar>normal! zzgv<CR>
