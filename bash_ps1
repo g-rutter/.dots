@@ -17,21 +17,22 @@ trap 'echo -ne "\033[00m"' DEBUG
 
 function prompt_command {
 
-directory=$(echo "`pwd` " | sed "s,$HOME,~," )
+directory=$(pwd | sed "s,$HOME,~," )
 
 if [[ $HOME2 ]]; then
    directory=$( echo $directory | sed "s,$HOME2,♥," )
 fi
 
+directory+=" "
 jobn=`jobs | wc -l | sed 's/^ *//'`
 
-let fillsize=$(( ${COLUMNS}-24-${#directory} ))
+let fillsize=$(( ${COLUMNS}-23-${#directory} ))
 
 ##############################
 #  PBS login node indicator  #
 ##############################
 
-if [ "$PBS_ENVIRONMENT" != "" ] || [ "$SSH_CONNECTION" == '' ]; then
+if [ "$PBS_ENVIRONMENT" != "" ] || [ "$SSH_CONNECTION" != '' ]; then
    hostindicator="‹$HOSTNAME› "
 else
    hostindicator=""
@@ -44,7 +45,7 @@ let fillsize=$(( ${fillsize}-${#hostindicator}))
 ##############################
 
 if [ "$jobn" -gt "0" ]; then
-   jobindicator=" [$jobn]"
+   jobindicator="[$jobn] "
 else
    jobindicator=""
 fi
