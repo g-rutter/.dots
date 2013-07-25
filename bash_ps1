@@ -9,7 +9,7 @@ white=$reset_style'\[\033[0;37m\]'
 
 # Prompt variable:
 
-PS1="$white"'${hostindicator} '"$bold_yellow"'${directory}${jobindicator}'"$yellow"'${fill} \d · \t\n'"$bold_green"
+PS1="$white"'${hostindicator}'"$bold_yellow"'${directory}${jobindicator}'"$yellow"'${fill} \d · \t\n'"$bold_green"
 
 # Reset color for command output
 # (this one is invoked every time before a command is executed):
@@ -31,8 +31,8 @@ let fillsize=$(( ${COLUMNS}-24-${#directory} ))
 #  PBS login node indicator  #
 ##############################
 
-if [ "$PBS_ENVIRONMENT" != "" ] || [ "$SSH_CONNECTION" != '' ]; then
-   hostindicator="‹$HOSTNAME›"
+if [ "$PBS_ENVIRONMENT" != "" ] || [ "$SSH_CONNECTION" == '' ]; then
+   hostindicator="‹$HOSTNAME› "
 else
    hostindicator=""
 fi
