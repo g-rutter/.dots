@@ -5,10 +5,11 @@ yellow=$reset_style'\[\033[0;33m\]'
 bold_yellow=$reset_style'\[\033[1;33m\]'
 bold_white=$reset_style'\[\033[1;29m\]'
 bold_green=$reset_style'\[\033[1;32m\]'
+white=$reset_style'\[\033[0;37m\]'
 
 # Prompt variable:
 
-PS1="$bold_yellow"'${directory}${jobindicator}${hostindicator} '"$yellow"'${fill} \d · \t\n'"$yellow"'\! > '"$bold_green"
+PS1="$white"'${hostindicator} '"$bold_yellow"'${directory}${jobindicator}'"$yellow"'${fill} \d · \t\n'"$bold_green"
 
 # Reset color for command output
 # (this one is invoked every time before a command is executed):
@@ -16,8 +17,7 @@ trap 'echo -ne "\033[00m"' DEBUG
 
 function prompt_command {
 
-# create a $fill of all screen width minus the time string and a space:
-directory=$(pwd | sed "s,$HOME,~," )
+directory=$(echo "`pwd` " | sed "s,$HOME,~," )
 
 if [[ $HOME2 ]]; then
    directory=$( echo $directory | sed "s,$HOME2,♥," )
@@ -31,8 +31,8 @@ let fillsize=$(( ${COLUMNS}-24-${#directory} ))
 #  PBS login node indicator  #
 ##############################
 
-if [ "$PBS_ENVIRONMENT" != "" ]; then
-   hostindicator=" [$HOSTNAME]"
+if [ "$PBS_ENVIRONMENT" != "" ] || [ "$SSH_CONNECTION" != '' ]; then
+   hostindicator="‹$HOSTNAME›"
 else
    hostindicator=""
 fi
