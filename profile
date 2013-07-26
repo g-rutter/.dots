@@ -191,8 +191,8 @@ fi
 #  Get TMUX up  #
 #################
 
-# No nesting, and no tmux in PBS interactive environment, no tmux through ssh.
-if [ "$TMUX" == '' ] && [ "$PBS_ENVIRONMENT" == '' ] && [ "$SSH_CONNECTION" == '' ]
+# Launch TMUX on bittern if not already launched
+if [ "$TMUX" == '' ] && [ "$HOST" == 'bittern' ]
 then
    existing_session_count=$(tmux ls | grep . -c)
    if [ $existing_session_count -eq '0' ]
