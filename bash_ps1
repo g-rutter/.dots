@@ -9,14 +9,14 @@ white=$reset_style'\[\033[0;37m\]'
 
 # Prompt variable:
 
-PS1="$white"'${hostindicator}'"$bold_yellow"'${directory}${jobindicator}'"$yellow"'${fill} \d · \t\n'"$bold_green"
+PS1="$white"'${hostindicator}'"$bold_yellow"'${directory}${jobindicator}'"$yellow"'${fill} \d · \t\n'"$bold_white"
 
 # Reset color for command output
 # (this one is invoked every time before a command is executed):
 trap 'echo -ne "\033[00m"' DEBUG
 
 #Put a red X after interrupted commands
-trap 'echo -ne "\033[1;31m"✕' INT
+trap 'echo -ne "\033[1;31m✕\033[00m"' INT
 
 function prompt_command {
 
