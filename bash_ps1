@@ -15,6 +15,9 @@ PS1="$white"'${hostindicator}'"$bold_yellow"'${directory}${jobindicator}'"$yello
 # (this one is invoked every time before a command is executed):
 trap 'echo -ne "\033[00m"' DEBUG
 
+#Put a red X after interrupted commands
+trap 'echo -ne "\033[1;31m"✕' INT
+
 function prompt_command {
 
 directory=$(pwd | sed "s,$HOME,~," )
