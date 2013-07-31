@@ -9,7 +9,7 @@ white=$reset_style'\[\033[0;37m\]'
 
 # Prompt variable:
 
-PS1="$white"'${hostindicator}'"$bold_yellow"'${directory}${jobindicator}'"$yellow"'${fill} \d · \t\n'"$bold_white"
+PS1="$white"'${hostindicator}'"$bold_yellow"'${directoryindicator}${jobindicator}'"$yellow"'${fill} \d · \t\n'"$bold_white"
 
 # Reset color for command output
 # (this one is invoked every time before a command is executed):
@@ -20,61 +20,70 @@ trap 'echo -ne "\033[1;31m✕\033[00m"' INT
 
 function prompt_command {
 
-directory=$(pwd | sed "s,$HOME,~," )
+   let fillsize=$(( ${COLUMNS}-23 ))
 
-if [[ $HOME2 ]]; then
-   directory=$( echo $directory | sed "s,$HOME2,♥," )
-fi
+#########################
+#  Directory indicator  #
+#########################
 
-directory+=" "
-jobn=`jobs | wc -l | sed 's/^ *//'`
+   directoryindicator=$(pwd | sed "s,$HOME,~," )
 
-let fillsize=$(( ${COLUMNS}-23-${#directory} ))
+   if [[ $HOME2 ]]; then
+      directoryindicator=$( echo $directoryindicator | sed "s,$HOME2,♥," )
+   fi
+
+   directoryindicator+=" "
+   jobn=`jobs | wc -l | sed 's/^ *//'`
+
+   let fillsize=$(( ${fillsize}-${#directoryindicator}))
 
 ##############################
 #  PBS login node indicator  #
 ##############################
 
-if [ "$PBS_ENVIRONMENT" != "" ] || [ "$SSH_CONNECTION" != '' ]; then
-   hostindicator="‹$HOSTNAME› "
-else
-   hostindicator=""
-fi
+   if [ "$PBS_ENVIRONMENT" != "" ] || [ "$SSH_CONNECTION" != '' ]; then
+      hostindicator="‹$HOSTNAME› "
+   else
+      hostindicator=""
+   fi
 
-let fillsize=$(( ${fillsize}-${#hostindicator}))
+   let fillsize=$(( ${fillsize}-${#hostindicator}))
 
 ##############################
 #  Background job indicator  #
 ##############################
 
-if [ "$jobn" -gt "0" ]; then
-   jobindicator="[$jobn] "
-else
-   jobindicator=""
-fi
+   if [ "$jobn" -gt "0" ]; then
+      jobindicator="[$jobn] "
+   else
+      jobindicator=""
+   fi
 
-let fillsize=$(( ${fillsize}-${#jobindicator}))
+   let fillsize=$(( ${fillsize}-${#jobindicator}))
 
 ###############################
 #  Fill with continuous dash  #
 ###############################
 
-fill=""
-while [ "$fillsize" -gt "0" ]
-do
-   fill="―${fill}"
-   let fillsize=$((${fillsize}-1))
-done
+   fill=""
+   while [ "$fillsize" -gt "0" ]
+   do
+      fill="―${fill}"
+      let fillsize=$((${fillsize}-1))
+   done
 
-#If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-bname=`basename "${PWD/$HOME/~}"`
-echo -ne "\033]0;${bname}: ${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
-;;
-*)
-;;
-esac
+#########################################################
+#  If this is an xterm, set the title to user@host:dir  #
+#########################################################
+
+   case "$TERM" in
+   xterm*|rxvt*)
+   bname=`basename "${PWD/$HOME/~}"`
+   echo -ne "\033]0;${bname}: ${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
+   ;;
+   *)
+   ;;
+   esac
 
 }
 PROMPT_COMMAND=prompt_command
