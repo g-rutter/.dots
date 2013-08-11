@@ -84,6 +84,7 @@ echo -e                  "####################""$reset_style"
 echo -e ""
 
 mkdir -v ~/.vim
+mkdir -v ~/.vim/syntax
 mkdir -v ~/.vim/backup
 
 ln -sv ~/.dots/vimrc          ~/.vimrc
