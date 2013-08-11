@@ -67,6 +67,12 @@ echo -e ""
 mkdir -v ~/bin
 sh -c "curl http://beyondgrep.com/ack-2.04-single-file > ~/bin/ack && chmod 0755 ~/bin/ack"
 
+############
+#  Vimcat  #
+############
+
+cp vimcat ~/bin/
+
 ##################
 #  Vim symlinks  #
 ##################
