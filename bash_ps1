@@ -1,3 +1,4 @@
+# vim: set filetype=sh:
 # Fill with minuses
 # (this is recalculated every time the prompt is shown in function prompt_command):
 reset_style='\[\033[00m\]'
