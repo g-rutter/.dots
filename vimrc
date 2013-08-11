@@ -23,6 +23,7 @@ set showcmd                        " display incomplete commands
 set smartindent                    " smart autoindenting when starting a new line
 set wildmenu                       " command-line completion in an enhanced mode
 set modelines=1                    " Prevents some security exploits
+set modeline
 set showcmd                        " Show the command being typed in the bottom right
 set iskeyword+=95                  " Now a word with an underscore will be seen as one word, e.g. big_output is one word.
 set laststatus=2                   " Always show me the file name.
