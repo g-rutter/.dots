@@ -57,11 +57,9 @@ alias w3m="w3m -num -no-mouse -cookie"
 
 #Shortcuts for moving around
 alias d="cd ~/Documents"      #Typing d will take you to your documents.
-alias ~="cd ~"                #Typing ~ will do cd ~, which takes you to your home directory.
 alias dots="cd ~/.dots"
 alias lammps="cd $HOME2/lammps/"
 alias dynamo="cd $HOME2/dynamo/"
-alias votesim="cd $HOME2/votesim/"
 alias ~2="cd $HOME2"
 alias ..="cd .."
 alias 2..="cd .. && cd .."
@@ -137,14 +135,16 @@ dall () { #Describe all: print the description of every folder.
 }
 
 h- () { #Print command history with negative index so that !-N:x-y type commands can be used
-   hist=$(history | tail -n 70)
+   n_entries=30
 
-   nhist=$(( -1 * $( echo "$hist" | wc -l ) ))
+   hist=$(history $n_entries)
+   nhist=$(( -1 * $( history $n_entries | wc -l ) ))
+   maxlen=${#nhist}
 
    while read -r line; do
       line=$( echo "$line" | sed "s/^[0-9 ]\+//g" )
-      echo -e "$nhist\t$line"
-      nhist=$(( $nhist + 1 ))
+      echo "$bblue$nhist $reset"$line
+      nhist=$( printf "%${maxlen}s" $(( $nhist + 1 )) )
    done <<< "$hist"
 }
 
