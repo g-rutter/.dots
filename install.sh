@@ -80,7 +80,8 @@ echo -e ""
 mkdir -v ~/.vim
 mkdir -v ~/.vim/backup
 
-ln -sv ~/.dots/vimrc ~/.vimrc
+ln -sv ~/.dots/vimrc          ~/.vimrc
+ln -sv ~/.dots/vim/lammps.vim ~/.vim/syntax/lammps.vim
 
 echo -e "$message_colour""\nMaking symlinks for vim subdirectories.""$reset_style"
 for DIR in bundle colors UltiSnips; do
