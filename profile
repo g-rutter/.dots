@@ -72,6 +72,7 @@ alias vimrc="vim ~/.vimrc"
 alias tmuxrc="vim ~/.tmux.conf"
 alias inputrc="vim ~/.inputrc"
 alias bashrc="vim ~/.bashrc"
+alias profile="vim ~/.profile"
 alias bashrc_local="vim ~/.bashrc_local"
 alias h="history|grep"        #Search your command history by typing 'h <query>'
 alias f="find . |grep"        #Search from your current directory downwards for matches in file name by typing 'f <query>'
@@ -87,6 +88,7 @@ alias python3="LD_PRELOAD='' python3"
 alias py="ipython"
 
 alias makelmp="make openmpi2 && make makelib && make -f Makefile.lib openmpi2 && cp liblammps_openmpi2.a ~/lib/ && cp lmp_openmpi2 ~/bin/ && cp library.h ~/include/liblmp.h"
+alias makedynamo="BOOST_BUILD_PATH=~/boost/tools/build/v2/ ~/boost/bjam install toolset=gcc link=static runtime-link=static include=~/boost/ linkflags=\"-L ~/boost/stage/lib/\""
 
 alias ack="ack --color-match=\"red bold\""
 alias ick="ack -i --color-match=\"red bold\""
