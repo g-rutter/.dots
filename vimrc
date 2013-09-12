@@ -203,10 +203,10 @@ vnoremap <leader>a :<c-u>execute ":'<,'>Tabular /".nr2char(getchar())<cr>
 
 "define a macro that inserts a line printing its line number in a variety of
 "languages
-au FileType cpp,c noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");', line('.'))<Enter>
-au FileType sh noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>
-au FileType python noremap <Leader>p o<Esc>:s/^/\=printf('print "Line %d."', line('.'))<Enter>
-au FileType vim noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>
+au FileType cpp,c noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");', line('.'))<Enter>:nohlsearch<CR>
+au FileType sh noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+au FileType python noremap <Leader>p o<Esc>:s/^/\=printf('print "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+au FileType vim noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
 "-------------------------------------------------------------------------------
 "" Load bundles/plugins
 ""-------------------------------------------------------------------------------
