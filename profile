@@ -182,6 +182,22 @@ t () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs,
    fi
 }
 
+qd () {
+
+   jobs=(`qstat -u phrlaq -t | tail -n +6 | sed 's/\..\+$//'`)
+   jobnumber=${jobs[ $(($1 - 1)) ]}
+
+   if [ -n "$jobnumber" ]; then
+      echo Deleting job $jobnumber
+      qdel $jobnumber
+   else
+      echo No such job
+   fi
+
+   sleep 0.3
+   qme
+}
+
 #########################
 #  Local-only settings  #
 #########################
