@@ -83,6 +83,7 @@ alias o="gnome-open 2>/dev/null"            #Open a file in the default program 
 alias v="vim -p" # open with tabs by default
 alias vs="vim -O" # opens a vertical split
 alias sp="vim -o" # opens a vertical split
+alias vc="vimcat" #catenate a file with vim
 
 alias python3="LD_PRELOAD='' python3"
 alias py="ipython"
@@ -107,6 +108,12 @@ alias kbn="killbyname"
 ###############
 #  Functions  #
 ###############
+
+#rm () {
+   #mkdir -p /tmp/recycle_bin/
+   #mv $* /tmp/recycle_bin/
+   #chmod 700 $*
+#}
 
 = () { echo "$*" | bc -l;} #Basic calculator. e.g. type '= 2.2*2.2' to get the output '4.84'
 
