@@ -40,6 +40,7 @@ ln  -sv  ~/.dots/profile     ~/.profile
 ln  -sv  ~/.dots/tmux.conf   ~/.tmux.conf
 ln  -sv  ~/.dots/bash_ps1    ~/.bash_ps1
 ln  -sv  ~/.dots/inputrc     ~/.inputrc
+ln  -sv  ~/.dots/gitconfig   ~/.gitconfig
 
 ##################
 #  ssh symlinks  #
