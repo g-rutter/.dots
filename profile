@@ -74,7 +74,6 @@ alias inputrc="vim ~/.inputrc"
 alias bashrc="vim ~/.bashrc"
 alias profile="vim ~/.profile"
 alias bashrc_local="vim ~/.bashrc_local"
-alias h="history|grep"        #Search your command history by typing 'h <query>'
 alias f="find . |grep"        #Search from your current directory downwards for matches in file name by typing 'f <query>'
 alias p="ps aux |grep"
 alias o="gnome-open 2>/dev/null"            #Open a file in the default program that it would open in if you went to the file explorer and double clicked it eg 'o intro.pdf' to open it in the GUI pdf program.
@@ -100,7 +99,7 @@ white=`printf "\033[1;37m"`
 reset=`printf "\033[00m"`
 
 # Job managing aliases: qme to see all my jobs, qn to see all nazgul jobs, qda to delete all my jobs
-alias qme="qstat -u phrlaq -t | tail -n +4 | sed 's/NDS  /  NDS/' | sed 's/^\(.\{21\}\)\(.\{9\}\)\(.\{26\}\)\(.\{9\}\)/\1\3/' | sed 2d | sed 's/^J.*/$white\0$reset/' | sed 's/\(^[0-9]\+\)\([a-z0-9\.]*\)  /$bblue\1 $reset\2 /'"
+alias qme="qstat -u phrlaq -t | tail -n +4 | sed 's/NDS  /  NDS/' | sed 's/^\(.\{21\}\)\(.\{9\}\)\(.\{26\}\)\(.\{9\}\)/\1\3/' | sed 2d | sed 's/^J.*/$white\0$reset/' | sed 's/\(^[^\.]\+\)\([a-z0-9\.]*\)  /$bblue\1 $reset\2 /'"
 alias qn="qstat | grep nazgul | sed 's/\([0-9]\+\)\(\.[a-zA-Z]\+ \)/\1 \2/' | sed 's/\(^[0-9]*\)\(.*\)\( phrlaq \)/$bblue\1$reset\2$bblue\3$reset/' | sed 's/ nazgul *$//'"
 alias qda="qdel all 2>&1 | grip -v '\(Deletion\)\|\(Unauthorized Request\)" #delete all my jobs without bothing me about other jobs.
 alias kbn="killbyname"
@@ -136,7 +135,7 @@ desc () { #print the description of a job folder
 }
 
 dall () { #Describe all: print the description of every folder.
-   for line in $(ls -1F | grep /$ )
+   for line in `ls -1F | grep /$`
    do
       echo "\033[34m\033[1m$(du -h $line)\033[0m"
       cat $line/description 2> /dev/null
@@ -144,17 +143,23 @@ dall () { #Describe all: print the description of every folder.
    done
 }
 
-h- () { #Print command history with negative index so that !-N:x-y type commands can be used
-   n_entries=30
+h () { #Print command history with negative index so that !-N:x-y type commands can be used
+   if [ -n "$*" ]; then
+      n_entries=`history | wc -l`
+   else
+      n_entries=30
+   fi
 
-   hist=$(history $n_entries)
-   nhist=$(( -1 * $( history $n_entries | wc -l ) ))
+   hist=`history $n_entries`
+   nhist=$(( -1 * `history $n_entries | wc -l` ))
    maxlen=${#nhist}
 
    while read -r line; do
-      line=$( echo "$line" | sed "s/^[0-9 ]\+//g" )
-      echo "$bblue$nhist $reset"$line
-      nhist=$( printf "%${maxlen}s" $(( $nhist + 1 )) )
+      line=`echo "$line" | sed "s/^[0-9 ]\+//g" | ack "$*"`
+      if [ -n "$line" ]; then
+         echo "$bblue$nhist $reset"$line
+      fi
+      nhist=`printf "%${maxlen}s" $(( $nhist + 1 ))`
    done <<< "$hist"
 }
 
