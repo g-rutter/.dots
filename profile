@@ -231,6 +231,5 @@ then
       tmux -2
    else
       tmux attach -d
-      tmux rename-window dotfiles
    fi
 fi
