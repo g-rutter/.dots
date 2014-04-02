@@ -99,7 +99,8 @@ white=`printf "\033[1;37m"`
 reset=`printf "\033[00m"`
 
 # Job managing aliases: qme to see all my jobs, qn to see all nazgul jobs, qda to delete all my jobs
-alias qme="qstat -u phrlaq -t | tail -n +4 | sed 's/NDS  /  NDS/' | sed 's/^\(.\{21\}\)\(.\{9\}\)\(.\{26\}\)\(.\{9\}\)/\1\3/' | sed 2d | sed 's/^J.*/$white\0$reset/' | sed 's/\(^[^\.]\+\)\([a-z0-9\.]*\)  /$bblue\1 $reset\2 /'"
+alias qme="qstat -u phrlaq | tail -n +4 | sed 's/NDS  /  NDS/' | sed 's/^\(.\{21\}\)\(.\{9\}\)\(.\{26\}\)\(.\{9\}\)/\1\3/' | sed 2d | sed 's/^J.*/$white\0$reset/' | sed 's/\(^[^\.]\+\)\([a-z0-9\.]*\)  /$bblue\1 $reset\2 /'"
+alias qmt="qstat -u phrlaq -t | tail -n +4 | sed 's/NDS  /  NDS/' | sed 's/^\(.\{21\}\)\(.\{9\}\)\(.\{26\}\)\(.\{9\}\)/\1\3/' | sed 2d | sed 's/^J.*/$white\0$reset/' | sed 's/\(^[^\.]\+\)\([a-z0-9\.]*\)  /$bblue\1 $reset\2 /'"
 alias qn="qstat | grep nazgul | sed 's/\([0-9]\+\)\(\.[a-zA-Z]\+ \)/\1 \2/' | sed 's/\(^[0-9]*\)\(.*\)\( phrlaq \)/$bblue\1$reset\2$bblue\3$reset/' | sed 's/ nazgul *$//'"
 alias qda="qdel all 2>&1 | grip -v '\(Deletion\)\|\(Unauthorized Request\)" #delete all my jobs without bothing me about other jobs.
 alias kbn="killbyname"

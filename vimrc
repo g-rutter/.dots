@@ -22,7 +22,7 @@ set mouse=                         " disable the use of the mouse
 set showcmd                        " display incomplete commands
 set smartindent                    " smart autoindenting when starting a new line
 set wildmenu                       " command-line completion in an enhanced mode
-set modelines=1                    " Prevents some security exploits
+set modelines=1
 set modeline
 set showcmd                        " Show the command being typed in the bottom right
 set iskeyword+=95                  " Now a word with an underscore will be seen as one word, e.g. big_output is one word.
@@ -40,6 +40,7 @@ set ignorecase                     " When searching, don't care about case of ma
 set smartcase                      " ... unless it includes a capital letter.
 set clipboard=unnamed              " system clipboard pls
 set ttyfast                        " faster redrawing
+set lazyredraw                     " screen doesn't update during macros or registers being executed (big speedup)
 set scrolloff=5                    " Scroll before reaching edge.
 set thesaurus+=~/.vim/mthesaur.txt
 set autoread                       " Reload file when changed.
@@ -232,7 +233,7 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'Shougo/unite.vim'
+"Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-abolish'
@@ -243,9 +244,11 @@ Bundle 'vim-scripts/a.vim'
 Bundle 'vim-scripts/CmdlineComplete.git'
 Bundle 'vim-scripts/InsertChar'
 Bundle 'vim-scripts/TagHighlight'
+Bundle 'osyo-manga/vim-over'
 
 if has('python')
   Bundle 'SirVer/ultisnips'
+  Bundle 'gregsexton/VimCalc'
   "Bundle 'alfredodeza/pytest.vim'
 endif
 
@@ -272,13 +275,13 @@ nnoremap Y y$
 nnoremap ŋ :GundoToggle<CR>
 
 "Unite
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-let g:unite_source_history_yank_enable = 1
-let g:unite_winheight = 10
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"let g:unite_source_history_yank_enable = 1
+"let g:unite_winheight = 10
 
-nnoremap \p :Unite -start-insert file_rec/async<cr>
-nnoremap \y :Unite history/yank<cr>
-nnoremap \l :Unite -start-insert line<cr>
+"nnoremap \p :Unite -start-insert file_rec/async<cr>
+"nnoremap \y :Unite history/yank<cr>
+"nnoremap \l :Unite -start-insert line<cr>
 
 ""-------------------------------------------------------------------------------
 "" Colours and such
