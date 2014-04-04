@@ -115,7 +115,10 @@ alias kbn="killbyname"
    #chmod 700 $*
 #}
 
-= () { echo "$*" | bc -l;} #Basic calculator. e.g. type '= 2.2*2.2' to get the output '4.84'
+= () {
+   A=`echo "$*" | bc -l`
+   echo A=$A
+} #Basic calculator. e.g. type '= 2.2*2.2' to get the output '4.84'
 
 killbyname () { # Kills ALL processes that match the name e.g. 'killbyname firefox'. You can't accidentally kill other people's stuff, but you can lose unsaved work etc and make your session screw up.
 
