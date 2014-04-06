@@ -5,7 +5,7 @@ set ofu=syntaxcomplete#Complete
 set completeopt+=preview
 set noswapfile                     " Turn off annoying swap file.
 set encoding=utf-8                 " Necessary to show unicode glyphs
-set fillchars+=stl:\ ,stlnc:\
+set fillchars+=stlnc:\             " Fill an inactive window statusline with \\\\\\\\
 set background=dark
 set autoindent                     " copy indent from current line
 if has ( "conceal" )
@@ -82,9 +82,6 @@ let mapleader = ","
 nnoremap <Leader>o o<Esc>
 nnoremap <Leader>O O<Esc>
 nnoremap <Leader>l o<Esc>O
-
-" ,, is Esc.
-noremap <leader><leader> <Esc>
 
 " make zz/zt/zb work nicely with visual selections
 vnoremap <silent> zz :<C-u>call setpos('.',[0,(line("'>")-line("'<"))/2+line("'<"),0,0])<Bar>normal! zzgv<CR>
@@ -216,13 +213,10 @@ filetype off " required!
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
-"let Vundle manage Vundle
-"Bundle 'gmarik/vundle'
-
 ""Github bundles here:
-"Bundle 'Valloric/YouCompleteMe'
 "Bundle 'kien/ctrlp.vim'
 "Bundle 'kshenoy/vim-signature'
+"Bundle 'Valloric/YouCompleteMe'
 "Bundle 'maxbrunsfeld/vim-yankstack'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'scrooloose/nerdtree'
@@ -245,6 +239,7 @@ Bundle 'vim-scripts/CmdlineComplete.git'
 Bundle 'vim-scripts/InsertChar'
 Bundle 'vim-scripts/TagHighlight'
 Bundle 'osyo-manga/vim-over'
+Bundle 'honza/vim-snippets'
 
 if has('python')
   Bundle 'SirVer/ultisnips'
@@ -258,7 +253,7 @@ let g:EasyMotion_leader_key = '<leader>'
 nnoremap <TAB> :<C-U>call InsertChar#insert(v:count1)<CR>
 let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="↓"
+let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit='horizontal'
