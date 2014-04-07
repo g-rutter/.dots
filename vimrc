@@ -221,13 +221,14 @@ call vundle#rc()
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'scrooloose/nerdtree'
 "Bundle 'scrooloose/syntastic'
+"Bundle 'Shougo/unite.vim'
+
 Bundle 'godlygeek/tabular'
 Bundle 'guns/xterm-color-table.vim'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdcommenter'
-"Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-abolish'
@@ -290,6 +291,7 @@ colorscheme molokai
 
 "Show line numbers.
 set number
+set relativenumber
 
 "Highlight semi-colons that don't terminate a line in C and C++:
 au BufEnter *.cpp,*.c hi semicolon ctermfg=46
