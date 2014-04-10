@@ -290,7 +290,6 @@ hi clear
 colorscheme molokai
 
 "Show line numbers.
-set number
 set relativenumber
 
 "Highlight semi-colons that don't terminate a line in C and C++:
