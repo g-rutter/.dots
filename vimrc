@@ -135,8 +135,7 @@ vnoremap <Space> G
 
 "Reload settings or vsplit to vimrc
 cab sv so ~/.vimrc
-cab spv vs ~/.vimrc
-cab vsv vs ~/.vimrc
+cab ev tabe ~/.vimrc
 
 "Arrow keys are disabled.
 inoremap <Left>  <Nop>
@@ -216,7 +215,7 @@ call vundle#rc()
 ""Github bundles here:
 "Bundle 'kien/ctrlp.vim'
 "Bundle 'kshenoy/vim-signature'
-"Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 "Bundle 'maxbrunsfeld/vim-yankstack'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'scrooloose/nerdtree'
@@ -278,6 +277,9 @@ nnoremap ŋ :GundoToggle<CR>
 "nnoremap \p :Unite -start-insert file_rec/async<cr>
 "nnoremap \y :Unite history/yank<cr>
 "nnoremap \l :Unite -start-insert line<cr>
+
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
 
 ""-------------------------------------------------------------------------------
 "" Colours and such
