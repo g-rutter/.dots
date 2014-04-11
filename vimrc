@@ -215,7 +215,6 @@ call vundle#rc()
 ""Github bundles here:
 "Bundle 'kien/ctrlp.vim'
 "Bundle 'kshenoy/vim-signature'
-Bundle 'Valloric/YouCompleteMe'
 "Bundle 'maxbrunsfeld/vim-yankstack'
 "Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'scrooloose/nerdtree'
@@ -224,9 +223,11 @@ Bundle 'Valloric/YouCompleteMe'
 
 Bundle 'godlygeek/tabular'
 Bundle 'guns/xterm-color-table.vim'
+Bundle 'honza/vim-snippets'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'osyo-manga/vim-over'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'sjl/gundo.vim'
@@ -238,13 +239,11 @@ Bundle 'vim-scripts/a.vim'
 Bundle 'vim-scripts/CmdlineComplete.git'
 Bundle 'vim-scripts/InsertChar'
 Bundle 'vim-scripts/TagHighlight'
-Bundle 'osyo-manga/vim-over'
-Bundle 'honza/vim-snippets'
 
 if has('python')
-  Bundle 'SirVer/ultisnips'
   Bundle 'gregsexton/VimCalc'
-  "Bundle 'alfredodeza/pytest.vim'
+  Bundle 'SirVer/ultisnips'
+  Bundle 'Valloric/YouCompleteMe'
 endif
 
 "Quick bundle options:
