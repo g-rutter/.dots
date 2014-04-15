@@ -1,6 +1,7 @@
-"-------------------------------------------------------------------------------
-" Various settings
-"-------------------------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              Various settings                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set ofu=syntaxcomplete#Complete
 set completeopt+=preview
 set noswapfile                     " Turn off annoying swap file.
@@ -47,6 +48,8 @@ set thesaurus+=~/.vim/mthesaur.txt
 set suffixes+=,                    " Lower matching priority to files without extension (likely binary)
 set suffixes-=.h                   " Remove .h from low priority group
 set showtabline=1                  " Show tabline when there is more than 1 tab.
+set foldmethod=indent              " Fold lines by indentation
+set foldminlines=5
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Persistent undo                               "
@@ -147,9 +150,6 @@ noremap n nzz
 nnoremap <Leader>Z zAkztj
 nnoremap <Leader>z zakztj
 
-"Returns the syntax highlighting group of the current thing under the cursor:
-nnoremap <silent> <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 "Make working in command mode less straining on the wrists. Ctrl-space is
 "equivalent to enter, and alt+hjkl move through history and left and right
 cnoremap <C-@> <Enter>
@@ -157,17 +157,6 @@ cnoremap <Esc>j <C-Down>
 cnoremap <Esc>k <C-Up>
 cnoremap <Esc>h <Left>
 cnoremap <Esc>l <Right>
-
-function! Fixtabs(spaces)
- let old_space_tab = repeat(' ', a:spaces)
- let new_space_tab = repeat(' ', g:tab_size)
- for indentation in range(30,1, -1)
-   let substitution     = '%s/^'.repeat(l:old_space_tab, indentation).'\ze\S/'.repeat(l:new_space_tab, indentation).'/e'
-   execute l:substitution
- endfor
- let substitution = '%s/\t/'.new_space_tab.'/ge'
- execute l:substitution
-endfunction
 
 "Make scrolloff compatible with H, L
 execute 'nnoremap H H'.&l:scrolloff.'k'
@@ -178,12 +167,37 @@ execute 'vnoremap L L'.&l:scrolloff.'j'
 "Align visually selected text by a single character
 vnoremap <leader>a :<c-u>execute ":'<,'>Tabular /".nr2char(getchar())<cr>
 
-"define a macro that inserts a line printing its line number in a variety of
-"languages
-au FileType cpp,c noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");', line('.'))<Enter>:nohlsearch<CR>
-au FileType sh noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+""""""""""""""""""""""""""""""""""""""""""""
+"  Insert line number in various langages  "
+""""""""""""""""""""""""""""""""""""""""""""
+
+au FileType cpp,c  noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");', line('.'))<Enter>:nohlsearch<CR>
+au FileType sh     noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
 au FileType python noremap <Leader>p o<Esc>:s/^/\=printf('print "Line %d."', line('.'))<Enter>:nohlsearch<CR>
-au FileType vim noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+au FileType vim    noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+
+""""""""""""""""""""
+"  Latex mappings  "
+""""""""""""""""""""
+
+au filetype tex noremap ;w :update<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
+noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>                         " open the pdf file corresponding to current latex file.
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  Search for selected text, forwards or backwards  "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Source:http://vim.wikia.com/wiki/Search_for_visually_selected_text
+
+vnoremap <silent> * :<C-U>
+\let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+\gvy/<C-R><C-R>=substitute(
+\escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+\gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+\let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+\gvy?<C-R><C-R>=substitute(
+\escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+\gV:call setreg('"', old_reg, old_regtype)<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Bundles                                   "
@@ -251,23 +265,23 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadBraces
 
 let g:rbpt_colorpairs = [
-  \ ['darkgray',    'DarkOrchid3' ],
-  \ ['brown',       'RoyalBlue3'  ],
-  \ ['Darkblue',    'SeaGreen3'   ],
-  \ ['darkgreen',   'firebrick3'  ],
-  \ ['darkcyan',    'RoyalBlue3'  ],
-  \ ['darkred',     'SeaGreen3'   ],
-  \ ['darkmagenta', 'DarkOrchid3' ],
-  \ ['brown',       'firebrick3'  ],
-  \ [89,        'RoyalBlue3'  ],
-  \ [202,       'SeaGreen3'   ], 
-  \ ['darkmagenta', 'DarkOrchid3' ],
-  \ [27,    'firebrick3'          ], 
-  \ [214,   'RoyalBlue3'  ], 
-  \ ['darkgreen',    'SeaGreen3'   ],
-  \ ['darkcyan',     'DarkOrchid3' ],
-  \ ['darkred',         'firebrick3'  ],
-  \ ]
+  \ ['darkgray',    'DarkOrchid3'    ] ,
+  \ ['brown',       'RoyalBlue3'     ] ,
+  \ ['Darkblue',    'SeaGreen3'      ] ,
+  \ ['darkgreen',   'firebrick3'     ] ,
+  \ ['darkcyan',    'RoyalBlue3'     ] ,
+  \ ['darkred',     'SeaGreen3'      ] ,
+  \ ['darkmagenta', 'DarkOrchid3'    ] ,
+  \ ['brown',       'firebrick3'     ] ,
+  \ [89,        'RoyalBlue3'         ] ,
+  \ [202,       'SeaGreen3'          ] ,
+  \ ['darkmagenta', 'DarkOrchid3'    ] ,
+  \ [27,    'firebrick3'             ] ,
+  \ [214,   'RoyalBlue3'             ] ,
+  \ ['darkgreen',    'SeaGreen3'     ] ,
+  \ ['darkcyan',     'DarkOrchid3'   ] ,
+  \ ['darkred',         'firebrick3' ] ,
+  \                                  ]
 
 """""""""""""""
 "  Powerline  "
@@ -383,19 +397,9 @@ au BufEnter *.cpp,*.c syn match cpp_le /<=/ conceal cchar=≤
 au BufEnter *.cpp,*.c syn match cpp_ge />=/ conceal cchar=≥
 au BufEnter *.cpp,*.c syn match cpp_multiply / \* / conceal cchar=✕
 
-"-------------------------------------------------------------------------------
-" Needed for LaTeX
-"-------------------------------------------------------------------------------
-
-au filetype tex noremap ;w :update<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
-noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>                         " open the pdf file corresponding to current latex file.
-
-"-------------------------------------------------------------------------------
-" Folding and visual fold cuing
-"-------------------------------------------------------------------------------
-
-set foldmethod=indent " Fold lines by indentation
-set foldminlines=5
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              Tabs and spaces                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set expandtab
 let &tabstop=g:tab_size
@@ -412,21 +416,6 @@ function! Fixtabs(spaces)
  let substitution = '%s/\t/'.new_space_tab.'/ge'
  execute l:substitution
 endfunction
-
-"-------------------------------------------------------------------------------
-" Search for selected text, forwards or backwards.
-" Source:http://vim.wikia.com/wiki/Search_for_visually_selected_text 
-"-------------------------------------------------------------------------------
-vnoremap <silent> * :<C-U>
-\let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-\gvy/<C-R><C-R>=substitute(
-\escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-\gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
-\let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-\gvy?<C-R><C-R>=substitute(
-\escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-\gV:call setreg('"', old_reg, old_regtype)<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                          Tabline-making function                           "
