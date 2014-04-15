@@ -43,14 +43,14 @@ set ttyfast                        " faster redrawing
 set lazyredraw                     " screen doesn't update during macros or registers being executed (big speedup)
 set scrolloff=5                    " Scroll before reaching edge.
 set thesaurus+=~/.vim/mthesaur.txt
-set autoread                       " Reload file when changed.
+"set autoread                       " Reload file when changed.
 set suffixes+=,                    " Lower matching priority to files without extension (likely binary)
 set suffixes-=.h                   " Remove .h from low priority group
 set showtabline=1                  " Show tabline when there is more than 1 tab.
 
-"-------------------------------------------------------------------------------
-" Persistent undo!
-"-------------------------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              Persistent undo                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if has ("persistent_undo")
    set undodir=~/.vim/undo
@@ -59,9 +59,9 @@ if has ("persistent_undo")
    set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 endif
 
-"-------------------------------------------------------------------------------
-" Set extra filetypes
-"-------------------------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                             Filetype settings                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if expand('%:t') =~? 'bash-fc-\d\+' "Temp bash files
  setfiletype sh
@@ -71,9 +71,9 @@ if expand('%:t') =~? '\.in$'
  setfiletype lammps
 endif
 
-"-------------------------------------------------------------------------------
-" Keyboard
-"-------------------------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Mappings                                  "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let mapleader = " "
 
@@ -91,6 +91,9 @@ vnoremap <silent> zb :<C-u>call setpos('.',[0,line("'>"),0,0])<Bar>normal! zbgv<
 " make << and >> work nicely with visual selections
 vnoremap < <gv
 vnoremap > >gv
+
+" Make Y consistent with D, C, S etc.
+nnoremap Y y$
 
 "make K split lines (opposite of J)
 nnoremap K i<cr><esc>k$
@@ -181,9 +184,10 @@ au FileType cpp,c noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");'
 au FileType sh noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
 au FileType python noremap <Leader>p o<Esc>:s/^/\=printf('print "Line %d."', line('.'))<Enter>:nohlsearch<CR>
 au FileType vim noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
-"-------------------------------------------------------------------------------
-"" Load bundles/plugins
-""-------------------------------------------------------------------------------
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Bundles                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 filetype off " required!
 set rtp+=~/.vim/bundle/vundle
@@ -193,7 +197,6 @@ call vundle#rc()
 "Bundle 'kien/ctrlp.vim'
 "Bundle 'kshenoy/vim-signature'
 "Bundle 'maxbrunsfeld/vim-yankstack'
-"Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'scrooloose/syntastic'
 "Bundle 'Shougo/unite.vim'
 
@@ -222,7 +225,15 @@ if has('python')
   Bundle 'Valloric/YouCompleteMe'
 endif
 
-nnoremap <TAB> :<C-U>call InsertChar#insert(v:count1)<CR>
+filetype plugin indent on "required!
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              Bundle settings                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""
+"  Ultisnips  "
+"""""""""""""""
+
 let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-l>"
@@ -230,121 +241,9 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit='horizontal'
 
-filetype plugin indent on "required!
-
-"nnoremap þ yankstack_substitute_older_paste
-"nnoremap Þ yankstack_substitute_newer_paste
-"call yankstack#setup()
-nnoremap Y y$
-
-nnoremap ŋ :GundoToggle<CR>
-
-"Unite
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"let g:unite_source_history_yank_enable = 1
-"let g:unite_winheight = 10
-
-"nnoremap \p :Unite -start-insert file_rec/async<cr>
-"nnoremap \y :Unite history/yank<cr>
-"nnoremap \l :Unite -start-insert line<cr>
-
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-
-""-------------------------------------------------------------------------------
-"" Colours and such
-""-------------------------------------------------------------------------------
-
-"Set scheme:
-set t_Co=256
-syntax on
-hi clear
-colorscheme molokai
-
-"Show line numbers.
-set number
-if exists('+relativenumber')
-   set relativenumber
-endif
-
-"Highlight semi-colons that don't terminate a line in C and C++:
-au BufEnter *.cpp,*.c hi semicolon ctermfg=46
-au BufEnter *.cpp,*.c let m = matchadd("semicolon", ';\ze[ \t]\+[^ \t\/$]')
-
-"Make cursor line grey for high visibility and telling the active mode
-if exists('+cursorline')
- hi CursorLine ctermbg=234 cterm=underline
- au InsertLeave * hi CursorLine ctermbg=234 cterm=underline
- au InsertEnter * hi CursorLine ctermbg=234 cterm=none
-endif
-
-" Search highlighting I like
-highlight Search ctermfg=78
-highlight Search ctermbg=none
-highlight Search cterm=underline
-highlight IncSearch term=bold
-
-" Override some unwanted molokai settings
-highlight   Normal       ctermfg=255   ctermbg=16
-highlight   NonText      ctermfg=250
-highlight   Comment      ctermfg=250
-highlight   SpecialKey   ctermfg=250
-highlight   Delimiter    ctermfg=228
-highlight   LineNr       ctermfg=15    ctermbg=53
-highlight   Conceal      ctermfg=11    ctermbg=16
-highlight   Pmenu        ctermbg=53    ctermfg=15
-highlight   VertSplit    ctermfg=53    ctermbg=53
-
-" Tabline
-highlight   TabLine      ctermfg=255   ctermbg=236 cterm=bold
-highlight   TabLineSel   ctermfg=10    ctermbg=0   cterm=bold
-highlight   TabLineFill                ctermbg=236 cterm=NONE
-
-" Make Vimdiff tolerable
-hi DiffAdd ctermbg=24 ctermfg=15 cterm=bold
-hi DiffChange ctermbg=16
-hi DiffDelete ctermbg=16 ctermfg=12
-hi DiffText ctermbg=0
-
-" Make paren matches less confusing
-hi MatchParen cterm=bold ctermbg=16 ctermfg=198
-
-"Show tabs
-set list
-set listchars=tab:›\ ,trail:⋅,nbsp:⋅
-
-"-------------------------------------------------------------------------------
-" Conceal settings
-"-------------------------------------------------------------------------------
-
-au BufEnter *.cpp,*.c syn match cpp_logical_and /&&/ conceal cchar=⋀
-au BufEnter *.cpp,*.c syn match cpp_logical_or /||/ conceal cchar=⋁
-au BufEnter *.cpp,*.c syn match cpp_sqrt /sqrt/ conceal cchar=√
-au BufEnter *.cpp,*.c syn match cpp_le /<=/ conceal cchar=≤
-au BufEnter *.cpp,*.c syn match cpp_ge />=/ conceal cchar=≥
-au BufEnter *.cpp,*.c syn match cpp_multiply / \* / conceal cchar=✕
-
-"-------------------------------------------------------------------------------
-" Extra colours from TagHighlight
-"-------------------------------------------------------------------------------
-
-"hi! link Class Normal
-"hi! link Enumerator Normal
-"hi! link EnumerationName Normal
-"hi! link Union Normal
-"hi! link GlobalConstant Normal
-"hi! link GlobalVariable Normal
-"hi! link LocalVariable Normal
-
-hi! Member ctermfg=255 cterm=bold
-hi! Structure ctermfg=45
-hi! DefinedName ctermfg=153
-hi! Function ctermfg=228
-hi! CTagsClass ctermfg=143 cterm=bold
-
-"-------------------------------------------------------------------------------
-" Rainbow Parens
-"-------------------------------------------------------------------------------
+""""""""""""""""""""
+"  Rainbow parens  "
+""""""""""""""""""""
 
 "Turn on rainbow parenthesis
 au VimEnter * RainbowParenthesesToggle
@@ -370,23 +269,126 @@ let g:rbpt_colorpairs = [
   \ ['darkred',         'firebrick3'  ],
   \ ]
 
-"-------------------------------------------------------------------------------
-" Needed for LaTeX
-"-------------------------------------------------------------------------------
-
-au filetype tex noremap ;w :update<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
-noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>                         " open the pdf file corresponding to current latex file.
-
-"-------------------------------------------------------------------------------
-" Statusline (Powerline)
-"-------------------------------------------------------------------------------
+"""""""""""""""
+"  Powerline  "
+"""""""""""""""
 
 let g:Powerline_stl_path_style = 'full'
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 let Powerline_cache_enabled = 1
 call Pl#Theme#InsertSegment('currhigroup', 'after', 'fileinfo')
 let Powerline_colorscheme = 'solarized256'
-"Add PWD then short/relative path
+
+""""""""""""""""""""""""""
+"  Misc bundle settings  "
+""""""""""""""""""""""""""
+
+nnoremap <TAB> :<C-U>call InsertChar#insert(v:count1)<CR>
+nnoremap ŋ :GundoToggle<CR>
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                          Colours and highlighting                          "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"Set scheme:
+set t_Co=256
+syntax on
+hi clear
+colorscheme molokai
+
+"Show line numbers.
+set number
+if exists('+relativenumber')
+   set relativenumber
+endif
+
+"Highlight semi-colons that don't terminate a line in C and C++:
+au BufEnter *.cpp,*.c hi semicolon ctermfg=46
+au BufEnter *.cpp,*.c let m = matchadd("semicolon", ';\ze[ \t]\+[^ \t\/$]')
+
+"Make cursor line grey for high visibility and telling the active mode
+if exists('+cursorline')
+ hi CursorLine ctermbg=234 cterm=underline
+ au InsertLeave * hi CursorLine ctermbg=234 cterm=underline
+ au InsertEnter * hi CursorLine ctermbg=234 cterm=none
+endif
+
+" Colour definitions
+let g:black=233
+let g:hi_settings=[]
+
+" Search highlighting I like
+highlight Search ctermfg=78
+highlight Search ctermbg=none
+highlight Search cterm=underline
+highlight IncSearch term=bold
+
+" Override some unwanted molokai settings
+call add(hi_settings, "hi Normal       ctermfg=255   ctermbg=".g:black               )
+call add(hi_settings, "hi NonText      ctermfg=250"                                  )
+call add(hi_settings, "hi Comment      ctermfg=250"                                  )
+call add(hi_settings, "hi SpecialKey   ctermfg=250"                                  )
+call add(hi_settings, "hi Delimiter    ctermfg=228"                                  )
+call add(hi_settings, "hi LineNr       ctermfg=25    ctermbg=".g:black." cterm=NONE" )
+call add(hi_settings, "hi Conceal      ctermfg=11    ctermbg=".g:black               )
+call add(hi_settings, "hi Pmenu        ctermbg=53    ctermfg=15"                     )
+call add(hi_settings, "hi VertSplit    ctermfg=25    ctermbg=".g:black               )
+call add(hi_settings, "hi MatchParen   cterm=bold    ctermbg=".g:black." ctermfg=198")
+
+" Tabline
+call add(hi_settings, "highlight   TabLine      ctermfg=255   ctermbg=236 cterm=bold")
+call add(hi_settings, "highlight   TabLineSel   ctermfg=10    ctermbg=0   cterm=bold")
+call add(hi_settings, "highlight   TabLineFill                ctermbg=236 cterm=NONE")
+
+" Vimdiff
+call add(hi_settings, "hi DiffAdd ctermbg=24 ctermfg=15 cterm=bold" )
+call add(hi_settings, "hi DiffChange ctermbg=".g:black              )
+call add(hi_settings, "hi DiffDelete ctermbg=".g:black." ctermfg=12")
+call add(hi_settings, "hi DiffText ctermbg=0"                       )
+
+"Show tabs and trailing whitespace
+set list
+set listchars=tab:›\ ,trail:⋅,nbsp:⋅
+
+"Extra highlight groups from TagHighlight
+"hi! link Class Normal
+"hi! link Enumerator Normal
+"hi! link EnumerationName Normal
+"hi! link Union Normal
+"hi! link GlobalConstant Normal
+"hi! link GlobalVariable Normal
+"hi! link LocalVariable Normal
+
+hi! Member ctermfg=255 cterm=bold
+hi! Structure ctermfg=45
+hi! DefinedName ctermfg=153
+hi! Function ctermfg=228
+hi! CTagsClass ctermfg=143 cterm=bold
+
+" Execute highlighting commands
+for hi_setting in g:hi_settings
+   execute hi_setting
+endfor
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Conceal                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+au BufEnter *.cpp,*.c syn match cpp_logical_and /&&/ conceal cchar=⋀
+au BufEnter *.cpp,*.c syn match cpp_logical_or /||/ conceal cchar=⋁
+au BufEnter *.cpp,*.c syn match cpp_sqrt /sqrt/ conceal cchar=√
+au BufEnter *.cpp,*.c syn match cpp_le /<=/ conceal cchar=≤
+au BufEnter *.cpp,*.c syn match cpp_ge />=/ conceal cchar=≥
+au BufEnter *.cpp,*.c syn match cpp_multiply / \* / conceal cchar=✕
+
+"-------------------------------------------------------------------------------
+" Needed for LaTeX
+"-------------------------------------------------------------------------------
+
+au filetype tex noremap ;w :update<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
+noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>                         " open the pdf file corresponding to current latex file.
 
 "-------------------------------------------------------------------------------
 " Folding and visual fold cuing
@@ -426,9 +428,9 @@ vnoremap <silent> # :<C-U>
 \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
 \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-"""""""""""""""""
-"  Window tabs  "
-"""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                          Tabline-making function                           "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if exists("+showtabline")
    function! MyTabLine()
