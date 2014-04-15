@@ -131,15 +131,12 @@ cab sv so ~/.vimrc
 cab ev tabe ~/.vimrc
 
 "Switch to nth tab with <Leader>n
-noremap <Leader>1 1gt
-noremap <Leader>2 2gt
-noremap <Leader>3 3gt
-noremap <Leader>4 4gt
-noremap <Leader>5 5gt
-noremap <Leader>6 6gt
-noremap <Leader>7 7gt
-noremap <Leader>8 8gt
-noremap <Leader>9 9gt
+for N in [1 , 2, 3, 4, 5, 6, 7, 8, 9]
+   let bufmap="^[".N." :b ".N."<CR>"
+   let tabmap="<Leader>".N." ".N."gt"
+   execute "noremap".bufmap
+   execute "noremap".tabmap
+endfor
 
 "Centre search matches when jumping
 noremap N Nzz
@@ -215,6 +212,7 @@ call vundle#rc()
 "Bundle 'Shougo/unite.vim'
 "Bundle 'blueyed/vim-diminactive'
 
+"Bundle 'fholgado/minibufexpl.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'guns/xterm-color-table.vim'
 Bundle 'kien/rainbow_parentheses.vim'
