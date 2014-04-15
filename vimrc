@@ -211,8 +211,9 @@ call vundle#rc()
 "Bundle 'scrooloose/syntastic'
 "Bundle 'Shougo/unite.vim'
 "Bundle 'blueyed/vim-diminactive'
-
 "Bundle 'fholgado/minibufexpl.vim'
+
+Bundle 'benmills/vimux'
 Bundle 'godlygeek/tabular'
 Bundle 'guns/xterm-color-table.vim'
 Bundle 'kien/rainbow_parentheses.vim'
