@@ -75,7 +75,7 @@ endif
 " Keyboard
 "-------------------------------------------------------------------------------
 
-let mapleader = ","
+let mapleader = " "
 
 " Enter a blank line below/above cursor in Normal mode.
 " The o command will continue comments in a program.
@@ -95,20 +95,12 @@ vnoremap > >gv
 "make K split lines (opposite of J)
 nnoremap K i<cr><esc>k$
 
-"open and close NERD tree
-nnoremap <Leader>nt :NERDTreeToggle<CR>
-
 "Update tags for extra highlighting with <leader>ut
 nnoremap <Leader>ut :UpdateTypesFile<CR>
 
-" Resize windows with + and -
-if bufwinnr(1)
- map + <C-W>+
- map - <C-W>-
-endif
-
 " save and quit shortcuts
 nnoremap <Leader>a :wall<CR>
+nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>x :x<CR>
 nnoremap <Leader>! :qall!<CR>
@@ -128,24 +120,9 @@ nnoremap <silent> <Leader>\ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 inoremap  <Left><Del>
 set backspace=2      "backspace over line breaks
 
-"Can enter 45<Space> to go to line 45!
-"<Space> goes to end of file! etc
-noremap <Space> G
-vnoremap <Space> G
-
 "Reload settings or vsplit to vimrc
 cab sv so ~/.vimrc
 cab ev tabe ~/.vimrc
-
-"Arrow keys are disabled.
-inoremap <Left>  <Nop>
-inoremap <Right> <Nop>
-inoremap <Up>    <Nop>
-inoremap <Down>  <Nop>
-noremap  <Left>  <Nop>
-noremap  <Right> <Nop>
-noremap  <Up>    <Nop>
-noremap  <Down>  <Nop>
 
 "Switch to nth tab with <Leader>n
 noremap <Leader>1 1gt
@@ -217,16 +194,14 @@ call vundle#rc()
 "Bundle 'kshenoy/vim-signature'
 "Bundle 'maxbrunsfeld/vim-yankstack'
 "Bundle 'nathanaelkane/vim-indent-guides'
-"Bundle 'scrooloose/nerdtree'
 "Bundle 'scrooloose/syntastic'
 "Bundle 'Shougo/unite.vim'
 
 Bundle 'godlygeek/tabular'
 Bundle 'guns/xterm-color-table.vim'
-Bundle 'honza/vim-snippets'
 Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'osyo-manga/vim-over'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Shougo/vimproc.vim'
@@ -242,12 +217,10 @@ Bundle 'vim-scripts/TagHighlight'
 
 if has('python')
   Bundle 'gregsexton/VimCalc'
+  Bundle 'honza/vim-snippets'
   Bundle 'SirVer/ultisnips'
   Bundle 'Valloric/YouCompleteMe'
 endif
-
-"Quick bundle options:
-let g:EasyMotion_leader_key = '<leader>'
 
 nnoremap <TAB> :<C-U>call InsertChar#insert(v:count1)<CR>
 let g:UltiSnipsUsePythonVersion = 2
@@ -256,8 +229,6 @@ let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit='horizontal'
-
-let g:NERDCustomDelimiters = { 'lammps' : { 'left' : '#' } }
 
 filetype plugin indent on "required!
 
@@ -436,10 +407,6 @@ function! Fixtabs(spaces)
  let substitution = '%s/\t/'.new_space_tab.'/ge'
  execute l:substitution
 endfunction
-
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=30
 
 "-------------------------------------------------------------------------------
 " Search for selected text, forwards or backwards.
