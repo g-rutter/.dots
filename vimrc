@@ -213,6 +213,7 @@ call vundle#rc()
 "Bundle 'maxbrunsfeld/vim-yankstack'
 "Bundle 'scrooloose/syntastic'
 "Bundle 'Shougo/unite.vim'
+"Bundle 'blueyed/vim-diminactive'
 
 Bundle 'godlygeek/tabular'
 Bundle 'guns/xterm-color-table.vim'
@@ -276,7 +277,6 @@ let g:rbpt_colorpairs = [
   \ [89,        'RoyalBlue3'         ] ,
   \ [202,       'SeaGreen3'          ] ,
   \ ['darkmagenta', 'DarkOrchid3'    ] ,
-  \ [27,    'firebrick3'             ] ,
   \ [214,   'RoyalBlue3'             ] ,
   \ ['darkgreen',    'SeaGreen3'     ] ,
   \ ['darkcyan',     'DarkOrchid3'   ] ,
@@ -322,16 +322,17 @@ endif
 au BufEnter *.cpp,*.c hi semicolon ctermfg=46
 au BufEnter *.cpp,*.c let m = matchadd("semicolon", ';\ze[ \t]\+[^ \t\/$]')
 
+" Colour definitions
+let g:black=233
+let g:white=253
+let g:hi_cmds=[]
+
 "Make cursor line grey for high visibility and telling the active mode
 if exists('+cursorline')
  hi CursorLine ctermbg=234 cterm=underline
  au InsertLeave * hi CursorLine ctermbg=234 cterm=underline
  au InsertEnter * hi CursorLine ctermbg=234 cterm=none
 endif
-
-" Colour definitions
-let g:black=233
-let g:hi_settings=[]
 
 " Search highlighting I like
 highlight Search ctermfg=78
@@ -340,33 +341,40 @@ highlight Search cterm=underline
 highlight IncSearch term=bold
 
 " Override some unwanted molokai settings
-call add(hi_settings, "hi Normal       ctermfg=255   ctermbg=".g:black               )
-call add(hi_settings, "hi NonText      ctermfg=250"                                  )
-call add(hi_settings, "hi Comment      ctermfg=250"                                  )
-call add(hi_settings, "hi SpecialKey   ctermfg=250"                                  )
-call add(hi_settings, "hi Delimiter    ctermfg=228"                                  )
-call add(hi_settings, "hi LineNr       ctermfg=25    ctermbg=".g:black." cterm=NONE" )
-call add(hi_settings, "hi Conceal      ctermfg=11    ctermbg=".g:black               )
-call add(hi_settings, "hi Pmenu        ctermbg=53    ctermfg=15"                     )
-call add(hi_settings, "hi VertSplit    ctermfg=25    ctermbg=".g:black               )
-call add(hi_settings, "hi MatchParen   cterm=bold    ctermbg=".g:black." ctermfg=198")
+call add(hi_cmds, "Normal       ctermfg=".white." ctermbg=".black              )
+call add(hi_cmds, "NonText      ctermfg=250"                                   )
+call add(hi_cmds, "Comment      ctermfg=245       ctermbg=".black              )
+call add(hi_cmds, "SpecialKey   ctermfg=250"                                   )
+call add(hi_cmds, "Special                        ctermbg=".black              )
+call add(hi_cmds, "Delimiter    ctermfg=228"                                   )
+call add(hi_cmds, "LineNr       ctermfg=25        ctermbg=".black." cterm=NONE")
+call add(hi_cmds, "Conceal      ctermfg=11        ctermbg=".black              )
+call add(hi_cmds, "VertSplit    ctermfg=25        ctermbg=".black              )
+call add(hi_cmds, "MatchParen   ctermfg=198       ctermbg=".black." cterm=bold")
+call add(hi_cmds, "Folded       ctermfg=3         ctermbg=".black." cterm=bold")
+
+" Popup menu
+call add(hi_cmds, "Pmenu        ctermfg=".white." ctermbg=235"                 )
+call add(hi_cmds, "PmenuSel     ctermfg=".white." ctermbg=235"                 )
 
 " Tabline
-call add(hi_settings, "highlight   TabLine      ctermfg=255   ctermbg=236 cterm=bold")
-call add(hi_settings, "highlight   TabLineSel   ctermfg=10    ctermbg=0   cterm=bold")
-call add(hi_settings, "highlight   TabLineFill                ctermbg=236 cterm=NONE")
+call add(hi_cmds, "TabLine      ctermfg=".white." ctermbg=236       cterm=bold")
+call add(hi_cmds, "TabLineSel   ctermfg=10        ctermbg=0         cterm=bold")
+call add(hi_cmds, "TabLineFill                    ctermbg=236       cterm=NONE")
 
 " Vimdiff
-call add(hi_settings, "hi DiffAdd ctermbg=24 ctermfg=15 cterm=bold" )
-call add(hi_settings, "hi DiffChange ctermbg=".g:black              )
-call add(hi_settings, "hi DiffDelete ctermbg=".g:black." ctermfg=12")
-call add(hi_settings, "hi DiffText ctermbg=0"                       )
-
-"Show tabs and trailing whitespace
-set list
-set listchars=tab:›\ ,trail:⋅,nbsp:⋅
+call add(hi_cmds, "DiffAdd      ctermfg=15        ctermbg=24        cterm=bold")
+call add(hi_cmds, "DiffChange                     ctermbg=".black              )
+call add(hi_cmds, "DiffDelete   ctermfg=12        ctermbg=".black              )
+call add(hi_cmds, "DiffText                       ctermbg=0"                   )
 
 "Extra highlight groups from TagHighlight
+call add(hi_cmds, "Member      ctermfg=".white."                    cterm=bold")
+call add(hi_cmds, "Structure   ctermfg=45"                                     )
+call add(hi_cmds, "DefinedName ctermfg=153"                                    )
+call add(hi_cmds, "Function    ctermfg=228"                                    )
+call add(hi_cmds, "CTagsClass  ctermfg=143                          cterm=bold")
+
 "hi! link Class Normal
 "hi! link Enumerator Normal
 "hi! link EnumerationName Normal
@@ -375,15 +383,13 @@ set listchars=tab:›\ ,trail:⋅,nbsp:⋅
 "hi! link GlobalVariable Normal
 "hi! link LocalVariable Normal
 
-hi! Member ctermfg=255 cterm=bold
-hi! Structure ctermfg=45
-hi! DefinedName ctermfg=153
-hi! Function ctermfg=228
-hi! CTagsClass ctermfg=143 cterm=bold
+"Show tabs and trailing whitespace
+set list
+set listchars=tab:›\ ,trail:⋅,nbsp:⋅
 
 " Execute highlighting commands
-for hi_setting in g:hi_settings
-   execute hi_setting
+for hi_cmd in g:hi_cmds
+   execute "hi ".hi_cmd
 endfor
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
