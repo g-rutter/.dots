@@ -120,7 +120,7 @@ nnoremap <silent> <Leader>\ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 inoremap  <Left><Del>
 set backspace=2      "backspace over line breaks
 
-"Reload settings or vsplit to vimrc
+"Reload settings or make new tab to vimrc
 cab sv so ~/.vimrc
 cab ev tabe ~/.vimrc
 
@@ -189,7 +189,7 @@ filetype off " required!
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
-""Github bundles here:
+"Github bundles here:
 "Bundle 'kien/ctrlp.vim'
 "Bundle 'kshenoy/vim-signature'
 "Bundle 'maxbrunsfeld/vim-yankstack'
@@ -262,7 +262,10 @@ hi clear
 colorscheme molokai
 
 "Show line numbers.
-set relativenumber
+set number
+if exists('+relativenumber')
+   set relativenumber
+endif
 
 "Highlight semi-colons that don't terminate a line in C and C++:
 au BufEnter *.cpp,*.c hi semicolon ctermfg=46
