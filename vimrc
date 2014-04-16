@@ -105,10 +105,7 @@ nnoremap K i<cr><esc>k$
 nnoremap <Leader>ut :UpdateTypesFile<CR>
 
 " save and quit shortcuts
-nnoremap <Leader>a :wall<CR>
 nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>x :x<CR>
 nnoremap <Leader>! :qall!<CR>
 
 " Enter command mode quickly
@@ -123,12 +120,12 @@ nnoremap <silent> <Leader>/ :nohlsearch<CR>
 nnoremap <silent> <Leader>\ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 "Backspace wasn't working:
-inoremap  <Left><Del>
+"inoremap  <Left><Del>
 set backspace=2      "backspace over line breaks
 
 "Reload settings or make new tab to vimrc
-cab sv so ~/.vimrc
-cab ev tabe ~/.vimrc
+cnoremap sv so ~/.vimrc
+cnoremap ev tabe ~/.vimrc
 
 "Switch to nth tab with <Leader>n
 for N in [1 , 2, 3, 4, 5, 6, 7, 8, 9]
