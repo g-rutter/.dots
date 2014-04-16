@@ -2,54 +2,19 @@
 "                              Various settings                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set ofu=syntaxcomplete#Complete
-set completeopt+=preview
-set noswapfile                     " Turn off annoying swap file.
-set encoding=utf-8                 " Necessary to show unicode glyphs
-set fillchars+=stlnc:\             " Fill an inactive window statusline with \\\\\\\\
-set background=dark
-set autoindent                     " copy indent from current line
-if has ( "conceal" )
-  set cole=2                       " enable conceal
-endif
-set backup                         " keep a backup file
-set backupdir=~/.vim/backup        " where to put backup files
-set noerrorbells                   " don't make noise
-set browsedir=current              " which directory to use for the file browser
-set history=500                    " keep N lines of command line history
-set hlsearch                       " highlight the last used search pattern
-set incsearch                      " do incremental searching
-set mouse=                         " disable the use of the mouse
-set showcmd                        " display incomplete commands
-set smartindent                    " smart autoindenting when starting a new line
-set wildmenu                       " command-line completion in an enhanced mode
-set modelines=1
-set modeline
-set showcmd                        " Show the command being typed in the bottom right
-set iskeyword+=95                  " Now a word with an underscore will be seen as one word, e.g. big_output is one word.
-set laststatus=2                   " Always show me the file name.
-set ruler                          " Show % through a file.
 "set autochdir                      " always switch to the current file directory
-set synmaxcol=10000                " Maximum number of characters on a line that will be syntax highlighted.
-set cursorline                     " Highlight current cursor line.
-set timeoutlen=600                 " Don't wait so long for the next keypress.
-set formatoptions-=r               " Dont add the comment prefix when I press <Enter> in Insert
-set formatoptions-=o               " Dont add the comment prefix when I hit o/O on a comment line.
-let g:tex_conceal='adgm'           " Conceal accents, ligatures, delimiters, Greek, maths, but not super|sub-scripts.
-let tab_size=3                     " Number of spaces which correspond to 1 tab.
+"set autoread                       " Reload file when changed.
+set backupdir=~/.vim/backup        " where to put backup files
+set backup                         " keep a backup file
+set browsedir=current              " which directory to use for the file browser
+set clipboard=unnamed              " system clipboard pls
+set history=500                    " keep N lines of command line history
+set iskeyword+=95                  " Now a word with an underscore will be seen as one word, e.g. big_output is one word.
+set noerrorbells                   " don't make noise
+set noswapfile                     " Turn off annoying swap file.
 set ignorecase                     " When searching, don't care about case of match...
 set smartcase                      " ... unless it includes a capital letter.
-set clipboard=unnamed              " system clipboard pls
-set ttyfast                        " faster redrawing
-set lazyredraw                     " screen doesn't update during macros or registers being executed (big speedup)
-set scrolloff=5                    " Scroll before reaching edge.
 set thesaurus+=~/.vim/mthesaur.txt
-"set autoread                       " Reload file when changed.
-set suffixes+=,                    " Lower matching priority to files without extension (likely binary)
-set suffixes-=.h                   " Remove .h from low priority group
-set showtabline=1                  " Show tabline when there is more than 1 tab.
-set foldmethod=indent              " Fold lines by indentation
-set foldminlines=5
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Persistent undo                               "
@@ -58,7 +23,7 @@ set foldminlines=5
 if has ("persistent_undo")
    set undodir=~/.vim/undo
    set undofile
-   set undolevels=1000 "maximum number of changes that can be undone
+   set undolevels=1000  "maximum number of changes that can be undone
    set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 endif
 
@@ -75,8 +40,26 @@ if expand('%:t') =~? '\.in$'
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Mappings                                  "
+"                                   Input                                    "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""
+"  Settings  "
+""""""""""""""
+
+set timeoutlen=600                 " Don't wait so long for the next keypress.
+set mouse=                         " disable the use of the mouse
+set formatoptions-=o               " Dont add the comment prefix when I hit o/O on a comment line.
+set formatoptions-=r               " Dont add the comment prefix when I press <Enter> in Insert
+set completeopt+=preview
+set ofu=syntaxcomplete#Complete
+set autoindent                     " copy indent from current line
+set smartindent                    " smart autoindenting when starting a new line
+set suffixes-=.h                   " Remove .h from low priority group for filename completion
+set suffixes+=,                    " Lower matching priority to files without extension (likely binary)
+
+""""""""""""""
+"  Mappings  "
+""""""""""""""
 
 let mapleader = " "
 
@@ -166,17 +149,23 @@ vnoremap <leader>a :<c-u>execute ":'<,'>Tabular /".nr2char(getchar())<cr>
 "  Insert line number in various langages  "
 """"""""""""""""""""""""""""""""""""""""""""
 
-au FileType cpp,c  noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");', line('.'))<Enter>:nohlsearch<CR>
-au FileType sh     noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
-au FileType python noremap <Leader>p o<Esc>:s/^/\=printf('print "Line %d."', line('.'))<Enter>:nohlsearch<CR>
-au FileType vim    noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+augroup linenr
+   autocmd!
+   au FileType cpp,c  noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");', line('.'))<Enter>:nohlsearch<CR>
+   au FileType sh     noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+   au FileType python noremap <Leader>p o<Esc>:s/^/\=printf('print "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+   au FileType vim    noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+augroup END
 
 """"""""""""""""""""
 "  Latex mappings  "
 """"""""""""""""""""
 
-au filetype tex noremap :up<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
-au filetype tex noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>  " open the pdf file corresponding to current latex file.
+augroup latex
+   autocmd!
+   au filetype tex noremap :up<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
+   au filetype tex noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>  " open the pdf file corresponding to current latex file.
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Search for selected text, forwards or backwards  "
@@ -257,9 +246,12 @@ let g:UltiSnipsEditSplit='horizontal'
 "  Rainbow parens  "
 """"""""""""""""""""
 
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadBraces
+augroup rainbowparens
+   autocmd!
+   au VimEnter * RainbowParenthesesActivate
+   au Syntax * RainbowParenthesesLoadRound
+   au Syntax * RainbowParenthesesLoadBraces
+augroup END
 
 let g:rbpt_colorpairs = [
   \ ['darkgray',    'DarkOrchid3'    ] ,
@@ -299,29 +291,58 @@ let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 
 "For A.vim. No <Leader> mappings in insert mode please.
-au VimEnter * iunmap <Leader>is
-au VimEnter * iunmap <Leader>ih
-au VimEnter * iunmap <Leader>ihn
+augroup avim
+   autocmd!
+   au VimEnter * iunmap <Leader>is
+   au VimEnter * iunmap <Leader>ih
+   au VimEnter * iunmap <Leader>ihn
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                          Colours and highlighting                          "
+"                                 Appearance                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""
+"  Settings  "
+""""""""""""""
+
+set lazyredraw                      " screen doesn't update during macros or registers being executed (big speedup)
+set ttyfast                         " faster redrawing
+set fillchars+=stlnc:\              " Fill an inactive window statusline with \\\\\\\\
+set encoding=utf-8                  " Show unicode glyphs
+set wildmenu                        " command-line completion in an enhanced mode
+set scrolloff=5                     " Scroll before reaching edge.
+set foldmethod=indent               " Fold lines by indentation
+set foldminlines=5
+set laststatus=2                    " Always show me the file name.
+set showtabline=1                   " Show tabline when there is more than 1 tab.
+set hlsearch                        " highlight the last used search pattern
+set incsearch                       " do incremental searching
+set showcmd                         " Show the command being typed in the bottom right
+set ruler                           " Show % through a file.
+set synmaxcol=10000                 " Maximum number of characters on a line that will be syntax highlighted.
+set t_Co=256                        " Number of colours terminal supports
+set number                          " Show line numbers
+set list                            " Show some chars explicitly
+set listchars=tab:›\ ,trail:⋅,nbsp: " Show these chars explicitly⋅
+if exists('+relativenumber')
+   set relativenumber               " Show relative numbers on inactive lines
+endif
+
+""""""""""""""""""""""""""""""
+"  Colours and highlighting  "
+""""""""""""""""""""""""""""""
 
 "Set scheme:
-set t_Co=256
 syntax on
 hi clear
 colorscheme molokai
 
-"Show line numbers.
-set number
-if exists('+relativenumber')
-   set relativenumber
-endif
-
 "Highlight semi-colons that don't terminate a line in C and C++:
-au BufEnter *.cpp,*.c hi semicolon ctermfg=46
-au BufEnter *.cpp,*.c let m = matchadd("semicolon", ';\ze[ \t]\+[^ \t\/$]')
+augroup nontrailing_semicolons
+   autocmd!
+   au BufEnter *.cpp,*.c hi semicolon ctermfg=46
+   au BufEnter *.cpp,*.c let m = matchadd("semicolon", ';\ze[ \t]\+[^ \t\/$]')
+augroup END
 
 " Colour definitions
 let g:black=233
@@ -330,9 +351,15 @@ let g:hi_cmds=[]
 
 "Make cursor line grey for high visibility and telling the active mode
 if exists('+cursorline')
- hi CursorLine ctermbg=234 cterm=underline
- au InsertLeave * hi CursorLine ctermbg=234 cterm=underline
- au InsertEnter * hi CursorLine ctermbg=234 cterm=none
+   set cursorline                     " Highlight current cursor line.
+   hi CursorLine ctermbg=234 cterm=underline
+
+   augroup cursor
+      autocmd!
+      au InsertLeave * hi CursorLine cterm=underline
+      au InsertEnter * hi CursorLine cterm=none
+   augroup END
+
 endif
 
 " Search highlighting I like
@@ -384,30 +411,35 @@ call add(hi_cmds, "CTagsClass  ctermfg=143                          cterm=bold")
 "hi! link GlobalVariable Normal
 "hi! link LocalVariable Normal
 
-"Show tabs and trailing whitespace
-set list
-set listchars=tab:›\ ,trail:⋅,nbsp:⋅
-
 " Execute highlighting commands
 for hi_cmd in g:hi_cmds
    execute "hi ".hi_cmd
 endfor
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Conceal                                   "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""
+"  Conceal  "
+"""""""""""""
 
-au BufEnter *.cpp,*.c syn match cpp_logical_and /&&/ conceal cchar=⋀
-au BufEnter *.cpp,*.c syn match cpp_logical_or /||/ conceal cchar=⋁
-au BufEnter *.cpp,*.c syn match cpp_sqrt /sqrt/ conceal cchar=√
-au BufEnter *.cpp,*.c syn match cpp_le /<=/ conceal cchar=≤
-au BufEnter *.cpp,*.c syn match cpp_ge />=/ conceal cchar=≥
-au BufEnter *.cpp,*.c syn match cpp_multiply / \* / conceal cchar=✕
+if has ( "conceal" )
+   let g:tex_conceal='adgm'           " Conceal accents, ligatures, delimiters, Greek, maths, but not super|sub-scripts.
+   set cole=2                         " enable conceal
+
+   augroup conceal
+      autocmd!
+      au BufEnter *.cpp,*.c syn match cpp_logical_and /&&/ conceal cchar=⋀
+      au BufEnter *.cpp,*.c syn match cpp_logical_or /||/ conceal cchar=⋁
+      au BufEnter *.cpp,*.c syn match cpp_sqrt /sqrt/ conceal cchar=√
+      au BufEnter *.cpp,*.c syn match cpp_le /<=/ conceal cchar=≤
+      au BufEnter *.cpp,*.c syn match cpp_ge />=/ conceal cchar=≥
+      au BufEnter *.cpp,*.c syn match cpp_multiply / \* / conceal cchar=✕
+   augroup END
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Tabs and spaces                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let tab_size=3  " Number of spaces which correspond to 1 tab.
 set expandtab
 let &tabstop=g:tab_size
 let &shiftwidth=g:tab_size
@@ -425,7 +457,7 @@ function! Fixtabs(spaces)
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                          Tabline-making function                           "
+"                                  Tab line                                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if exists("+showtabline")
