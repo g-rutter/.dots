@@ -69,7 +69,6 @@ augroup END
 let mapleader = " "
 
 " Enter a blank line below/above cursor in Normal mode.
-" The o command will continue comments in a program.
 nnoremap <Leader>o o<Esc>
 nnoremap <Leader>O O<Esc>
 nnoremap <Leader>l o<Esc>O
@@ -114,12 +113,12 @@ nnoremap <silent> <Leader>/ :nohlsearch<CR>
 nnoremap <silent> <Leader>\ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 "Backspace wasn't working:
-"inoremap  <Left><Del>
 set backspace=2      "backspace over line breaks
 
-"Reload settings or make new tab to vimrc
+"sv: source vimrc || ev: tabe vimrc || ed: tabe dotfiles dir
 cnoremap sv so ~/.vimrc
 cnoremap ev tabe ~/.vimrc
+cnoremap ed tabe ~/.dots
 
 "Switch to nth tab with <Leader>n
 for N in [1 , 2, 3, 4, 5, 6, 7, 8, 9]
