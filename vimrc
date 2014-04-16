@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Various settings                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "set autochdir                      " always switch to the current file directory
 "set autoread                       " Reload file when changed.
 set backupdir=~/.vim/backup        " where to put backup files
@@ -48,14 +47,20 @@ endif
 
 set timeoutlen=600                 " Don't wait so long for the next keypress.
 set mouse=                         " disable the use of the mouse
-set formatoptions-=o               " Dont add the comment prefix when I hit o/O on a comment line.
-set formatoptions-=r               " Dont add the comment prefix when I press <Enter> in Insert
 set completeopt+=preview
 set ofu=syntaxcomplete#Complete
 set autoindent                     " copy indent from current line
 set smartindent                    " smart autoindenting when starting a new line
 set suffixes-=.h                   " Remove .h from low priority group for filename completion
 set suffixes+=,                    " Lower matching priority to files without extension (likely binary)
+
+" REALLY disable adding the comment prefix for me:
+" (Lots of syntax files loaded after vimrc turn it back on.)
+augroup formatoptions
+   autocmd!
+   au BufEnter * set formatoptions-=o
+   au BufEnter * set formatoptions-=r
+augroup END
 
 """"""""""""""
 "  Mappings  "
