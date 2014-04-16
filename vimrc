@@ -104,9 +104,13 @@ nnoremap K i<cr><esc>k$
 "Update tags for extra highlighting with <leader>ut
 nnoremap <Leader>ut :UpdateTypesFile<CR>
 
-" save and quit shortcuts
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>! :qall!<CR>
+"I dont like ex mode
+nnoremap Q <nop>
+nnoremap gQ <nop>
+
+" save and quit-all shortcuts. c.f. ZZ (=:wq) and ZQ (=:q!)
+nnoremap ZW :w<CR>
+nnoremap Z! :qall!<CR>
 
 " Enter command mode quickly
 nnoremap ; :
