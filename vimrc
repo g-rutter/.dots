@@ -109,8 +109,10 @@ nnoremap Q <nop>
 nnoremap gQ <nop>
 
 " save and quit-all shortcuts. c.f. ZZ (=:wq) and ZQ (=:q!)
-nnoremap ZW :w<CR>
-nnoremap Z! :qall!<CR>
+nnoremap <Leader>W :w<CR>
+nnoremap <Leader>! :qall!<CR>
+nnoremap <Leader>Q :q!<CR>
+nnoremap <Leader>Z ZZ
 
 " Enter command mode quickly
 nnoremap ; :
@@ -142,11 +144,6 @@ endfor
 "Centre search matches when jumping
 noremap N Nzz
 noremap n nzz
-
-"Open a fold and put the line above the top of the fold at the top of the
-"screen
-nnoremap <Leader>Z zAkztj
-nnoremap <Leader>z zakztj
 
 "Make working in command mode less straining on the wrists. Ctrl-space is
 "equivalent to enter, and alt+hjkl move through history and left and right
@@ -301,6 +298,11 @@ nnoremap <TAB> :<C-U>call InsertChar#insert(v:count1)<CR>
 nnoremap ŋ :GundoToggle<CR>
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
+
+"For A.vim. No <Leader> mappings in insert mode please.
+au VimEnter * iunmap <Leader>is
+au VimEnter * iunmap <Leader>ih
+au VimEnter * iunmap <Leader>ihn
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                          Colours and highlighting                          "
