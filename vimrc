@@ -305,27 +305,27 @@ augroup END
 "  Settings  "
 """"""""""""""
 
-set lazyredraw                      " screen doesn't update during macros or registers being executed (big speedup)
-set ttyfast                         " faster redrawing
-set fillchars+=stlnc:\              " Fill an inactive window statusline with \\\\\\\\
-set encoding=utf-8                  " Show unicode glyphs
-set wildmenu                        " command-line completion in an enhanced mode
-set scrolloff=5                     " Scroll before reaching edge.
-set foldmethod=indent               " Fold lines by indentation
+set lazyredraw                       " screen doesn't update during macros or registers being executed (big speedup)
+set ttyfast                          " faster redrawing
+set fillchars+=stlnc:\               " Fill an inactive window statusline with \\\\\\\\
+set encoding=utf-8                   " Show unicode glyphs
+set wildmenu                         " command-line completion in an enhanced mode
+set scrolloff=5                      " Scroll before reaching edge.
+set foldmethod=indent                " Fold lines by indentation
 set foldminlines=5
-set laststatus=2                    " Always show me the file name.
-set showtabline=1                   " Show tabline when there is more than 1 tab.
-set hlsearch                        " highlight the last used search pattern
-set incsearch                       " do incremental searching
-set showcmd                         " Show the command being typed in the bottom right
-set ruler                           " Show % through a file.
-set synmaxcol=10000                 " Maximum number of characters on a line that will be syntax highlighted.
-set t_Co=256                        " Number of colours terminal supports
-set number                          " Show line numbers
-set list                            " Show some chars explicitly
-set listchars=tab:›\ ,trail:⋅,nbsp: " Show these chars explicitly⋅
+set laststatus=2                     " Always show me the file name.
+set showtabline=1                    " Show tabline when there is more than 1 tab.
+set hlsearch                         " highlight the last used search pattern
+set incsearch                        " do incremental searching
+set showcmd                          " Show the command being typed in the bottom right
+set ruler                            " Show % through a file.
+set synmaxcol=10000                  " Maximum number of characters on a line that will be syntax highlighted.
+set t_Co=256                         " Number of colours terminal supports
+set number                           " Show line numbers
+set list                             " Show some chars explicitly
+set listchars=tab:›\ ,trail:⋅,nbsp:⋅ " Show these chars explicitly
 if exists('+relativenumber')
-   set relativenumber               " Show relative numbers on inactive lines
+   set relativenumber                " Show relative numbers on inactive lines
 endif
 
 """"""""""""""""""""""""""""""
