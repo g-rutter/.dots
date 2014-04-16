@@ -175,8 +175,8 @@ au FileType vim    noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line
 "  Latex mappings  "
 """"""""""""""""""""
 
-au filetype tex noremap ;w :update<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
-noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>                         " open the pdf file corresponding to current latex file.
+au filetype tex noremap :up<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
+au filetype tex noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>  " open the pdf file corresponding to current latex file.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Search for selected text, forwards or backwards  "
@@ -257,7 +257,6 @@ let g:UltiSnipsEditSplit='horizontal'
 "  Rainbow parens  "
 """"""""""""""""""""
 
-"Turn on rainbow parenthesis
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadBraces
