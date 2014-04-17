@@ -117,14 +117,21 @@ rm -rf $dots_dir/vim/bundle/vundle
 mkdir -vp $dots_dir/vim/bundle
 git clone https://github.com/gmarik/vundle.git $dots_dir/vim/bundle/vundle
 
-echo -e "$message_colour""\nLaunching Vim to install plugins. Press enter if requested.""$reset_style"
+echo -e "$message_colour""\nLaunching Vim to install plugins. Press enter if required.""$reset_style"
 
 vim +BundleInstall +qall --noplugin
 
-echo -e "$message_colour""\nCompiling YouCompleteMe's support libs.""$reset_style"
+echo -ne "$message_colour""\nCompile YouCompleteMe's support libs? (Takes a while) [y/n]: ""$reset_style"
+read answer
+echo ""
 
-mkdir $YCM_build_dir
-cd    $YCM_build_dir
-cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/cpp
-make ycm_support_libs
-rm -rf $YCM_build_dir >/dev/null
+if [[ $answer = 'y' || $answer = 'Y' ]]; then
+   echo "Building..."
+   mkdir -v $YCM_build_dir
+   cd    $YCM_build_dir
+   cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/cpp
+   make ycm_support_libs
+   rm -rf $YCM_build_dir >/dev/null
+fi
+
+echo -e "$message_colour""Done!""$reset_style"
