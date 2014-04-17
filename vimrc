@@ -383,7 +383,7 @@ call add(hi_cmds, "Folded       ctermfg=3         ctermbg=".black." cterm=bold")
 
 " Popup menu
 call add(hi_cmds, "Pmenu        ctermfg=".white." ctermbg=235"                 )
-call add(hi_cmds, "PmenuSel     ctermfg=".white." ctermbg=235"                 )
+call add(hi_cmds, "PmenuSel     ctermfg=288       ctermbg=235       cterm=bold")
 
 " Tabline
 call add(hi_cmds, "TabLine      ctermfg=".white." ctermbg=236       cterm=bold")
