@@ -61,6 +61,7 @@ echo -e ""
 
 mkdir -v ~/.ssh
 ln  -sv  $dots_dir/ssh_config  ~/.ssh/config
+chmod 600 ssh_config
 
 #################
 #  Install ack  #
