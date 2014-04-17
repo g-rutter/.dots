@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Various settings                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "set autochdir                      " always switch to the current file directory
 "set autoread                       " Reload file when changed.
 set backupdir=~/.vim/backup        " where to put backup files
@@ -48,14 +47,20 @@ endif
 
 set timeoutlen=600                 " Don't wait so long for the next keypress.
 set mouse=                         " disable the use of the mouse
-set formatoptions-=o               " Dont add the comment prefix when I hit o/O on a comment line.
-set formatoptions-=r               " Dont add the comment prefix when I press <Enter> in Insert
 set completeopt+=preview
 set ofu=syntaxcomplete#Complete
 set autoindent                     " copy indent from current line
 set smartindent                    " smart autoindenting when starting a new line
 set suffixes-=.h                   " Remove .h from low priority group for filename completion
 set suffixes+=,                    " Lower matching priority to files without extension (likely binary)
+
+" REALLY disable adding the comment prefix for me:
+" (Lots of syntax files loaded after vimrc turn it back on.)
+augroup formatoptions
+   autocmd!
+   au BufEnter * set formatoptions-=o
+   au BufEnter * set formatoptions-=r
+augroup END
 
 """"""""""""""
 "  Mappings  "
@@ -64,7 +69,6 @@ set suffixes+=,                    " Lower matching priority to files without ex
 let mapleader = " "
 
 " Enter a blank line below/above cursor in Normal mode.
-" The o command will continue comments in a program.
 nnoremap <Leader>o o<Esc>
 nnoremap <Leader>O O<Esc>
 nnoremap <Leader>l o<Esc>O
@@ -109,12 +113,12 @@ nnoremap <silent> <Leader>/ :nohlsearch<CR>
 nnoremap <silent> <Leader>\ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 "Backspace wasn't working:
-"inoremap  <Left><Del>
 set backspace=2      "backspace over line breaks
 
-"Reload settings or make new tab to vimrc
+"sv: source vimrc || ev: tabe vimrc || ed: tabe dotfiles dir
 cnoremap sv so ~/.vimrc
 cnoremap ev tabe ~/.vimrc
+cnoremap ed tabe ~/.dots
 
 "Switch to nth tab with <Leader>n
 for N in [1 , 2, 3, 4, 5, 6, 7, 8, 9]
