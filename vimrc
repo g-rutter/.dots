@@ -285,6 +285,16 @@ let Powerline_cache_enabled = 1
 call Pl#Theme#InsertSegment('currhigroup', 'after', 'fileinfo')
 let Powerline_colorscheme = 'solarized256'
 
+"""""""""""
+"  Vimux  "
+"""""""""""
+
+let VimuxUseNearestPane = 0
+let g:VimuxPromptString = "Vimux > "
+noremap <Leader>vc :VimuxPromptCommand<CR>
+noremap <Leader>vl :VimuxRunLastCommand<CR>
+noremap <Leader>vQ :VimuxCloseRunner<CR>
+
 """"""""""""""""""""""""""
 "  Misc bundle settings  "
 """"""""""""""""""""""""""
