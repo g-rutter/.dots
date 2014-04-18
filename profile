@@ -116,6 +116,12 @@ alias kbn="killbyname"
    #chmod 700 $*
 #}
 
+swap () {
+   mv $1 $1.temp
+   mv $2 $1
+   mv $1.temp $2
+}
+
 = () {
    A=`echo "$*" | bc -l`
    echo A=$A
