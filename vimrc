@@ -3,6 +3,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "set autochdir                      " always switch to the current file directory
 "set autoread                       " Reload file when changed.
+set nocompatible
 set backupdir=~/.vim/backup        " where to put backup files
 set backup                         " keep a backup file
 set browsedir=current              " which directory to use for the file browser
@@ -97,8 +98,8 @@ nnoremap gQ <nop>
 
 " save and quit-all shortcuts. c.f. ZZ (=:wq) and ZQ (=:q!)
 nnoremap <Leader>W :w<CR>
-nnoremap <Leader>! :qall!<CR>
-nnoremap <Leader>Q :q!<CR>
+nnoremap <Leader>!! :qall!<CR>
+nnoremap <Leader>Q :q<CR>
 nnoremap <Leader>Z ZZ
 
 " Enter command mode quickly
