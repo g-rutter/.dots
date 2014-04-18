@@ -117,9 +117,36 @@ alias kbn="killbyname"
 #}
 
 swap () {
-   mv $1 $1.temp
-   mv $2 $1
-   mv $1.temp $2
+   # Swap files $1 and $2. With no args given, swap last 2 files swapped.
+   args=("$@")
+   n_args=${#args[@]}
+   swapfnfiles=("" "")
+   temp=${RANDOM}
+
+   #Try to populate swapfnfiles if at least 1 arg was given.
+   #Ohtherwise, rely on it already being populated.
+   if [[ $n_args -eq 2 ]]; then
+      swapfnfiles=("${args[0]}" "${args[1]}")
+   elif [[ $n_args -eq 1 ]]; then
+      echo "1 arg"
+      swapfnfiles[0]="${args[0]}"
+      if [[ "${args[0]:(-4)}" = ".bck" ]]; then
+         swapfnfiles[1]="${args[0]%.bck}"
+      else
+         swapfnfiles[1]="${args[0]}.bck"
+      fi
+   fi
+
+   #Swap if swapfnfiles is populated
+   if [[ ${#swapfnfiles[@]} -eq 2 ]]; then
+      mv -fn $file1 $file1.$temp >/dev/null
+      mv -fn $file2 $file1       >/dev/null
+      mv -fn $file1.$temp $file2 >/dev/null
+      echo $bblue"Created `ls $file1 $file2`"$reset
+   else
+      echo "No files to swap. Please pass some args."
+   fi
+
 }
 
 = () {
