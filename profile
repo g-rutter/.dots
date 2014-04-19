@@ -29,6 +29,9 @@ export PLATFORM=`uname -s`
 export LESS=-RFX
 export PATH="$PATH:$HOME/bin"
 
+export PBSdir="/home/theory/phrlaq/scripts/MD/PBS/"
+export MDdir="$HOME/scripts/MD/"
+
 ####################
 #  PS1 prettifier  #
 ####################
@@ -44,8 +47,6 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$
 ####################
 
 #Change default options for basic commands
-alias lg="ll | grep "
-alias l1="ls -1"
 alias rm="rm -iv"             #-i: Ask you to confirm before deletions. Can be overridden at any time by using the -f option. -v: be verbose. Makes it say exactly what it is doing.
 alias rmd="rm -rf" #remove a directory silently without asking
 alias cp="cp -v"              #-v: Verbose
@@ -75,7 +76,6 @@ alias inputrc="vim ~/.inputrc"
 alias bashrc="vim ~/.bashrc"
 alias profile="vim ~/.profile"
 alias bashrc_local="vim ~/.bashrc_local"
-alias f="find . |grep"        #Search from your current directory downwards for matches in file name by typing 'f <query>'
 alias p="ps aux |grep"
 alias o="gnome-open 2>/dev/null"            #Open a file in the default program that it would open in if you went to the file explorer and double clicked it eg 'o intro.pdf' to open it in the GUI pdf program.
 
