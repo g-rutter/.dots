@@ -47,8 +47,7 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$
 ####################
 
 #Change default options for basic commands
-alias rm="rm -iv"             #-i: Ask you to confirm before deletions. Can be overridden at any time by using the -f option. -v: be verbose. Makes it say exactly what it is doing.
-alias rmd="rm -rf" #remove a directory silently without asking
+alias rm="rm -I"             #-i: Ask you to confirm before deletions. Can be overridden at any time by using the -f option. -v: be verbose. Makes it say exactly what it is doing.
 alias cp="cp -v"              #-v: Verbose
 alias mv="mv -v"              #-v: Verbose
 alias mkdir="mkdir -v"        #-v: Verbose
@@ -139,10 +138,10 @@ swap () {
 
    #Swap if swapfnfiles is populated
    if [[ ${#swapfnfiles[@]} -eq 2 ]]; then
-      mv -fn $file1 $file1.$temp >/dev/null
-      mv -fn $file2 $file1       >/dev/null
-      mv -fn $file1.$temp $file2 >/dev/null
-      echo $bblue"Created `ls $file1 $file2`"$reset
+      mv -fn ${swapfnfiles[0]} ${swapfnfiles[1]}.$temp >/dev/null
+      mv -fn ${swapfnfiles[1]} ${swapfnfiles[0]}       >/dev/null
+      mv -fn ${swapfnfiles[1]}.$temp ${swapfnfiles[1]} >/dev/null
+      echo $bblue"Created `ls ${swapfnfiles[0]} ${swapfnfiles[1]}`"$reset
    else
       echo "No files to swap. Please pass some args."
    fi
