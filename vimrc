@@ -117,15 +117,17 @@ nnoremap <silent> <Leader>\ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 set backspace=2      "backspace over line breaks
 
 "sv: source vimrc || ev: tabe vimrc || ed: tabe dotfiles dir
-cnoremap sv so ~/.vimrc
-cnoremap ev tabe ~/.vimrc
-cnoremap ed tabe ~/.dots
+cab sv so ~/.vimrc
+cab ev tabe ~/.vimrc
+cab ed tabe ~/.dots
 
 "Switch to nth tab with <Leader>n
 for N in [1 , 2, 3, 4, 5, 6, 7, 8, 9]
-   let bufmap="^[".N." :b ".N."<CR>"
+   "Removed bufmap because it puts delay before ^ cmd
+   "let bufmap="^[".N." :b ".N."<CR>"
+   "execute "noremap".bufmap
+
    let tabmap="<Leader>".N." ".N."gt"
-   execute "noremap".bufmap
    execute "noremap".tabmap
 endfor
 
