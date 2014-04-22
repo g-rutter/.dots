@@ -214,6 +214,7 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'osyo-manga/vim-over'
+Bundle 'salsifis/vim-transpose'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'sjl/gundo.vim'
@@ -397,6 +398,7 @@ call add(hi_cmds, "Conceal      ctermfg=11        ctermbg=".black              )
 call add(hi_cmds, "VertSplit    ctermfg=25        ctermbg=".black              )
 call add(hi_cmds, "MatchParen   ctermfg=198       ctermbg=".black." cterm=bold")
 call add(hi_cmds, "Folded       ctermfg=3         ctermbg=".black." cterm=bold")
+call add(hi_cmds, "ColorColumn  ctermfg=220       ctermbg=".black." cterm=NONE")
 
 " Popup menu
 call add(hi_cmds, "Pmenu        ctermfg=".white." ctermbg=235"                 )
@@ -451,6 +453,15 @@ if has ( "conceal" )
       au BufEnter *.cpp,*.c syn match cpp_multiply / \* / conceal cchar=✕
    augroup END
 endif
+
+""""""""""""""""""""""""""""""""""""""""
+"  Highlight Nth column in some langs  "
+""""""""""""""""""""""""""""""""""""""""
+
+augroup colorcol
+   autocmd!
+   au FileType python set colorcolumn=80
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Tabs and spaces                               "
