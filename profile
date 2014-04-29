@@ -7,6 +7,7 @@
 ##############
 
 set -o vi #Work in Vi mode!
+unset SSH_ASKPASS #Don't launch a GUI to ask for my password. Ask on the CLI!
 
 PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
 
