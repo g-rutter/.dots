@@ -467,7 +467,7 @@ augroup END
 "                              Tabs and spaces                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let tab_size=3  " Number of spaces which correspond to 1 tab.
+let tab_size=4  " Number of spaces which correspond to 1 tab.
 set expandtab
 let &tabstop=g:tab_size
 let &shiftwidth=g:tab_size
