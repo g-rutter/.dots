@@ -43,11 +43,12 @@ echo -e                  "#  Creating general symlinks  #"
 echo -e                  "###############################""$reset_style"
 echo -e ""
 
-ln  -sv  $dots_dir/profile     ~/.profile
-ln  -sv  $dots_dir/tmux.conf   ~/.tmux.conf
-ln  -sv  $dots_dir/bash_ps1    ~/.bash_ps1
-ln  -sv  $dots_dir/inputrc     ~/.inputrc
-ln  -sv  $dots_dir/gitconfig   ~/.gitconfig
+ln  -sv  $dots_dir/profile           ~/.profile
+ln  -sv  $dots_dir/tmux.conf         ~/.tmux.conf
+ln  -sv  $dots_dir/bash_ps1          ~/.bash_ps1
+ln  -sv  $dots_dir/inputrc           ~/.inputrc
+ln  -sv  $dots_dir/gitconfig         ~/.gitconfig
+ln  -sv  $dots_dir/bashrc_$PLATFORM  ~/.bashrc_$PLATFORM
 
 ##################
 #  ssh symlinks  #

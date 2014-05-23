@@ -7,7 +7,6 @@
 ##############
 
 set -o vi #Work in Vi mode!
-unset SSH_ASKPASS #Don't launch a GUI to ask for my password. Ask on the CLI!
 
 PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
 
@@ -26,7 +25,7 @@ if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
 fi
 
 export EDITOR="vim -p"
-export PLATFORM=`uname -s`
+export PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
 export LESS=-RFX
 export PATH="$PATH:$HOME/bin"
 
@@ -48,7 +47,6 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$
 ####################
 
 #Change default options for basic commands
-alias rm="rm -I"             #-i: Ask you to confirm before deletions. Can be overridden at any time by using the -f option. -v: be verbose. Makes it say exactly what it is doing.
 alias cp="cp -v"              #-v: Verbose
 alias mv="mv -v"              #-v: Verbose
 alias mkdir="mkdir -v"        #-v: Verbose
@@ -248,12 +246,14 @@ qd () {
    qme
 }
 
-#########################
-#  Local-only settings  #
-#########################
+################################
+#  Platform-specific settings  #
+################################
 
-if [ -a ~/.bashrc_local ]; then
-   source ~/.bashrc_local
+PLATFORM_BASHRC=$HOME/.bashrc_$PLATFORM
+
+if [ -a $PLATFORM_BASHRC ]; then
+   source $PLATFORM_BASHRC
 fi
 
 #################
