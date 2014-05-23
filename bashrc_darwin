@@ -1,0 +1,24 @@
+# vim: set filetype=sh:
+
+###########################
+#  Environment variables  #
+###########################
+
+#Macports
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+#??
+export ANT_HOME=/usr/local/ant
+export PATH=${PATH}:${ANT_HOME}/bin
+
+#############
+#  Aliases  #
+#############
+#Settings for these commands, particularly -G/-color, seem to be different for Mac vs Linux
+
+alias ls="ls -hrtG"
+alias ll="ls -lhrtG"
+alias grip="grep -IiG"
+alias grep="grep --color=auto -I"
+
