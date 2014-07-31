@@ -7,7 +7,7 @@ set nocompatible
 set backupdir=~/.vim/backup        " where to put backup files
 set backup                         " keep a backup file
 set browsedir=current              " which directory to use for the file browser
-set clipboard=unnamed              " system clipboard pls
+set clipboard=                     " make yank work on Mac
 set history=500                    " keep N lines of command line history
 set iskeyword+=95                  " Now a word with an underscore will be seen as one word, e.g. big_output is one word.
 set noerrorbells                   " don't make noise
@@ -21,10 +21,10 @@ set thesaurus+=~/.vim/mthesaur.txt
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if has ("persistent_undo")
-   set undodir=~/.vim/undo
-   set undofile
-   set undolevels=1000  "maximum number of changes that can be undone
-   set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+    set undodir=~/.vim/undo
+    set undofile
+    set undolevels=1000  "maximum number of changes that can be undone
+    set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -32,11 +32,11 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if expand('%:t') =~? 'bash-fc-\d\+' "Temp bash files
- setfiletype sh
+    setfiletype sh
 endif
 
 if expand('%:t') =~? '\.in$'
- setfiletype lammps
+    setfiletype lammps
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -58,9 +58,9 @@ set suffixes+=,                    " Lower matching priority to files without ex
 " REALLY disable adding the comment prefix for me:
 " (Lots of syntax files loaded after vimrc turn it back on.)
 augroup formatoptions
-   autocmd!
-   au BufEnter * set formatoptions-=o
-   au BufEnter * set formatoptions-=r
+    autocmd!
+    au BufEnter * set formatoptions-=o
+    au BufEnter * set formatoptions-=r
 augroup END
 
 """"""""""""""
@@ -123,12 +123,12 @@ cab ed tabe ~/.dots
 
 "Switch to nth tab with <Leader>n
 for N in [1 , 2, 3, 4, 5, 6, 7, 8, 9]
-   "Removed bufmap because it puts delay before ^ cmd
-   "let bufmap="^[".N." :b ".N."<CR>"
-   "execute "noremap".bufmap
+    "Removed bufmap because it puts delay before ^ cmd
+    "let bufmap="^[".N." :b ".N."<CR>"
+    "execute "noremap".bufmap
 
-   let tabmap="<Leader>".N." ".N."gt"
-   execute "noremap".tabmap
+    let tabmap="<Leader>".N." ".N."gt"
+    execute "noremap".tabmap
 endfor
 
 "Centre search matches when jumping
@@ -157,11 +157,11 @@ vnoremap <leader>a :<c-u>execute ":'<,'>Tabular /".nr2char(getchar())<cr>
 """"""""""""""""""""""""""""""""""""""""""""
 
 augroup linenr
-   autocmd!
-   au FileType cpp,c  noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");', line('.'))<Enter>:nohlsearch<CR>
-   au FileType sh     noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
-   au FileType python noremap <Leader>p o<Esc>:s/^/\=printf('print "Line %d."', line('.'))<Enter>:nohlsearch<CR>
-   au FileType vim    noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+    autocmd!
+    au FileType cpp,c  noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");', line('.'))<Enter>:nohlsearch<CR>
+    au FileType sh     noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+    au FileType python noremap <Leader>p o<Esc>:s/^/\=printf('print "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+    au FileType vim    noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
 augroup END
 
 """"""""""""""""""""
@@ -228,10 +228,10 @@ Bundle 'vim-scripts/InsertChar'
 Bundle 'vim-scripts/TagHighlight'
 
 if has('python')
-  Bundle 'gregsexton/VimCalc'
-  Bundle 'honza/vim-snippets'
-  Bundle 'SirVer/ultisnips'
-  Bundle 'Valloric/YouCompleteMe'
+    Bundle 'gregsexton/VimCalc'
+    Bundle 'honza/vim-snippets'
+    Bundle 'SirVer/ultisnips'
+    Bundle 'Valloric/YouCompleteMe'
 endif
 
 filetype plugin indent on "required!
@@ -255,29 +255,29 @@ let g:UltiSnipsEditSplit='horizontal'
 """"""""""""""""""""
 
 augroup rainbowparens
-   autocmd!
-   au VimEnter * RainbowParenthesesActivate
-   au Syntax * RainbowParenthesesLoadRound
-   au Syntax * RainbowParenthesesLoadBraces
+    autocmd!
+    au VimEnter * RainbowParenthesesActivate
+    au Syntax * RainbowParenthesesLoadRound
+    au Syntax * RainbowParenthesesLoadBraces
 augroup END
 
 let g:rbpt_colorpairs = [
-  \ ['darkgray',    'DarkOrchid3'    ] ,
-  \ ['brown',       'RoyalBlue3'     ] ,
-  \ ['Darkblue',    'SeaGreen3'      ] ,
-  \ ['darkgreen',   'firebrick3'     ] ,
-  \ ['darkcyan',    'RoyalBlue3'     ] ,
-  \ ['darkred',     'SeaGreen3'      ] ,
-  \ ['darkmagenta', 'DarkOrchid3'    ] ,
-  \ ['brown',       'firebrick3'     ] ,
-  \ [89,        'RoyalBlue3'         ] ,
-  \ [202,       'SeaGreen3'          ] ,
-  \ ['darkmagenta', 'DarkOrchid3'    ] ,
-  \ [214,   'RoyalBlue3'             ] ,
-  \ ['darkgreen',    'SeaGreen3'     ] ,
-  \ ['darkcyan',     'DarkOrchid3'   ] ,
-  \ ['darkred',         'firebrick3' ] ,
-  \                                  ]
+    \ ['darkgray',    'DarkOrchid3'    ] ,
+    \ ['brown',       'RoyalBlue3'     ] ,
+    \ ['Darkblue',    'SeaGreen3'      ] ,
+    \ ['darkgreen',   'firebrick3'     ] ,
+    \ ['darkcyan',    'RoyalBlue3'     ] ,
+    \ ['darkred',     'SeaGreen3'      ] ,
+    \ ['darkmagenta', 'DarkOrchid3'    ] ,
+    \ ['brown',       'firebrick3'     ] ,
+    \ [89,        'RoyalBlue3'         ] ,
+    \ [202,       'SeaGreen3'          ] ,
+    \ ['darkmagenta', 'DarkOrchid3'    ] ,
+    \ [214,   'RoyalBlue3'             ] ,
+    \ ['darkgreen',    'SeaGreen3'     ] ,
+    \ ['darkcyan',     'DarkOrchid3'   ] ,
+    \ ['darkred',         'firebrick3' ] ,
+    \                                  ]
 
 """""""""""""""
 "  Powerline  "
@@ -310,10 +310,10 @@ let g:ycm_key_list_previous_completion=[]
 
 "For A.vim. No <Leader> mappings in insert mode please.
 augroup avim
-   autocmd!
-   au VimEnter * iunmap <Leader>is
-   au VimEnter * iunmap <Leader>ih
-   au VimEnter * iunmap <Leader>ihn
+    autocmd!
+    au VimEnter * iunmap <Leader>is
+    au VimEnter * iunmap <Leader>ih
+    au VimEnter * iunmap <Leader>ihn
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -357,9 +357,9 @@ colorscheme molokai
 
 "Highlight semi-colons that don't terminate a line in C and C++:
 augroup nontrailing_semicolons
-   autocmd!
-   au BufEnter *.cpp,*.c hi semicolon ctermfg=46
-   au BufEnter *.cpp,*.c let m = matchadd("semicolon", ';\ze[ \t]\+[^ \t\/$]')
+    autocmd!
+    au BufEnter *.cpp,*.c hi semicolon ctermfg=46
+    au BufEnter *.cpp,*.c let m = matchadd("semicolon", ';\ze[ \t]\+[^ \t\/$]')
 augroup END
 
 " Colour definitions
@@ -369,14 +369,14 @@ let g:hi_cmds=[]
 
 "Make cursor line grey for high visibility and telling the active mode
 if exists('+cursorline')
-   set cursorline                     " Highlight current cursor line.
-   hi CursorLine ctermbg=234 cterm=underline
+    set cursorline                     " Highlight current cursor line.
+    hi CursorLine ctermbg=234 cterm=underline
 
-   augroup cursor
-      autocmd!
-      au InsertLeave * hi CursorLine cterm=underline
-      au InsertEnter * hi CursorLine cterm=none
-   augroup END
+    augroup cursor
+        autocmd!
+        au InsertLeave * hi CursorLine cterm=underline
+        au InsertEnter * hi CursorLine cterm=none
+    augroup END
 
 endif
 
@@ -432,7 +432,7 @@ call add(hi_cmds, "CTagsClass  ctermfg=143                          cterm=bold")
 
 " Execute highlighting commands
 for hi_cmd in g:hi_cmds
-   execute "hi ".hi_cmd
+    execute "hi ".hi_cmd
 endfor
 
 """""""""""""
@@ -440,18 +440,18 @@ endfor
 """""""""""""
 
 if has ( "conceal" )
-   let g:tex_conceal='adgm'           " Conceal accents, ligatures, delimiters, Greek, maths, but not super|sub-scripts.
-   set cole=2                         " enable conceal
+    let g:tex_conceal='adgm'           " Conceal accents, ligatures, delimiters, Greek, maths, but not super|sub-scripts.
+    set cole=2                         " enable conceal
 
-   augroup conceal
-      autocmd!
-      au BufEnter *.cpp,*.c syn match cpp_logical_and /&&/ conceal cchar=⋀
-      au BufEnter *.cpp,*.c syn match cpp_logical_or /||/ conceal cchar=⋁
-      au BufEnter *.cpp,*.c syn match cpp_sqrt /sqrt/ conceal cchar=√
-      au BufEnter *.cpp,*.c syn match cpp_le /<=/ conceal cchar=≤
-      au BufEnter *.cpp,*.c syn match cpp_ge />=/ conceal cchar=≥
-      au BufEnter *.cpp,*.c syn match cpp_multiply / \* / conceal cchar=✕
-   augroup END
+    augroup conceal
+        autocmd!
+        au BufEnter *.cpp,*.c syn match cpp_logical_and /&&/ conceal cchar=⋀
+        au BufEnter *.cpp,*.c syn match cpp_logical_or /||/ conceal cchar=⋁
+        au BufEnter *.cpp,*.c syn match cpp_sqrt /sqrt/ conceal cchar=√
+        au BufEnter *.cpp,*.c syn match cpp_le /<=/ conceal cchar=≤
+        au BufEnter *.cpp,*.c syn match cpp_ge />=/ conceal cchar=≥
+        au BufEnter *.cpp,*.c syn match cpp_multiply / \* / conceal cchar=✕
+    augroup END
 endif
 
 """"""""""""""""""""""""""""""""""""""""
@@ -474,14 +474,14 @@ let &shiftwidth=g:tab_size
 let &softtabstop=g:tab_size
 
 function! Fixtabs(spaces)
- let old_space_tab = repeat(' ', a:spaces)
- let new_space_tab = repeat(' ', g:tab_size)
- for indentation in range(30,1, -1)
-   let substitution     = '%s/^'.repeat(l:old_space_tab, indentation).'\ze\S/'.repeat(l:new_space_tab, indentation).'/e'
-   execute l:substitution
- endfor
- let substitution = '%s/\t/'.new_space_tab.'/ge'
- execute l:substitution
+    let old_space_tab = repeat(' ', a:spaces)
+    let new_space_tab = repeat(' ', g:tab_size)
+    for indentation in range(30,1, -1)
+        let substitution     = '%s/^'.repeat(l:old_space_tab, indentation).'\ze\S/'.repeat(l:new_space_tab, indentation).'/e'
+        execute l:substitution
+    endfor
+    let substitution = '%s/\t/'.new_space_tab.'/ge'
+    execute l:substitution
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -489,33 +489,33 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if exists("+showtabline")
-   function! MyTabLine()
-      let s = ''
-      let t = tabpagenr()
-      let i = 1
+    function! MyTabLine()
+        let s = ''
+        let t = tabpagenr()
+        let i = 1
 
-      while i <= tabpagenr('$')
+        while i <= tabpagenr('$')
 
-         let buflist = tabpagebuflist(i)
-         let winnr = tabpagewinnr(i)
-         let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
-         let file = bufname(buflist[winnr - 1])
-         let file = fnamemodify(file, ':p:t')
+            let buflist = tabpagebuflist(i)
+            let winnr = tabpagewinnr(i)
+            let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
+            let file = bufname(buflist[winnr - 1])
+            let file = fnamemodify(file, ':p:t')
 
-         if file == ''
-            let file = '[No Name]'
-         endif
+            if file == ''
+                let file = '[No Name]'
+            endif
 
-         let s .= ' ' . i . ': ' . file  . ' ' . '%#TabLine#' . '│'
-         let i = i + 1
+            let s .= ' ' . i . ': ' . file  . ' ' . '%#TabLine#' . '│'
+            let i = i + 1
 
-      endwhile
+        endwhile
 
-      let s.= '%#TabLineFill#'
+        let s.= '%#TabLineFill#'
 
-      return s
+        return s
 
-   endfunction
+    endfunction
 
-   set tabline=%!MyTabLine()
+    set tabline=%!MyTabLine()
 endif

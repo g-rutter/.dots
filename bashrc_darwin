@@ -5,7 +5,8 @@
 ###########################
 
 #Macports
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH
+export PYTHONPATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/:$PYTHONPATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 #??
