@@ -170,7 +170,7 @@ augroup END
 
 augroup latex
    autocmd!
-   au filetype tex noremap :up<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
+   au filetype tex noremap ;p :up<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
    au filetype tex noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>  " open the pdf file corresponding to current latex file.
 augroup END
 
