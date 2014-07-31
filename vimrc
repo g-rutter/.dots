@@ -339,7 +339,6 @@ set showcmd                          " Show the command being typed in the botto
 set ruler                            " Show % through a file.
 set synmaxcol=10000                  " Maximum number of characters on a line that will be syntax highlighted.
 set t_Co=256                         " Number of colours terminal supports
-set number                           " Show line numbers
 set list                             " Show some chars explicitly
 set listchars=tab:›\ ,trail:⋅,nbsp:⋅ " Show these chars explicitly
 if exists('+relativenumber')
