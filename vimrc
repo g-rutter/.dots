@@ -218,6 +218,7 @@ Bundle 'salsifis/vim-transpose'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'sjl/gundo.vim'
+Bundle 'terryma/vim-smooth-scroll'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-eunuch'
 Bundle 'tpope/vim-repeat'
@@ -239,6 +240,13 @@ filetype plugin indent on "required!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Bundle settings                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""
+"  Smooth-scroll  "
+"""""""""""""""""""
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 1)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 1)<CR>
+
 """""""""""""""
 "  Ultisnips  "
 """""""""""""""
