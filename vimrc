@@ -169,9 +169,9 @@ augroup END
 """"""""""""""""""""
 
 augroup latex
-    autocmd!
-    au filetype tex noremap :up<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
-    au filetype tex noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>  " open the pdf file corresponding to current latex file.
+   autocmd!
+   au filetype tex noremap ;p :up<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
+   au filetype tex noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>  " open the pdf file corresponding to current latex file.
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -301,7 +301,7 @@ let Powerline_colorscheme = 'solarized256'
 "  Vimux  "
 """""""""""
 
-let VimuxUseNearestPane = 0
+let g:VimuxUseNearestPane = 0
 let g:VimuxPromptString = "Vimux > "
 noremap <Leader>vc :VimuxPromptCommand<CR>
 noremap <Leader>vl :VimuxRunLastCommand<CR>
@@ -347,7 +347,6 @@ set showcmd                          " Show the command being typed in the botto
 set ruler                            " Show % through a file.
 set synmaxcol=10000                  " Maximum number of characters on a line that will be syntax highlighted.
 set t_Co=256                         " Number of colours terminal supports
-set number                           " Show line numbers
 set list                             " Show some chars explicitly
 set listchars=tab:›\ ,trail:⋅,nbsp:⋅ " Show these chars explicitly
 if exists('+relativenumber')
