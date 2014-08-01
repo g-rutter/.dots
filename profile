@@ -114,6 +114,21 @@ alias kbn="killbyname"
     #chmod 700 $*
 #}
 
+vmdcd () {
+    #Automatically find a matching PSF file
+
+    PSF_FILES=($(find . -maxdepth 1 -name '*.psf'))
+
+    if [[ -z "${PSF_FILES[0]}" ]]; then
+           PSF_FILES=($(find .. -maxdepth 1 -name *.psf))
+   fi
+
+   PSF_FILE=${PSF_FILES[0]}
+
+   echo vmd $* -psf ${PSF_FILE}
+   vmd $* -psf ${PSF_FILE}
+}
+
 swap () {
     # Swap files $1 and $2. With no args given, swap last 2 files swapped.
     args=("$@")
