@@ -128,11 +128,9 @@ echo ""
 
 if [[ $answer = 'y' || $answer = 'Y' ]]; then
    echo "Building..."
-   mkdir -v $YCM_build_dir
-   cd    $YCM_build_dir
-   cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/cpp
-   make ycm_support_libs
-   rm -rf $YCM_build_dir >/dev/null
+   cd $HOME/.vim/bundle/YouCompleteMe/
+   ./install.sh
+   cd $HOME/.vim/
 fi
 
 echo -e "$message_colour""Done!""$reset_style"
