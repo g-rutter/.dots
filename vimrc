@@ -353,6 +353,13 @@ if exists('+relativenumber')
    set relativenumber                " Show relative numbers on inactive lines
 endif
 
+" This should not require an augroup, but there appears to be a bug with
+" relativenumber and number cooperating
+augroup set_number
+    autocmd!
+    au BufEnter * set number
+augroup END
+
 """"""""""""""""""""""""""""""
 "  Colours and highlighting  "
 """"""""""""""""""""""""""""""
