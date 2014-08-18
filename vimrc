@@ -353,15 +353,13 @@ set synmaxcol=10000                  " Maximum number of characters on a line th
 set t_Co=256                         " Number of colours terminal supports
 set list                             " Show some chars explicitly
 set listchars=tab:›\ ,trail:⋅,nbsp:⋅ " Show these chars explicitly
-if exists('+relativenumber')
-   set relativenumber                " Show relative numbers on inactive lines
-endif
 
 " This should not require an augroup, but there appears to be a bug with
 " relativenumber and number cooperating
 augroup set_number
     autocmd!
     au BufEnter * set number
+    au BufEnter * set relativenumber
 augroup END
 
 """"""""""""""""""""""""""""""
