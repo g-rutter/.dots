@@ -169,9 +169,13 @@ augroup END
 """"""""""""""""""""
 
 augroup latex
-   autocmd!
-   au filetype tex noremap ;p :up<CR>:!latexmk -pdf % && clear<CR> " save file then run latexmk to make pdf file.
-   au filetype tex noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>  " open the pdf file corresponding to current latex file.
+    autocmd!
+    " save file then run latexmk to make pdf file.
+    au filetype tex noremap ;p :up<CR>:!latexmk -pdf % && clear<CR>
+    " force latexmk to run even if it thinks there are no changes
+    au filetype tex noremap ;f :up<CR>:!latexmk -c && latexmk -pdf % && clear<CR>
+    " open the pdf file corresponding to current latex file.
+    au filetype tex noremap ;o :!kde-open %<.pdf<CR>:!clear<CR>
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
