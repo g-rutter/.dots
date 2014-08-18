@@ -222,6 +222,7 @@ Bundle 'salsifis/vim-transpose'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'sjl/gundo.vim'
+Bundle 'terryma/vim-smooth-scroll'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-eunuch'
 Bundle 'tpope/vim-repeat'
@@ -243,6 +244,13 @@ filetype plugin indent on "required!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Bundle settings                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""
+"  Smooth-scroll  "
+"""""""""""""""""""
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 1)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 1)<CR>
+
 """""""""""""""
 "  Ultisnips  "
 """""""""""""""
@@ -348,6 +356,13 @@ set listchars=tab:›\ ,trail:⋅,nbsp:⋅ " Show these chars explicitly
 if exists('+relativenumber')
    set relativenumber                " Show relative numbers on inactive lines
 endif
+
+" This should not require an augroup, but there appears to be a bug with
+" relativenumber and number cooperating
+augroup set_number
+    autocmd!
+    au BufEnter * set number
+augroup END
 
 """"""""""""""""""""""""""""""
 "  Colours and highlighting  "
