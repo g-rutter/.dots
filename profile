@@ -7,6 +7,7 @@
 ##############
 
 set -o vi #Work in Vi mode!
+unset SSH_ASKPASS #No gui interface when asking me for git password
 
 PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
 
