@@ -64,9 +64,9 @@ alias lammps="cd $HOME2/lammps/"
 alias dynamo="cd $HOME2/dynamo/"
 alias ~2="cd $HOME2"
 alias ..="cd .."
-alias 2..="cd .. && cd .."
-alias 3..="cd .. && cd .. && cd .."
-alias 4..="cd .. && cd .. && cd .. && cd .."
+alias 2..="cd ../.."
+alias 3..="cd ../../.."
+alias 4..="cd ../../../.."
 
 #Miscellaneous shortcuts
 alias vimrc="vim ~/.vimrc"
