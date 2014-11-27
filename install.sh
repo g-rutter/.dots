@@ -75,7 +75,7 @@ echo -e                  "####################""$reset_style"
 echo -e ""
 
 mkdir -v ~/bin
-sh -c "curl http://beyondgrep.com/ack-2.12-single-file > ~/bin/ack && chmod 0755 ~/bin/ack"
+sh -c "curl http://beyondgrep.com/ack-2.14-single-file > ~/bin/ack && chmod 0755 ~/bin/ack"
 
 ############
 #  Vimcat  #
