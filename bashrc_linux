@@ -9,9 +9,15 @@ export LIBRARY_PATH=$HOME/lib:$HOME/lib64:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$HOME/lib:$HOME/lib64:$LD_LIBRARY_PATH
 #export LD_PRELOAD=$HOME/lib/libxdo.so.2:$LD_PRELOAD
 export PYTHONPATH=$PYTHONPATH:$HOME/lib/python2.6/site-packages/
-export PKG_CONFIG_PATH=/home/theory/phrlaq/lib64/pkgconfig:/home/theory/phrlaq/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=/home/theory/phrlaq/lib64/pkgconfig:/home/theory/phrlaq/lib/pkgconfig:/home/theory/phrlaq/share/pkgconfig:$PKG_CONFIG_PATH
+export XDG_DATA_DIRS=$HOME/share:$XDG_DATA_DIRS
+
+export CC=/usr/bin/gcc-4.9
+export CXX=/usr/bin/g++-4.9
 
 export INCLUDE=$HOME/include:$INCLUDE
+export C_INCLUDE_PATH=$HOME/include
+export CPLUS_INCLUDE_PATH=$HOME/include
 export FPATH=$HOME/include:$FPATH
 export CPATH=$HOME/include:$CPATH
 export ACLOCAL_FLAGS="-I /home/theory/phrlaq/share/aclocal/"
@@ -32,6 +38,7 @@ export BOOST_BUILD_PATH=~/boost/tools/build/v2/
 export CPATH=~/boost/:$CPATH
 export LIBRARY_PATH=~/boost/stage/lib/:$LIBRARY_PATH
 
+#CVS
 export CVSROOT=:ext:phrlaq@godzilla:/home/cvs/phrlaq
 export CVS_RSH=ssh
 
@@ -52,9 +59,3 @@ alias rm="rm -I"             #-i: Ask you to confirm before deletions. Can be ov
 #############
 
 module load vmd
-module load intel/13.1
-module load ompi/1.6.4/intel/13.1
-module load ompi_threads/1.6.4/intel/13.1
-
-module unload intel/11.1
-module unload ompi/1.4.5/intel/11.1
