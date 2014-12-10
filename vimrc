@@ -135,6 +135,10 @@ endfor
 noremap N Nzz
 noremap n nzz
 
+"* Doesn't go anywhere, just selects the word for searching
+noremap * *Nzz
+noremap # <Nop>
+
 "Make working in command mode less straining on the wrists. Ctrl-space is
 "equivalent to enter, and alt+hjkl move through history and left and right
 cnoremap <C-@> <Enter>
