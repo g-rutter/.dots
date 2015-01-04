@@ -136,7 +136,7 @@ noremap N Nzz
 noremap n nzz
 
 "* Doesn't go anywhere, just selects the word for searching
-noremap * *Nzz
+noremap * *N
 noremap # <Nop>
 
 "Make working in command mode less straining on the wrists. Ctrl-space is
@@ -482,15 +482,14 @@ augroup colorcol
    au FileType python set colorcolumn=80
 augroup END
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              Tabs and spaces                               "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""
+"  Useful func(s)  "
+""""""""""""""""""""
 
-let tab_size=4  " Number of spaces which correspond to 1 tab.
-set expandtab
-let &tabstop=g:tab_size
-let &shiftwidth=g:tab_size
-let &softtabstop=g:tab_size
+function! Rmcolorcodes()
+    let substitution = '%s/\[\([0-9]\{1,2}\(;[0-9]\{1,2}\)\?\)\?m//g'
+    execute l:substitution
+endfunction
 
 function! Fixtabs(spaces)
     let old_space_tab = repeat(' ', a:spaces)
@@ -502,6 +501,16 @@ function! Fixtabs(spaces)
     let substitution = '%s/\t/'.new_space_tab.'/ge'
     execute l:substitution
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              Tabs and spaces                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let tab_size=4  " Number of spaces which correspond to 1 tab.
+set expandtab
+let &tabstop=g:tab_size
+let &shiftwidth=g:tab_size
+let &softtabstop=g:tab_size
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Tab line                                  "
