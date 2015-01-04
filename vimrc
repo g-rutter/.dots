@@ -308,7 +308,7 @@ let Powerline_colorscheme = 'solarized256'
 "  Vimux  "
 """""""""""
 
-let g:VimuxUseNearestPane = 0
+let g:VimuxUseNearest = 0
 let g:VimuxPromptString = "Vimux > "
 noremap <Leader>vc :VimuxPromptCommand<CR>
 noremap <Leader>vl :VimuxRunLastCommand<CR>

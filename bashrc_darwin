@@ -23,3 +23,10 @@ alias ll="ls -lhrtG"
 alias grip="grep -IiG"
 alias grep="grep --color=auto -I"
 
+#############################################
+#  To make Vim from MacPorts work with YCM  #
+#############################################
+
+alias v="DYLD_FORCE_FLAT_NAMESPACE=1 vim -p" # open with tabs by default
+alias vim="DYLD_FORCE_FLAT_NAMESPACE=1 vim" # fix
+export EDITOR="DYLD_FORCE_FLAT_NAMESPACE=1 vim -p"

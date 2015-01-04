@@ -21,11 +21,11 @@ shopt -s histreedit #(With readline being used) user gets chance to re-edit fail
 shopt -s no_empty_cmd_completion #no completion when spamming <TAB> on an empty line.
 
 if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
-    shopt -s autocd #Directory names giving at the interative shell are interpreted as if they're an argument to cd.
+    shopt -s autocd #Directory names given at the interative shell are interpreted as if they're an argument to cd.
     shopt -s dirspell #Correct directory spelling during word completion
 fi
 
-export EDITOR="vim -p"
+export EDITOR="v"
 export PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
 export LESS=-RFX
 export PATH="$PATH:$HOME/bin"
@@ -69,20 +69,17 @@ alias 3..="cd ../../.."
 alias 4..="cd ../../../.."
 
 #Miscellaneous shortcuts
-alias vimrc="vim ~/.vimrc"
-alias tmuxrc="vim ~/.tmux.conf"
-alias inputrc="vim ~/.inputrc"
-alias bashrc="vim ~/.bashrc"
-alias profile="vim ~/.profile"
-alias bashrc_local="vim ~/.bashrc_local"
+alias vimrc="v ~/.vimrc"
+alias tmuxrc="v ~/.tmux.conf"
+alias inputrc="v ~/.inputrc"
+alias bashrc="v ~/.bashrc"
+alias profile="v ~/.profile"
+alias bashrc_local="v ~/.bashrc_local"
 alias p="ps aux |grep"
 alias o="gnome-open 2>/dev/null"            #Open a file in the default program that it would open in if you went to the file explorer and double clicked it eg 'o intro.pdf' to open it in the GUI pdf program.
 
 #Get into vim faster
 alias v="vim -p" # open with tabs by default
-alias vs="vim -O" # opens a vertical split
-alias sp="vim -o" # opens a vertical split
-alias vc="vimcat" #catenate a file with vim
 
 alias python3="LD_PRELOAD='' python3"
 alias py="ipython"
