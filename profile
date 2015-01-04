@@ -122,12 +122,12 @@ vmdcd () {
 
     if [[ -z "${PSF_FILES[0]}" ]]; then
            PSF_FILES=($(find .. -maxdepth 1 -name *.psf))
-   fi
+    fi
 
-   PSF_FILE=${PSF_FILES[0]}
+    PSF_FILE=${PSF_FILES[0]}
 
-   echo vmd $* -psf ${PSF_FILE}
-   vmd $* -psf ${PSF_FILE}
+    echo vmd $* -psf ${PSF_FILE}
+    vmd $* -psf ${PSF_FILE}
 }
 
 swap () {
