@@ -101,7 +101,7 @@ ln -sv $dots_dir/vimrc          ~/.vimrc
 ln -sv $dots_dir/vim/lammps.vim ~/.vim/syntax/lammps.vim
 
 echo -e "$message_colour""\nMaking symlinks for vim subdirectories.""$reset_style"
-for DIR in bundle colors UltiSnips; do
+for DIR in spell bundle colors; do
 
    rm -rf ~/.vim/$DIR
    ln $ln_dir_options $dots_dir/vim/$DIR ~/.vim/$DIR
