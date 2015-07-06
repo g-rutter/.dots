@@ -359,11 +359,13 @@ set listchars=tab:›\ ,trail:⋅,nbsp:⋅ " Show these chars explicitly
 
 " This should not require an augroup, but there appears to be a bug with
 " relativenumber and number cooperating
-augroup set_number
-    autocmd!
-    au BufEnter * set number
-    au BufEnter * set relativenumber
-augroup END
+if exists ("+relativenumber")
+    augroup set_number
+        autocmd!
+        au BufEnter * set number
+        au BufEnter * set relativenumber
+    augroup END
+endif
 
 """"""""""""""""""""""""""""""
 "  Colours and highlighting  "
