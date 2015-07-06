@@ -365,6 +365,11 @@ if exists ("+relativenumber")
         au BufEnter * set number
         au BufEnter * set relativenumber
     augroup END
+else
+    augroup set_number
+        autocmd!
+        au BufEnter * set number
+    augroup END
 endif
 
 """"""""""""""""""""""""""""""
