@@ -9,7 +9,9 @@
 set -o vi #Work in Vi mode!
 unset SSH_ASKPASS #No gui interface when asking me for git password
 
-PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+if [[ `readonly | ack "COMMAND=" | wc -l` -eq 0 ]]; then
+    PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+fi
 
 #Stop ^S annoyingly freezing the terminal
 stty stop undef
