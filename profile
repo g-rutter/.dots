@@ -268,8 +268,13 @@ qd () {
 
 PLATFORM_BASHRC=$HOME/.bashrc_$PLATFORM
 
+#Deprecated in favour of local-only .bashrc shown below
 if [ -a $PLATFORM_BASHRC ]; then
     source $PLATFORM_BASHRC
+fi
+
+if [ -a $HOME/.bashrc_local ]; then
+    source $HOME/.bashrc_local
 fi
 
 #################
