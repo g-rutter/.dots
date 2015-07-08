@@ -58,6 +58,7 @@ alias echo="echo -e"
 alias tmux="tmux -2"
 alias w3m="w3m -num -no-mouse -cookie"
 alias pause="echo \"The command you're looking for is called sleep.\""
+alias parallel="parallel --ungroup"
 
 #Shortcuts for moving around
 alias d="cd ~/Documents"      #Typing d will take you to your documents.
