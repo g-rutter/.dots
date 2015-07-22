@@ -6,6 +6,14 @@
 #  Settings  #
 ##############
 
+export EDITOR="v"
+export PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
+export LESS=-RFX
+export PATH="$PATH:$HOME/bin"
+
+export PBSdir="/home/theory/phrlaq/scripts/MD/PBS/"
+export MDdir="$HOME/scripts/MD/"
+
 set -o vi #Work in Vi mode!
 unset SSH_ASKPASS #No gui interface when asking me for git password
 
@@ -26,14 +34,6 @@ if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
     shopt -s autocd #Directory names given at the interative shell are interpreted as if they're an argument to cd.
     shopt -s dirspell #Correct directory spelling during word completion
 fi
-
-export EDITOR="v"
-export PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
-export LESS=-RFX
-export PATH="$PATH:$HOME/bin"
-
-export PBSdir="/home/theory/phrlaq/scripts/MD/PBS/"
-export MDdir="$HOME/scripts/MD/"
 
 ####################
 #  PS1 prettifier  #
