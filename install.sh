@@ -62,7 +62,6 @@ echo -e ""
 
 mkdir -v ~/.ssh
 ln  -sv  $dots_dir/ssh_config  ~/.ssh/config
-ln  -sv  $dots_dir/ssh_pubkey  ~/.ssh/id_rsa.pub
 chmod 600 ssh_config
 
 #################
