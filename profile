@@ -6,10 +6,20 @@
 #  Settings  #
 ##############
 
+export EDITOR="v"
+export PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
+export LESS=-RFX
+export PATH="$PATH:$HOME/bin"
+
+export PBSdir="/home/theory/phrlaq/scripts/MD/PBS/"
+export MDdir="$HOME/scripts/MD/"
+
 set -o vi #Work in Vi mode!
 unset SSH_ASKPASS #No gui interface when asking me for git password
 
-PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+if [[ `readonly | ack "COMMAND=" | wc -l` -eq 0 ]]; then
+    PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+fi
 
 #Stop ^S annoyingly freezing the terminal
 stty stop undef
@@ -24,14 +34,6 @@ if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
     shopt -s autocd #Directory names given at the interative shell are interpreted as if they're an argument to cd.
     shopt -s dirspell #Correct directory spelling during word completion
 fi
-
-export EDITOR="v"
-export PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
-export LESS=-RFX
-export PATH="$PATH:$HOME/bin"
-
-export PBSdir="/home/theory/phrlaq/scripts/MD/PBS/"
-export MDdir="$HOME/scripts/MD/"
 
 ####################
 #  PS1 prettifier  #
@@ -56,6 +58,7 @@ alias echo="echo -e"
 alias tmux="tmux -2"
 alias w3m="w3m -num -no-mouse -cookie"
 alias pause="echo \"The command you're looking for is called sleep.\""
+alias parallel="parallel --ungroup"
 
 #Shortcuts for moving around
 alias d="cd ~/Documents"      #Typing d will take you to your documents.
@@ -265,8 +268,13 @@ qd () {
 
 PLATFORM_BASHRC=$HOME/.bashrc_$PLATFORM
 
+#Deprecated in favour of local-only .bashrc shown below
 if [ -a $PLATFORM_BASHRC ]; then
     source $PLATFORM_BASHRC
+fi
+
+if [ -a $HOME/.bashrc_local ]; then
+    source $HOME/.bashrc_local
 fi
 
 #################
