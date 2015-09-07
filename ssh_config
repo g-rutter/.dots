@@ -17,3 +17,7 @@ Host dubhe
 Host archer
     Hostname login.archer.ac.uk
     User phrlaq
+
+Host gilmac
+    Hostname 137.205.62.191
+    User grut
