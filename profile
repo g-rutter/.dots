@@ -59,11 +59,13 @@ alias tmux="tmux -2"
 alias w3m="w3m -num -no-mouse -cookie"
 alias pause="echo \"The command you're looking for is called sleep.\""
 alias parallel="parallel --ungroup"
+alias xmgrace="xmgrace -hdevice EPS"
 
 #Shortcuts for moving around
 alias d="cd ~/Documents"      #Typing d will take you to your documents.
 alias dots="cd ~/.dots"
 alias ..="cd .."
+alias ...="cd ../.."
 alias 2..="cd ../.."
 alias 3..="cd ../../.."
 alias 4..="cd ../../../.."
