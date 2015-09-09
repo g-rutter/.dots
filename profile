@@ -63,9 +63,6 @@ alias parallel="parallel --ungroup"
 #Shortcuts for moving around
 alias d="cd ~/Documents"      #Typing d will take you to your documents.
 alias dots="cd ~/.dots"
-alias lammps="cd $HOME2/lammps/"
-alias dynamo="cd $HOME2/dynamo/"
-alias ~2="cd $HOME2"
 alias ..="cd .."
 alias 2..="cd ../.."
 alias 3..="cd ../../.."
@@ -262,16 +259,9 @@ qd () {
     qme
 }
 
-################################
-#  Platform-specific settings  #
-################################
-
-PLATFORM_BASHRC=$HOME/.bashrc_$PLATFORM
-
-#Deprecated in favour of local-only .bashrc shown below
-if [ -a $PLATFORM_BASHRC ]; then
-    source $PLATFORM_BASHRC
-fi
+#############################
+#  Local-specific settings  #
+#############################
 
 if [ -a $HOME/.bashrc_local ]; then
     source $HOME/.bashrc_local
