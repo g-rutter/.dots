@@ -168,6 +168,14 @@ augroup linenr
     au FileType vim    noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
 augroup END
 
+""""""""""""""""""""""""""""""""
+"  Compile sphinx docs in rst  "
+""""""""""""""""""""""""""""""""
+
+augroup makehtml
+    au FileType rst noremap <Leader>m :VimuxPromptCommand<CR>make clean; PYTHONPATH=~/Documents/HyperSearch/ make html<CR>
+augroup END
+
 """"""""""""""""""""
 "  Latex mappings  "
 """"""""""""""""""""
@@ -313,6 +321,8 @@ let g:VimuxPromptString = "Vimux > "
 noremap <Leader>vc :VimuxPromptCommand<CR>
 noremap <Leader>vl :VimuxRunLastCommand<CR>
 noremap <Leader>vQ :VimuxCloseRunner<CR>
+
+noremap <Leader>t :VimuxRunCommand expand('%:p')<CR>
 
 """"""""""""""""""""""""""
 "  Misc bundle settings  "
