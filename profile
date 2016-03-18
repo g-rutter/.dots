@@ -60,7 +60,6 @@ alias w3m="w3m -num -no-mouse -cookie"
 alias pause="echo \"The command you're looking for is called sleep.\""
 alias parallel="parallel --ungroup"
 alias xmgrace="xmgrace -hdevice EPS"
-
 #Shortcuts for moving around
 alias d="cd ~/Documents"      #Typing d will take you to your documents.
 alias dots="cd ~/.dots"
@@ -86,8 +85,9 @@ alias v="vim -p" # open with tabs by default
 alias python3="LD_PRELOAD='' python3"
 alias py="ipython"
 
-alias makelmp="make openmpi2 && make makelib && make -f Makefile.lib openmpi2 && cp liblammps_openmpi2.a ~/lib/ && cp lmp_openmpi2 ~/bin/ && cp library.h ~/include/liblmp.h"
-alias makedynamo="BOOST_BUILD_PATH=~/boost/tools/build/v2/ ~/boost/bjam install toolset=gcc link=static runtime-link=static include=~/boost/ linkflags=\"-L ~/boost/stage/lib/\""
+# ll commands
+alias ll='ls -alFh --color=auto'
+alias la="ls -A"
 
 alias ack="ack --color-match=\"red bold\""
 alias ick="ack -i --color-match=\"red bold\""

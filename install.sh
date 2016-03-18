@@ -48,7 +48,6 @@ ln  -sv  $dots_dir/tmux.conf         ~/.tmux.conf
 ln  -sv  $dots_dir/bash_ps1          ~/.bash_ps1
 ln  -sv  $dots_dir/inputrc           ~/.inputrc
 ln  -sv  $dots_dir/gitconfig         ~/.gitconfig
-ln  -sv  $dots_dir/bashrc_$PLATFORM  ~/.bashrc_$PLATFORM
 
 ##################
 #  ssh symlinks  #
