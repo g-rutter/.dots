@@ -9,6 +9,7 @@
 export EDITOR="v"
 export PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
 export LESS=-RFX
+
 export PATH="$PATH:$HOME/bin"
 
 export PBSdir="/home/theory/phrlaq/scripts/MD/PBS/"
@@ -33,6 +34,22 @@ shopt -s no_empty_cmd_completion #no completion when spamming <TAB> on an empty 
 if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
     shopt -s autocd #Directory names given at the interative shell are interpreted as if they're an argument to cd.
     shopt -s dirspell #Correct directory spelling during word completion
+fi
+
+#################################
+#  Platform-dependent settings  #
+#################################
+
+if [[ $PLATFORM = darwin ]]; then
+    # Enable macports binaries
+    export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+
+    alias ll='ls -lFhG'
+    alias la='ls -AlFhG'
+    alias ls='ls -G'
+else
+    alias ll='ls -alFh --color=auto'
+    alias la="ls -A"
 fi
 
 ####################
@@ -79,55 +96,15 @@ alias bashrc_local="v ~/.bashrc_local"
 alias p="ps aux |grep"
 alias o="gnome-open 2>/dev/null"            #Open a file in the default program that it would open in if you went to the file explorer and double clicked it eg 'o intro.pdf' to open it in the GUI pdf program.
 
-#Get into vim faster
 alias v="vim -p" # open with tabs by default
-
-alias python3="LD_PRELOAD='' python3"
 alias py="ipython"
-
-# ll commands
-alias ll='ls -alFh --color=auto'
-alias la="ls -A"
 
 alias ack="ack --color-match=\"red bold\""
 alias ick="ack -i --color-match=\"red bold\""
 
-bblue=`printf "\033[1;34m"`
-blue=`printf "\033[34m"`
-white=`printf "\033[1;37m"`
-reset=`printf "\033[00m"`
-
-# Job managing aliases: qme to see all my jobs, qn to see all nazgul jobs, qda to delete all my jobs
-alias qme="qstat -u phrlaq | tail -n +4 | sed 's/NDS  /  NDS/' | sed 's/^\(.\{21\}\)\(.\{9\}\)\(.\{26\}\)\(.\{9\}\)/\1\3/' | sed 2d | sed 's/^J.*/$white\0$reset/' | sed 's/\(^[^\.]\+\)\([a-z0-9\.]*\)  /$bblue\1 $reset\2 /'"
-alias qmt="qstat -u phrlaq -t | tail -n +4 | sed 's/NDS  /  NDS/' | sed 's/^\(.\{21\}\)\(.\{9\}\)\(.\{26\}\)\(.\{9\}\)/\1\3/' | sed 2d | sed 's/^J.*/$white\0$reset/' | sed 's/\(^[^\.]\+\)\([a-z0-9\.]*\)  /$bblue\1 $reset\2 /'"
-alias qn="qstat | grep nazgul | sed 's/\([0-9]\+\)\(\.[a-zA-Z]\+ \)/\1 \2/' | sed 's/\(^[0-9]*\)\(.*\)\( phrlaq \)/$bblue\1$reset\2$bblue\3$reset/' | sed 's/ nazgul *$//'"
-alias qda="qdel all 2>&1 | grip -v '\(Deletion\)\|\(Unauthorized Request\)" #delete all my jobs without bothing me about other jobs.
-alias kbn="killbyname"
-
 ###############
 #  Functions  #
 ###############
-
-#rm () {
-    #mkdir -p /tmp/recycle_bin/
-    #mv $* /tmp/recycle_bin/
-    #chmod 700 $*
-#}
-
-vmdcd () {
-    #Automatically find a matching PSF file
-
-    PSF_FILES=($(find . -maxdepth 1 -name '*.psf'))
-
-    if [[ -z "${PSF_FILES[0]}" ]]; then
-           PSF_FILES=($(find .. -maxdepth 1 -name *.psf))
-    fi
-
-    PSF_FILE=${PSF_FILES[0]}
-
-    echo vmd $* -psf ${PSF_FILE}
-    vmd $* -psf ${PSF_FILE}
-}
 
 swap () {
     # Swap files $1 and $2. With no args given, swap last 2 files swapped.
