@@ -242,8 +242,8 @@ qd () {
 #  Local-specific settings  #
 #############################
 
-if [ -a $HOME/.bashrc_local ]; then
-    source $HOME/.bashrc_local
+if [ -a $HOME/.bashrc ]; then
+    source $HOME/.bashrc
 fi
 
 #################
