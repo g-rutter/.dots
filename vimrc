@@ -35,10 +35,6 @@ if expand('%:t') =~? 'bash-fc-\d\+' "Temp bash files
     setfiletype sh
 endif
 
-if expand('%:t') =~? '\.in$'
-    setfiletype lammps
-endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Input                                    "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -66,6 +62,9 @@ augroup END
 """"""""""""""
 "  Mappings  "
 """"""""""""""
+
+" Allow access to # character on Mac. £ symbol is rarely needed.
+inoremap £ #
 
 let mapleader = " "
 
@@ -176,6 +175,16 @@ augroup makehtml
     au FileType rst noremap <Leader>m :VimuxPromptCommand<CR>make clean; PYTHONPATH=~/Documents/HyperSearch/ make html<CR>
 augroup END
 
+""""""""""""""""""""""""""""
+"  Integration with nbtxt  "
+""""""""""""""""""""""""""""
+augroup nbtxt
+    " Update notebook based on current fileset
+    au FileType python noremap <silent> <Leader>nbn :!nbtxt nb '%:p:h'<CR>
+    " Update fileset based on notebook
+    au FileType python noremap <silent> <Leader>nbt :!nbtxt txt '%:p:h'<CR>:e<CR>
+augroup END
+
 """"""""""""""""""""
 "  Latex mappings  "
 """"""""""""""""""""
@@ -255,13 +264,6 @@ filetype plugin indent on "required!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Bundle settings                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""
-"  Smooth-scroll  "
-"""""""""""""""""""
-
-"noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 1)<CR>
-"noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 1)<CR>
-
 """""""""""""""
 "  Ultisnips  "
 """""""""""""""
