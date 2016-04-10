@@ -180,7 +180,7 @@ augroup END
 """"""""""""""""""""""""""""
 augroup nbtxt
     " Update notebook based on current fileset
-    au FileType python noremap <silent> <Leader>nbn :!nbtxt nb '%:p:h'<CR>
+    au FileType python noremap <silent> <Leader>nbn :silent !nbtxt nb '%:p:h'<CR>:redraw!<CR>
     " Update fileset based on notebook
     au FileType python noremap <silent> <Leader>nbt :!nbtxt txt '%:p:h'<CR>:e<CR>
 augroup END
