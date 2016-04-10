@@ -1,0 +1,81 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import json
+import sys
+import errno
+import os
+import shutil
+
+def totxt(nb_fn):
+    ''' Create folder named nb_fn which contains a plaintext file for every
+        cell in the Jupyter notebook nb_fn + '.ipynb'
+    '''
+
+    # Read json to get code from cells
+    with open(nb_fn + '.ipynb') as json_file:
+        json_cells = json.load(json_file)['cells']
+
+    cells = ["".join(cell['source']) + '\n' for cell in json_cells]
+
+    # Write files
+    mkdir_p(nb_fn)
+
+    for i in range(len(cells)):
+        with open(nb_fn + '/{}.py'.format(i), 'w') as plain_file:
+            plain_file.write(cells[i])
+
+def toipynb(nb_fn):
+    ''' Expects files [0 ... n].py in folder nb_fn and uses these to update
+        the Jupyter notebook nb_fn + '.ipynb' with new cell contents.
+    '''
+
+    # First, backup notebook.
+    shutil.copy(nb_fn + '.ipynb', nb_fn + '/.bck.ipynb')
+
+    # Read json to get code
+    with open(nb_fn + '.ipynb') as json_file:
+        json_all = json.load(json_file)
+
+    # Read new code for cells into json dict
+    for i_cell, json_cell in enumerate(json_all['cells']):
+        with open(nb_fn + '/{}.py'.format(i_cell), 'r') as plain_file:
+            cell = plain_file.read()
+            cell = cell[:-1] if cell[-1] == '\n' else cell
+            json_cell['source'] = cell
+
+    with open(nb_fn + '.ipynb', 'w') as json_file:
+        json.dump(json_all, json_file, indent=1)
+
+def mkdir_p(path):
+    """ 'mkdir -p' in Python
+        From http://stackoverflow.com/a/11860637
+    """
+
+    try:
+        os.makedirs(path)
+    except OSError as exc:  # Python >2.5
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else:
+            raise
+
+if __name__ == "__main__":
+
+    try:
+        mode = sys.argv[1]
+        assert (mode == 'txt' or mode == 'nb')
+    except (AssertionError, IndexError):
+        print "Run as {} {mode} [notebook_filename]"
+        print "Where mode is one of: txt, nb."
+        exit()
+
+    try:
+        nb_fn = sys.argv[2]
+    except IndexError:
+        nb_fn = os.getcwd()
+
+    if sys.argv[1] == 'txt':
+        totxt(nb_fn)
+    elif sys.argv[1] == 'nb':
+        toipynb(nb_fn)

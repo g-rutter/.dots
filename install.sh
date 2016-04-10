@@ -82,6 +82,12 @@ sh -c "curl http://beyondgrep.com/ack-2.14-single-file > ~/bin/ack && chmod 0755
 
 cp vimcat ~/bin/
 
+###########
+#  nbtxt  #
+###########
+
+ln -sv $dots_dir/nbtxt ~/bin/nbtxt
+
 ##################
 #  Vim symlinks  #
 ##################
