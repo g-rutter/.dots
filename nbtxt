@@ -17,11 +17,21 @@ def totxt(nb_fn):
         json_cells = json.load(json_file)['cells']
 
     cells = ["".join(cell['source']) + '\n' for cell in json_cells]
+    cell_types = [cell['cell_type'] for cell in json_cells]
 
     # Write files
     mkdir_p(nb_fn)
 
+    aggregate_fn = open(nb_fn + '/aggregate.py', 'w')
+
     for i in range(len(cells)):
+        if cell_types[i] == 'code':
+
+            header = "\n#  Start of cell {}  #\n".format(i)
+
+            aggregate_fn.write(header)
+            aggregate_fn.write(cells[i])
+
         with open(nb_fn + '/{}.py'.format(i), 'w') as plain_file:
             plain_file.write(cells[i])
 

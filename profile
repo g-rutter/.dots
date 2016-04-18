@@ -66,6 +66,11 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$
 #  Custom aliases  #
 ####################
 
+#mysql usage on scl servers
+alias mysqle="mysql --pass=$(cat ~/.mysql-passwd) -e"
+alias mysql_show="mysql --pass=$(cat ~/.mysql-passwd) -e \"SHOW PROCESSLIST\""
+alias mysql_sf="mysql --pass=$(cat ~/.mysql-passwd) -e \"SHOW FULL PROCESSLIST\""
+
 #Change default options for basic commands
 alias cp="cp -v"              #-v: Verbose
 alias mv="mv -v"              #-v: Verbose
@@ -163,93 +168,10 @@ killbyname () { # Kills ALL processes that match the name e.g. 'killbyname firef
     echo "Killed $(($Nresults_before - $Nresults_after)) process(es)."
 }
 
-desc () { #print the description of a job folder
-    cat $1/description 2> /dev/null
-}
-
-dall () { #Describe all: print the description of every folder.
-    for line in `ls -1F | grep /$`
-    do
-        echo "\033[34m\033[1m$(du -h $line)\033[0m"
-        cat $line/description 2> /dev/null
-        echo '\n'
-    done
-}
-
-h () { #Print command history with negative index so that !-N:x-y type commands can be used
-    if [ -n "$*" ]; then
-        n_entries=`history | wc -l`
-    else
-        n_entries=30
-    fi
-
-    hist=`history $n_entries`
-    nhist=$(( -1 * `history $n_entries | wc -l` ))
-    maxlen=${#nhist}
-
-    while read -r line; do
-        line=`echo "$line" | sed "s/^[0-9 ]\+//g" | ack "$*"`
-        if [ -n "$line" ]; then
-            echo "$bblue$nhist $reset"$line
-        fi
-        nhist=`printf "%${maxlen}s" $(( $nhist + 1 ))`
-    done <<< "$hist"
-}
-
 mkcd () { #Make a new dir and cd into it.
     mkdir -p "$*"
     cd "$*"
 }
-
-t () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs, if they match any of the following arguments
-
-    search=`echo $*| sed 's/ /|/g'`
-    FINAL_LIST=""
-
-    TEXT_FILES=`file * | ack ':.*text' | sed  's/:.*text.*//' | ack "$search"`
-
-    for FILE in `file * | ack ':.*text' | sed  's/:.*text.*//' | ack "$search"`; do
-
-        FILESIZE=$(stat -c%s "$FILE")
-
-        if [[ $FILESIZE -lt 104857600 ]]; then
-            FINAL_LIST+="$FILE "
-        fi
-
-    done
-
-    if [[ ${#FINAL_LIST} -ge 1 ]]; then
-        echo "Opening the following files for editing:"
-        echo $FINAL_LIST
-        $EDITOR $FINAL_LIST
-    else
-        echo "Nothing to open."
-    fi
-}
-
-qd () {
-
-    jobs=(`qstat -u phrlaq -t | tail -n +6 | sed 's/\..\+$//'`)
-    jobnumber=${jobs[ $(($1 - 1)) ]}
-
-    if [ -n "$jobnumber" ]; then
-        echo Deleting job $jobnumber
-        qdel $jobnumber
-    else
-        echo No such job
-    fi
-
-    sleep 0.3
-    qme
-}
-
-#############################
-#  Local-specific settings  #
-#############################
-
-if [ -a $HOME/.bashrc ]; then
-    source $HOME/.bashrc
-fi
 
 #################
 #  Get TMUX up  #
