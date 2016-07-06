@@ -96,11 +96,7 @@ alias bashrc_local="v ~/.bashrc_local"
 alias p="ps aux |grep"
 alias o="gnome-open 2>/dev/null"            #Open a file in the default program that it would open in if you went to the file explorer and double clicked it eg 'o intro.pdf' to open it in the GUI pdf program.
 
-if hash nvim 2>/dev/null; then
-    alias v="nvim -p"
-else
-    alias v="vim -p"
-fi
+alias v="vim -p"
 
 alias py="ipython"
 
@@ -149,99 +145,23 @@ swap () {
     echo A=$A
 } #Basic calculator. e.g. type '= 2.2*2.2' to get the output '4.84'
 
-killbyname () { # Kills ALL processes that match the name e.g. 'killbyname firefox'. You can't accidentally kill other people's stuff, but you can lose unsaved work etc and make your session screw up.
-
-    Nresults_before=`ps ax | grep $1 | grep -v grep | wc -l`
-
-    for i in `ps ax | grep $1 | grep -v grep | sed 's/ *//' | sed 's/[^0-9].*//'`
-    do
-        kill -9 $i
-    done
-
-    Nresults_after=`ps ax | grep $1 | grep -v grep | wc -l`
-
-    echo "Killed $(($Nresults_before - $Nresults_after)) process(es)."
-}
-
-desc () { #print the description of a job folder
-    cat $1/description 2> /dev/null
-}
-
-dall () { #Describe all: print the description of every folder.
-    for line in `ls -1F | grep /$`
-    do
-        echo "\033[34m\033[1m$(du -h $line)\033[0m"
-        cat $line/description 2> /dev/null
-        echo '\n'
-    done
-}
-
-h () { #Print command history with negative index so that !-N:x-y type commands can be used
-    if [ -n "$*" ]; then
-        n_entries=`history | wc -l`
-    else
-        n_entries=30
-    fi
-
-    hist=`history $n_entries`
-    nhist=$(( -1 * `history $n_entries | wc -l` ))
-    maxlen=${#nhist}
-
-    while read -r line; do
-        line=`echo "$line" | sed "s/^[0-9 ]\+//g" | ack "$*"`
-        if [ -n "$line" ]; then
-            echo "$bblue$nhist $reset"$line
-        fi
-        nhist=`printf "%${maxlen}s" $(( $nhist + 1 ))`
-    done <<< "$hist"
-}
-
 mkcd () { #Make a new dir and cd into it.
     mkdir -p "$*"
     cd "$*"
 }
 
-t () { #Open all text files in pwd which are smaller than 100MB in Vim, in tabs, if they match any of the following arguments
+#################################################
+#  Load up my Python virtualenv on the servers  #
+#################################################
 
-    search=`echo $*| sed 's/ /|/g'`
-    FINAL_LIST=""
+if [[ "$HOSTNAME" == "svr-01.int.sclgroup.cc" ]] || [[ "$HOSTNAME" == "svr-02.int.sclgroup.cc" ]]
+then
+    export WORKON_HOME=$HOME/.virtualenvs
+    source /usr/local/bin/virtualenvwrapper.sh
+    PIP_REQUIRE_VIRTUALENV=true
 
-    TEXT_FILES=`file * | ack ':.*text' | sed  's/:.*text.*//' | ack "$search"`
-
-    for FILE in `file * | ack ':.*text' | sed  's/:.*text.*//' | ack "$search"`; do
-
-        FILESIZE=$(stat -c%s "$FILE")
-
-        if [[ $FILESIZE -lt 104857600 ]]; then
-            FINAL_LIST+="$FILE "
-        fi
-
-    done
-
-    if [[ ${#FINAL_LIST} -ge 1 ]]; then
-        echo "Opening the following files for editing:"
-        echo $FINAL_LIST
-        $EDITOR $FINAL_LIST
-    else
-        echo "Nothing to open."
-    fi
-}
-
-qd () {
-
-    jobs=(`qstat -u phrlaq -t | tail -n +6 | sed 's/\..\+$//'`)
-    jobnumber=${jobs[ $(($1 - 1)) ]}
-
-    if [ -n "$jobnumber" ]; then
-        echo Deleting job $jobnumber
-        qdel $jobnumber
-    else
-        echo No such job
-    fi
-
-    sleep 0.3
-    qme
-}
+    workon develop
+fi
 
 #############################
 #  Local-specific settings  #
@@ -255,13 +175,13 @@ fi
 #  Get TMUX up  #
 #################
 
-# Launch TMUX on bittern if not already launched
-if [ "$TMUX" == '' ] && [ "$HOST" == 'bittern' ]
+# Launch TMUX if not already launched
+if [ "$TMUX" == '' ]
 then
     existing_session_count=$(tmux ls | grep . -c)
     if [ $existing_session_count -eq '0' ]
     then
-        tmux -2
+        tmux
     else
         tmux attach -d
     fi
