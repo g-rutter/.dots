@@ -66,6 +66,11 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$
 #  Custom aliases  #
 ####################
 
+#mysql usage on scl servers
+alias mysqle="mysql --pass=$(cat ~/.mysql-passwd) -e"
+alias mysql_show="mysql --pass=$(cat ~/.mysql-passwd) -e \"SHOW PROCESSLIST\""
+alias mysql_sf="mysql --pass=$(cat ~/.mysql-passwd) -e \"SHOW FULL PROCESSLIST\""
+
 #Change default options for basic commands
 alias cp="cp -v"              #-v: Verbose
 alias mv="mv -v"              #-v: Verbose
@@ -106,39 +111,6 @@ alias ick="ack -i --color-match=\"red bold\""
 ###############
 #  Functions  #
 ###############
-
-swap () {
-    # Swap files $1 and $2. With no args given, swap last 2 files swapped.
-    args=("$@")
-    n_args=${#args[@]}
-    swapfnfiles=("" "")
-    temp=${RANDOM}
-
-    #Try to populate swapfnfiles if at least 1 arg was given.
-    #Ohtherwise, rely on it already being populated.
-    if [[ $n_args -eq 2 ]]; then
-        swapfnfiles=("${args[0]}" "${args[1]}")
-    elif [[ $n_args -eq 1 ]]; then
-        echo "1 arg"
-        swapfnfiles[0]="${args[0]}"
-        if [[ "${args[0]:(-4)}" = ".bck" ]]; then
-            swapfnfiles[1]="${args[0]%.bck}"
-        else
-            swapfnfiles[1]="${args[0]}.bck"
-        fi
-    fi
-
-    #Swap if swapfnfiles is populated
-    if [[ ${#swapfnfiles[@]} -eq 2 ]]; then
-        mv -fn ${swapfnfiles[0]} ${swapfnfiles[1]}.$temp >/dev/null
-        mv -fn ${swapfnfiles[1]} ${swapfnfiles[0]}       >/dev/null
-        mv -fn ${swapfnfiles[1]}.$temp ${swapfnfiles[1]} >/dev/null
-        echo $bblue"Created `ls ${swapfnfiles[0]} ${swapfnfiles[1]}`"$reset
-    else
-        echo "No files to swap. Please pass some args."
-    fi
-
-}
 
 = () {
     A=`echo "$*" | bc -l`
