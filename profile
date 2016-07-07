@@ -128,6 +128,7 @@ mkcd () { #Make a new dir and cd into it.
 
 if [[ "$HOSTNAME" == "svr-01.int.sclgroup.cc" ]] || [[ "$HOSTNAME" == "svr-02.int.sclgroup.cc" ]]
 then
+    VIRTUAL_ENV_DISABLE_PROMPT=true
     export WORKON_HOME=$HOME/.virtualenvs
     source /usr/local/bin/virtualenvwrapper.sh
     PIP_REQUIRE_VIRTUALENV=true
