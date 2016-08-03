@@ -227,7 +227,7 @@ call vundle#rc()
 "Bundle 'kien/ctrlp.vim'
 "Bundle 'kshenoy/vim-signature'
 "Bundle 'maxbrunsfeld/vim-yankstack'
-"Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/syntastic'
 "Bundle 'Shougo/unite.vim'
 "Bundle 'blueyed/vim-diminactive'
 "Bundle 'fholgado/minibufexpl.vim'
@@ -326,12 +326,41 @@ noremap <Leader>vQ :VimuxCloseRunner<CR>
 
 noremap <Leader>t :VimuxRunCommand expand('%:p')<CR>
 
+"""""""""""""""
+"  Syntastic  "
+"""""""""""""""
+
+let g:syntastic_python_checkers = ["flake8"]
+
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
+
+let g:syntastic_mode_map = {
+    \ "mode": "passive",
+    \ "active_filetypes": [],
+    \ "passive_filetypes": [] }
+
+nnoremap <Leader>sc :SyntasticCheck<CR>
+nnoremap <Leader>sr :SyntasticReset<CR>
+
 """"""""""""""""""""""""""
 "  Misc bundle settings  "
 """"""""""""""""""""""""""
 
 nnoremap <TAB> :<C-U>call InsertChar#insert(v:count1)<CR>
-nnoremap ŋ :GundoToggle<CR>
+nnoremap <Leader>g :GundoToggle<CR>
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 
