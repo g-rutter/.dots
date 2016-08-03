@@ -4,7 +4,6 @@
 #  Settings  #
 ##############
 
-YCM_build_dir="$HOME/ycm_build"
 dots_dir="$HOME/.dots"
 
 #############################
@@ -134,7 +133,7 @@ echo ""
 if [[ $answer = 'y' || $answer = 'Y' ]]; then
    echo "Building..."
    cd $HOME/.vim/bundle/YouCompleteMe/
-   ./install.sh
+   ./install.py
    cd $HOME/.vim/
 fi
 
