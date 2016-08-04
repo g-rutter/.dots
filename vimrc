@@ -352,7 +352,7 @@ let g:syntastic_mode_map = {
     \ "active_filetypes": [],
     \ "passive_filetypes": [] }
 
-nnoremap <Leader>sc :SyntasticCheck<CR>
+nnoremap <Leader>sc :w<CR>:SyntasticCheck<CR>
 nnoremap <Leader>sr :SyntasticReset<CR>
 
 """"""""""""""""""""""""""
