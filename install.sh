@@ -133,7 +133,7 @@ echo -e "$message_colour""\nGrabbing vundle.""$reset_style"
 
 rm -rf $dots_dir/vim/bundle/vundle
 mkdir -vp $dots_dir/vim/bundle
-git clone https://github.com/gmarik/vundle.git $dots_dir/vim/bundle/vundle
+git clone https://github.com/VundleVim/Vundle.vim $dots_dir/vim/bundle/Vundle.vim
 
 echo -e "$message_colour""\nLaunching Vim to install plugins. Press enter if required.""$reset_style"
 

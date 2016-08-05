@@ -220,45 +220,49 @@ vnoremap <silent> # :<C-U>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 filetype off " required!
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
 
 "Github bundles here:
-"Bundle 'kien/ctrlp.vim'
-"Bundle 'kshenoy/vim-signature'
-"Bundle 'maxbrunsfeld/vim-yankstack'
-Bundle 'scrooloose/syntastic'
-"Bundle 'Shougo/unite.vim'
-"Bundle 'blueyed/vim-diminactive'
-"Bundle 'fholgado/minibufexpl.vim'
+"Plugin 'kien/ctrlp.vim'
+"Plugin 'kshenoy/vim-signature'
+"Plugin 'maxbrunsfeld/vim-yankstack'
+Plugin 'scrooloose/syntastic'
+"Plugin 'Shougo/unite.vim'
+"Plugin 'blueyed/vim-diminactive'
+"Plugin 'fholgado/minibufexpl.vim'
 
-Bundle 'benmills/vimux'
-Bundle 'godlygeek/tabular'
-Bundle 'guns/xterm-color-table.vim'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'osyo-manga/vim-over'
-Bundle 'salsifis/vim-transpose'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'Shougo/vimproc.vim'
-Bundle 'sjl/gundo.vim'
-Bundle 'tpope/vim-abolish'
-Bundle 'tpope/vim-eunuch'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/a.vim'
-Bundle 'vim-scripts/CmdlineComplete.git'
-Bundle 'vim-scripts/InsertChar'
-Bundle 'vim-scripts/TagHighlight'
+Plugin 'benmills/vimux'
+Plugin 'godlygeek/tabular'
+Plugin 'guns/xterm-color-table.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'osyo-manga/vim-over'
+Plugin 'salsifis/vim-transpose'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/CmdlineComplete.git'
+Plugin 'vim-scripts/InsertChar'
+Plugin 'vim-scripts/TagHighlight'
+Plugin 'junegunn/fzf.vim'
 
 if has('python')
-    Bundle 'gregsexton/VimCalc'
-    Bundle 'honza/vim-snippets'
-    Bundle 'SirVer/ultisnips'
-    Bundle 'Valloric/YouCompleteMe'
+    Plugin 'gregsexton/VimCalc'
+    Plugin 'honza/vim-snippets'
+    Plugin 'SirVer/ultisnips'
+    Plugin 'Valloric/YouCompleteMe'
 endif
 
+call vundle#end()
 filetype plugin indent on "required!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
