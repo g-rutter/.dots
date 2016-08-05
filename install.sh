@@ -87,6 +87,20 @@ cp vimcat ~/bin/
 
 ln -sv $dots_dir/nbtxt ~/bin/nbtxt
 
+######################
+#  FZF installation  #
+######################
+
+echo -e ""
+echo -e "$message_colour""####################"
+echo -e                  "#  Setting up FZF  #"
+echo -e                  "####################""$reset_style"
+echo -e ""
+
+git submodule init
+git submodule update
+$dots_dir/fzf/install <<< ''
+
 ##################
 #  Vim symlinks  #
 ##################
