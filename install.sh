@@ -97,8 +97,7 @@ echo -e                  "#  Setting up FZF  #"
 echo -e                  "####################""$reset_style"
 echo -e ""
 
-git submodule init
-git submodule update
+git submodule update --init
 $dots_dir/fzf/install <<< ''
 
 ##################
@@ -147,6 +146,7 @@ echo ""
 if [[ $answer = 'y' || $answer = 'Y' ]]; then
    echo "Building..."
    cd $HOME/.vim/bundle/YouCompleteMe/
+   git submodule update --init --recursive
    ./install.py
    cd $HOME/.vim/
 fi
