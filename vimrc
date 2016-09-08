@@ -361,6 +361,10 @@ let g:syntastic_mode_map = {
 nnoremap <Leader>sc :w<CR>:SyntasticCheck<CR>
 nnoremap <Leader>sr :SyntasticReset<CR>
 
+" Make use of populated location list to jump to next/prev error
+nnoremap <Leader>sn :lnext<CR>
+nnoremap <Leader>sp :lprev<CR>
+
 """"""""""""""""""""""""""
 "  Misc bundle settings  "
 """"""""""""""""""""""""""

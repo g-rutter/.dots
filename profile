@@ -66,6 +66,12 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$
 #  Custom aliases  #
 ####################
 
+# Better git defaults
+alias gitb="git branch -av"
+alias gits="git status"
+alias gitd="git diff"
+alias gitl="git log"
+
 #mysql usage on scl servers
 alias mysqle="mysql --pass=$(cat ~/.mysql-passwd) -e"
 alias mysql_show="mysql --pass=$(cat ~/.mysql-passwd) -e \"SHOW PROCESSLIST\""
