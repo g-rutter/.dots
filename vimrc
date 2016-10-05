@@ -239,7 +239,7 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'benmills/vimux'
 Plugin 'godlygeek/tabular'
 Plugin 'guns/xterm-color-table.vim'
-Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'eapache/rainbow_parentheses.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'osyo-manga/vim-over'
@@ -296,22 +296,19 @@ augroup rainbowparens
 augroup END
 
 let g:rbpt_colorpairs = [
-    \ ['darkgray'    , 'DarkOrchid3'],
-    \ ['brown'       , 'RoyalBlue3' ],
-    \ ['Darkblue'    , 'SeaGreen3'  ],
+    \ ['gray'    , 'DarkOrchid3'],
+    \ [202           , 'SeaGreen3'  ],
+    \ [214           , 'RoyalBlue3' ],
+    \ ['red'       , 'RoyalBlue3' ],
+    \ ['blue'    , 'SeaGreen3'  ],
     \ ['darkgreen'   , 'firebrick3' ],
     \ ['darkcyan'    , 'RoyalBlue3' ],
     \ ['darkred'     , 'SeaGreen3'  ],
     \ ['darkmagenta' , 'DarkOrchid3'],
     \ ['brown'       , 'firebrick3' ],
-    \ [89            , 'RoyalBlue3' ],
-    \ [202           , 'SeaGreen3'  ],
-    \ ['darkmagenta' , 'DarkOrchid3'],
-    \ [214           , 'RoyalBlue3' ],
-    \ ['darkgreen'   , 'SeaGreen3'  ],
-    \ ['darkcyan'    , 'DarkOrchid3'],
-    \ ['darkred'     , 'firebrick3' ],
 \ ]
+
+let g:rbpt_max = 10
 
 """""""""""""""
 "  Powerline  "

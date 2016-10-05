@@ -11,6 +11,7 @@
 	tool = vimdiff
 [core]
 	editor = vim
+	attributesfile = /home/gilr/.gitattributes
 [color]
    branch = auto
    diff = auto
@@ -18,3 +19,6 @@
    status = auto
 [push]
 	default = simple
+[filter "clean_ipynb"]
+	clean = ~/scripts/ipynb_drop_output.py
+	smudge = cat
