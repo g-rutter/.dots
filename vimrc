@@ -234,6 +234,8 @@ Plugin 'scrooloose/syntastic'
 "Plugin 'blueyed/vim-diminactive'
 "Plugin 'fholgado/minibufexpl.vim'
 
+Plugin 'derekwyatt/vim-scala'
+
 Plugin 'benmills/vimux'
 Plugin 'godlygeek/tabular'
 Plugin 'guns/xterm-color-table.vim'
@@ -258,6 +260,7 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 
 if has('python')
+    Plugin 'ensime/ensime-vim'
     Plugin 'gregsexton/VimCalc'
     Plugin 'honza/vim-snippets'
     Plugin 'SirVer/ultisnips'
@@ -288,27 +291,27 @@ let g:UltiSnipsEditSplit='horizontal'
 augroup rainbowparens
     autocmd!
     au VimEnter * RainbowParenthesesActivate
-    au Syntax * RainbowParenthesesLoadRound
-    au Syntax * RainbowParenthesesLoadBraces
+    au BufEnter * RainbowParenthesesLoadRound
+    au BufEnter * RainbowParenthesesLoadBraces
 augroup END
 
 let g:rbpt_colorpairs = [
-    \ ['darkgray',    'DarkOrchid3'    ] ,
-    \ ['brown',       'RoyalBlue3'     ] ,
-    \ ['Darkblue',    'SeaGreen3'      ] ,
-    \ ['darkgreen',   'firebrick3'     ] ,
-    \ ['darkcyan',    'RoyalBlue3'     ] ,
-    \ ['darkred',     'SeaGreen3'      ] ,
-    \ ['darkmagenta', 'DarkOrchid3'    ] ,
-    \ ['brown',       'firebrick3'     ] ,
-    \ [89,        'RoyalBlue3'         ] ,
-    \ [202,       'SeaGreen3'          ] ,
-    \ ['darkmagenta', 'DarkOrchid3'    ] ,
-    \ [214,   'RoyalBlue3'             ] ,
-    \ ['darkgreen',    'SeaGreen3'     ] ,
-    \ ['darkcyan',     'DarkOrchid3'   ] ,
-    \ ['darkred',         'firebrick3' ] ,
-    \                                  ]
+    \ ['darkgray'    , 'DarkOrchid3'],
+    \ ['brown'       , 'RoyalBlue3' ],
+    \ ['Darkblue'    , 'SeaGreen3'  ],
+    \ ['darkgreen'   , 'firebrick3' ],
+    \ ['darkcyan'    , 'RoyalBlue3' ],
+    \ ['darkred'     , 'SeaGreen3'  ],
+    \ ['darkmagenta' , 'DarkOrchid3'],
+    \ ['brown'       , 'firebrick3' ],
+    \ [89            , 'RoyalBlue3' ],
+    \ [202           , 'SeaGreen3'  ],
+    \ ['darkmagenta' , 'DarkOrchid3'],
+    \ [214           , 'RoyalBlue3' ],
+    \ ['darkgreen'   , 'SeaGreen3'  ],
+    \ ['darkcyan'    , 'DarkOrchid3'],
+    \ ['darkred'     , 'firebrick3' ],
+\ ]
 
 """""""""""""""
 "  Powerline  "
@@ -337,6 +340,7 @@ noremap <Leader>t :VimuxRunCommand expand('%:p')<CR>
 """""""""""""""
 
 let g:syntastic_python_checkers = ["flake8"]
+let g:syntastic_scala_checkers = ["ensime"]
 
 let g:syntastic_error_symbol = '❌'
 let g:syntastic_style_error_symbol = '⁉️'
