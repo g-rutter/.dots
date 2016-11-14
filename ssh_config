@@ -1,23 +1,62 @@
-Host bittern
-   Hostname bittern.csc.warwick.ac.uk
-   User phrlaq
+# Open an ssh tunnel to the MySQL database
+# using 'ssh scls1_tunnel -N'. This connects port 3313
+# on your local computer to port 3306 on SCLS1
+Host scls1_tunnel
+    Hostname 192.168.111.1
+    User gilr
+    ServerAliveInterval 60
+    LocalForward 3313 127.0.0.1:3306
 
-Host godzilla
-   Hostname godzilla.csc.warwick.ac.uk
-   User phrlaq
+Host scls2_tunnel
+    Hostname 192.168.111.2
+    User gilr
+    ServerAliveInterval 60
+    LocalForward 3314 127.0.0.1:3306
 
-Host minerva
-   Hostname minerva.csc.warwick.ac.uk
-   User phrlaq
+# Lets you ssh into SCLS1 by typing $ ssh scls1
+Host scls1
+    Hostname 192.168.111.1
 
-Host dubhe
-   Hostname dubhe.csc.warwick.ac.uk
-   User phrlaq
+Host scls2
+    Hostname 192.168.111.2
 
-Host archer
-    Hostname login.archer.ac.uk
-    User phrlaq
+Host scls3
+    Hostname 192.168.111.3
 
-Host gilmac
-    Hostname 137.205.62.191
-    User grut
+Host ec2
+    Hostname mgmt.svr-01.use1.aws.sclgroup.cc
+
+# Options common to all SCLS* hosts.
+Host scls?
+    User gilr
+    ServerAliveInterval 60
+
+Host nb_s1
+    Hostname 192.168.111.1
+    ServerAliveInterval 60
+    LocalForward 9801 127.0.0.1:9542
+    User gilr
+
+Host nb_s2
+    Hostname 192.168.111.2
+    ServerAliveInterval 60
+    LocalForward 9802 127.0.0.1:9530
+    User gilr
+
+Host wikis
+    Hostname 192.168.111.1
+    ServerAliveInterval 60
+    LocalForward 9803 127.0.0.1:80
+    User gilr
+
+Host nb_nssf
+    Hostname 192.168.111.1
+    ServerAliveInterval 60
+    LocalForward 9804 127.0.0.1:9039
+    User gilr
+
+Host nb_ec2
+    Hostname mgmt.svr-01.use1.aws.sclgroup.cc
+    ServerAliveInterval 60
+    LocalForward 9805 127.0.0.1:9542
+    User gilr
