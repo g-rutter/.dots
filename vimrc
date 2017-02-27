@@ -251,6 +251,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-scripts/a.vim'
 Plugin 'vim-scripts/CmdlineComplete.git'
 Plugin 'vim-scripts/InsertChar'
@@ -382,6 +383,13 @@ augroup avim
     au VimEnter * iunmap <Leader>ih
     au VimEnter * iunmap <Leader>ihn
 augroup END
+
+"""""""""
+"  FZF  "
+"""""""""
+
+noremap <Leader>f :FZF<CR>
+noremap <Leader>l :Lines<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Appearance                                 "
