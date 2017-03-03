@@ -261,7 +261,7 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 
 if has('python')
-    Plugin 'ensime/ensime-vim'
+    "Plugin 'ensime/ensime-vim'
     Plugin 'gregsexton/VimCalc'
     Plugin 'honza/vim-snippets'
     Plugin 'SirVer/ultisnips'
@@ -389,7 +389,7 @@ augroup END
 """""""""
 
 noremap <Leader>f :FZF<CR>
-noremap <Leader>l :Lines<CR>
+"noremap <Leader>l :Lines<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Appearance                                 "

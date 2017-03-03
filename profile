@@ -71,6 +71,7 @@ alias gitb="git branch -av"
 alias gits="git status"
 alias gitd="git diff"
 alias gitl="git log"
+alias gitr="git remote -v"
 
 #mysql usage on scl servers
 alias mysqle="mysql --pass=$(cat ~/.mysql-passwd) -e"
