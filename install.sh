@@ -73,7 +73,7 @@ echo -e                  "####################""$reset_style"
 echo -e ""
 
 mkdir -v ~/bin
-sh -c "curl http://beyondgrep.com/ack-2.16-single-file > ~/bin/ack && chmod 0755 ~/bin/ack"
+sh -c "curl -L http://beyondgrep.com/ack-2.16-single-file > ~/bin/ack && chmod 0755 ~/bin/ack"
 
 ############
 #  Vimcat  #
@@ -139,7 +139,7 @@ echo -e "$message_colour""\nLaunching Vim to install plugins. Press enter if req
 
 vim +BundleInstall +qall --noplugin
 
-echo -ne "$message_colour""\nCompile YouCompleteMe's support libs? (Takes a while) [y/n]: ""$reset_style"
+echo -ne "$message_colour""\nCompile YouCompleteMe's support libs? (Takes a while) [y]: ""$reset_style"
 read answer
 echo ""
 
