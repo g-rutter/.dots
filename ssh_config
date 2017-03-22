@@ -1,8 +1,8 @@
 # Open an ssh tunnel to the MySQL database
 # using 'ssh scls1_tunnel -N'. This connects port 3313
 # on your local computer to port 3306 on SCLS1
-Host scls1_tunnel
-    Hostname 192.168.111.1
+Host scls5_tunnel
+    Hostname 192.168.111.5
     User gilr
     ServerAliveInterval 60
     LocalForward 3313 127.0.0.1:3306
