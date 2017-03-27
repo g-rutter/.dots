@@ -31,28 +31,19 @@ Host scls?
     User gilr
     ServerAliveInterval 60
 
-Host nb_s1
+Host s1
     Hostname 192.168.111.1
     ServerAliveInterval 60
+    # nb, wiki, then nb-nssf
     LocalForward 9801 127.0.0.1:9542
+    LocalForward 9803 127.0.0.1:80
+    LocalForward 9804 127.0.0.1:9039
     User gilr
 
-Host nb_s2
+Host s2
     Hostname 192.168.111.2
     ServerAliveInterval 60
     LocalForward 9802 127.0.0.1:9530
-    User gilr
-
-Host wikis
-    Hostname 192.168.111.1
-    ServerAliveInterval 60
-    LocalForward 9803 127.0.0.1:80
-    User gilr
-
-Host nb_nssf
-    Hostname 192.168.111.1
-    ServerAliveInterval 60
-    LocalForward 9804 127.0.0.1:9039
     User gilr
 
 Host nb_ec2
@@ -60,3 +51,5 @@ Host nb_ec2
     ServerAliveInterval 60
     LocalForward 9805 127.0.0.1:9542
     User gilr
+
+# For use on scls2, which I will ssh to seperately
