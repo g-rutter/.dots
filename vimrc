@@ -327,11 +327,11 @@ let Powerline_colorscheme = 'solarized256'
 
 let g:VimuxUseNearest = 0
 let g:VimuxPromptString = "Vimux > "
-noremap <Leader>vc :VimuxPromptCommand<CR>
-noremap <Leader>vl :VimuxRunLastCommand<CR>
+noremap <Leader>vc :w<CR>:VimuxPromptCommand<CR>
+noremap <Leader>vl :w<CR>:VimuxRunLastCommand<CR>
 noremap <Leader>vQ :VimuxCloseRunner<CR>
 
-noremap <Leader>t :VimuxRunCommand expand('%:p')<CR>
+noremap <Leader>t :w<CR>:VimuxRunCommand expand('%:p')<CR>
 
 """""""""""""""
 "  Syntastic  "
