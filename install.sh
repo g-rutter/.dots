@@ -113,6 +113,7 @@ echo -e ""
 mkdir -v ~/.vim
 mkdir -v ~/.vim/syntax
 mkdir -v ~/.vim/backup
+mkdir -v ~/.vim/undo
 
 ln -sv $dots_dir/vimrc          ~/.vimrc
 ln -sv $dots_dir/vim/lammps.vim ~/.vim/syntax/lammps.vim
