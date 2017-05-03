@@ -108,9 +108,7 @@ vnoremap ; :
 vnoremap : ;
 
 " Clear search highlighting
-nnoremap <silent> <Leader>/ :nohlsearch<CR>
-" Open a Quickfix window for the last search.
-nnoremap <silent> <Leader>\ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+nnoremap <silent> <Leader>\ :nohlsearch<CR>
 
 "Backspace wasn't working:
 set backspace=2      "backspace over line breaks
@@ -389,7 +387,13 @@ augroup END
 """""""""
 
 noremap <Leader>f :FZF<CR>
+noremap <Leader>/ :BLines<CR>
 "noremap <Leader>l :Lines<CR>
+
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Appearance                                 "
