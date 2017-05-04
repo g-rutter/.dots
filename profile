@@ -133,7 +133,7 @@ mkcd () { #Make a new dir and cd into it.
 #  Load up my Python virtualenv on the servers  #
 #################################################
 
-if [[ "$HOSTNAME" =~ svr-0[0-9]\..*int.sclgroup\.cc ]]
+if [[ "$HOSTNAME" =~ svr-0[0-9]\..*int.sclgroup\.cc|ip-10-160-180-7 ]]
 then
     VIRTUAL_ENV_DISABLE_PROMPT=true
     export WORKON_HOME=$HOME/.virtualenvs
