@@ -140,6 +140,9 @@ echo -e "$message_colour""\nLaunching Vim to install plugins. Press enter if req
 
 vim +BundleInstall +qall --noplugin
 
+# Build fzf for Vim
+$dots_dir/vim/bundle/fzf/install --all
+
 echo -ne "$message_colour""\nCompile YouCompleteMe's support libs? (Takes a while) [y]: ""$reset_style"
 read answer
 echo ""

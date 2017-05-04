@@ -255,7 +255,7 @@ Plugin 'vim-scripts/CmdlineComplete.git'
 Plugin 'vim-scripts/InsertChar'
 Plugin 'vim-scripts/TagHighlight'
 
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
 if has('python')
