@@ -108,7 +108,11 @@ alias bashrc_local="v ~/.bashrc_local"
 alias p="ps aux |grep"
 alias o="gnome-open 2>/dev/null"            #Open a file in the default program that it would open in if you went to the file explorer and double clicked it eg 'o intro.pdf' to open it in the GUI pdf program.
 
-alias v="vim -p"
+if hash nvim 2>/dev/null; then
+    alias v="nvim -p"
+else
+    alias v="vim -p"
+fi
 
 alias py="ipython"
 
