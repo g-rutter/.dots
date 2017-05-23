@@ -15,6 +15,8 @@ export PATH="$PATH:$HOME/bin"
 export PBSdir="/home/theory/phrlaq/scripts/MD/PBS/"
 export MDdir="$HOME/scripts/MD/"
 
+export PYTHONSTARTUP="$HOME/.dots/python_interactive_startup.py"
+
 set -o vi #Work in Vi mode!
 unset SSH_ASKPASS #No gui interface when asking me for git password
 
