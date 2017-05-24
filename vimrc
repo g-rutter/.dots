@@ -161,6 +161,9 @@ execute 'vnoremap L L'.&l:scrolloff.'j'
 "Align visually selected text by a single character
 vnoremap <leader>a :<c-u>execute ":'<,'>Tabular /".nr2char(getchar())<cr>
 
+" Fix print commands in python 2 to be python 3 style.
+command! FixPrint %s/\(^ *\)print *\([a-zA-Z].*$\)/\1print(\2)/
+
 """"""""""""""""""""""""""""""""""""""""""""
 "  Insert line number in various langages  "
 """"""""""""""""""""""""""""""""""""""""""""
