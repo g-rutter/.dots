@@ -135,6 +135,13 @@ mkcd () { #Make a new dir and cd into it.
     cd "$*"
 }
 
+tad () {
+    tmux attach -d
+    if [ "$?" -eq "1" ]; then
+        tmux
+    fi
+}
+
 #################################################
 #  Load up my Python virtualenv on the servers  #
 #################################################
@@ -155,20 +162,4 @@ fi
 
 if [ -a $HOME/.bashrc ]; then
     source $HOME/.bashrc
-fi
-
-#################
-#  Get TMUX up  #
-#################
-
-# Launch TMUX if not already launched
-if [ "$TMUX" == '' ]
-then
-    existing_session_count=$(tmux ls | grep . -c)
-    if [ $existing_session_count -eq '0' ]
-    then
-        tmux
-    else
-        tmux attach -d
-    fi
 fi
