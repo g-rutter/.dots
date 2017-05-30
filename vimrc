@@ -238,7 +238,11 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'kien/ctrlp.vim'
 "Plugin 'kshenoy/vim-signature'
 "Plugin 'maxbrunsfeld/vim-yankstack'
-Plugin 'scrooloose/syntastic'
+
+"Plugin 'scrooloose/syntastic'
+"Plugin 'neomake/neomake'
+Plugin 'w0rp/ale'
+
 "Plugin 'Shougo/unite.vim'
 "Plugin 'blueyed/vim-diminactive'
 "Plugin 'fholgado/minibufexpl.vim'
@@ -342,39 +346,21 @@ noremap <Leader>vQ :VimuxCloseRunner<CR>
 
 noremap <Leader>t :w<CR>:VimuxRunCommand expand('%:p')<CR>
 
-"""""""""""""""
-"  Syntastic  "
-"""""""""""""""
+"""""""""
+"  ALE  "
+"""""""""
 
-let g:syntastic_python_checkers = ["flake8"]
-let g:syntastic_scala_checkers = ["ensime"]
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '!'
+nmap <silent> <Leader>ak <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>aj <Plug>(ale_next_wrap)
 
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
+highlight link ALEErrorSign SignColumn
+highlight link ALEWarningSign SignColumn
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:ale_echo_msg_format = '[%linter%] %s'
 
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
-
-let g:syntastic_mode_map = {
-    \ "mode": "passive",
-    \ "active_filetypes": [],
-    \ "passive_filetypes": [] }
-
-nnoremap <Leader>sc :w<CR>:SyntasticCheck<CR>
-nnoremap <Leader>sr :SyntasticReset<CR>
-
-" Make use of populated location list to jump to next/prev error
-nnoremap <Leader>sn :lnext<CR>
-nnoremap <Leader>sp :lprev<CR>
+let g:ale_python_pylint_options = '-d W0401'
 
 """"""""""""""""""""""""""
 "  Misc bundle settings  "
