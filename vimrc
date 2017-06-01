@@ -360,7 +360,9 @@ highlight link ALEWarningSign SignColumn
 
 let g:ale_echo_msg_format = '[%linter%] %s'
 
-let g:ale_python_pylint_options = '-d W0401'
+let ignore_pylint = "-d W0401,R0914,R0903,R1705,R0913,R0902,W503,W1202,W503"
+let good_names = "--good-names e,x,n,i,lr,w"
+let g:ale_python_pylint_options = ignore_pylint . " " . good_names
 
 """"""""""""""""""""""""""
 "  Misc bundle settings  "
@@ -472,6 +474,9 @@ highlight Search ctermfg=78
 highlight Search ctermbg=none
 highlight Search cterm=underline
 highlight IncSearch term=bold
+
+highlight SpellBad ctermbg=236
+highlight SpellCap ctermbg=236
 
 " Override some unwanted molokai settings
 call add(hi_cmds, "Normal       ctermfg=".white." ctermbg=".black              )
