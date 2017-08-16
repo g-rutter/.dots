@@ -117,9 +117,12 @@ else
 fi
 
 alias py="ipython --TerminalInteractiveShell.editing_mode=vi"
-
 alias ack="ack --color-match=\"red bold\""
 alias ick="ack -i --color-match=\"red bold\""
+
+if [[ $PLATFORM = darwin ]]; then
+    alias cut="LC_ALL=C cut"
+fi
 
 ###############
 #  Functions  #

@@ -52,4 +52,7 @@ Host nb_ec2
     LocalForward 9805 127.0.0.1:9542
     User gilr
 
-# For use on scls2, which I will ssh to seperately
+Host aws_read_slave
+    User gilr
+    Hostname read_slave.mysql.int.cambridgeanalytica.org
+    LocalForward 3317 127.0.0.1:3306

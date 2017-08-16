@@ -273,6 +273,8 @@ Plugin 'vim-scripts/TagHighlight'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
+Plugin 'chrisbra/csv.vim'
+
 if has('python')
     "Plugin 'ensime/ensime-vim'
     Plugin 'gregsexton/VimCalc'
