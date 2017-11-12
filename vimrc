@@ -234,26 +234,15 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-"Github bundles here:
-"Plugin 'kien/ctrlp.vim'
-"Plugin 'kshenoy/vim-signature'
-"Plugin 'maxbrunsfeld/vim-yankstack'
-
-"Plugin 'scrooloose/syntastic'
-"Plugin 'neomake/neomake'
 Plugin 'w0rp/ale'
 
-"Plugin 'Shougo/unite.vim'
-"Plugin 'blueyed/vim-diminactive'
-"Plugin 'fholgado/minibufexpl.vim'
-
 Plugin 'derekwyatt/vim-scala'
-
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'benmills/vimux'
 Plugin 'godlygeek/tabular'
 Plugin 'guns/xterm-color-table.vim'
 Plugin 'eapache/rainbow_parentheses.vim'
-Plugin 'Lokaltog/vim-powerline'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'osyo-manga/vim-over'
 Plugin 'salsifis/vim-transpose'
@@ -276,7 +265,6 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'chrisbra/csv.vim'
 
 if has('python')
-    "Plugin 'ensime/ensime-vim'
     Plugin 'gregsexton/VimCalc'
     Plugin 'honza/vim-snippets'
     Plugin 'SirVer/ultisnips'
@@ -289,6 +277,12 @@ filetype plugin indent on "required!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Bundle settings                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""
+"  Airline  "
+"""""""""""""
+
+let g:airline_theme='tomorrow'
+
 """""""""""""""
 "  Ultisnips  "
 """""""""""""""
@@ -325,16 +319,6 @@ let g:rbpt_colorpairs = [
 \ ]
 
 let g:rbpt_max = 10
-
-"""""""""""""""
-"  Powerline  "
-"""""""""""""""
-
-let g:Powerline_stl_path_style = 'full'
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
-let Powerline_cache_enabled = 1
-call Pl#Theme#InsertSegment('currhigroup', 'after', 'fileinfo')
-let Powerline_colorscheme = 'solarized256'
 
 """""""""""
 "  Vimux  "
@@ -389,7 +373,6 @@ augroup END
 
 noremap <Leader>f :FZF<CR>
 noremap <Leader>/ :BLines<CR>
-"noremap <Leader>l :Lines<CR>
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -444,7 +427,7 @@ endif
 "Set scheme:
 syntax on
 hi clear
-colorscheme molokai
+colorscheme Tomorrow
 
 "Highlight semi-colons that don't terminate a line in C and C++:
 augroup nontrailing_semicolons
@@ -461,68 +444,15 @@ let g:hi_cmds=[]
 "Make cursor line grey for high visibility and telling the active mode
 if exists('+cursorline')
     set cursorline                     " Highlight current cursor line.
-    hi CursorLine ctermbg=234 cterm=underline
+    hi CursorLine cterm=underline
 
     augroup cursor
         autocmd!
-        au InsertLeave * hi CursorLine cterm=underline
-        au InsertEnter * hi CursorLine cterm=none
+        au InsertLeave * hi CursorLine cterm=underline ctermbg=NONE
+        au InsertEnter * hi CursorLine cterm=none ctermbg=253
     augroup END
 
 endif
-
-" Search highlighting I like
-highlight Search ctermfg=78
-highlight Search ctermbg=none
-highlight Search cterm=underline
-highlight IncSearch term=bold
-
-highlight SpellBad ctermbg=236
-highlight SpellCap ctermbg=236
-
-" Override some unwanted molokai settings
-call add(hi_cmds, "Normal       ctermfg=".white." ctermbg=".black              )
-call add(hi_cmds, "NonText      ctermfg=250"                                   )
-call add(hi_cmds, "Comment      ctermfg=245       ctermbg=".black              )
-call add(hi_cmds, "SpecialKey   ctermfg=250"                                   )
-call add(hi_cmds, "Special                        ctermbg=".black              )
-call add(hi_cmds, "Delimiter    ctermfg=228"                                   )
-call add(hi_cmds, "LineNr       ctermfg=25        ctermbg=".black." cterm=NONE")
-call add(hi_cmds, "Conceal      ctermfg=11        ctermbg=".black              )
-call add(hi_cmds, "VertSplit    ctermfg=25        ctermbg=".black              )
-call add(hi_cmds, "MatchParen   ctermfg=198       ctermbg=".black." cterm=bold")
-call add(hi_cmds, "Folded       ctermfg=3         ctermbg=".black." cterm=bold")
-call add(hi_cmds, "ColorColumn  ctermfg=220       ctermbg=".black." cterm=NONE")
-
-" Popup menu
-call add(hi_cmds, "Pmenu        ctermfg=".white." ctermbg=235"                 )
-call add(hi_cmds, "PmenuSel     ctermfg=288       ctermbg=235       cterm=bold")
-
-" Tabline
-call add(hi_cmds, "TabLine      ctermfg=".white." ctermbg=236       cterm=bold")
-call add(hi_cmds, "TabLineSel   ctermfg=10        ctermbg=0         cterm=bold")
-call add(hi_cmds, "TabLineFill                    ctermbg=236       cterm=NONE")
-
-" Vimdiff
-call add(hi_cmds, "DiffAdd      ctermfg=15        ctermbg=24        cterm=bold")
-call add(hi_cmds, "DiffChange                     ctermbg=".black              )
-call add(hi_cmds, "DiffDelete   ctermfg=12        ctermbg=".black              )
-call add(hi_cmds, "DiffText                       ctermbg=0"                   )
-
-"Extra highlight groups from TagHighlight
-call add(hi_cmds, "Member      ctermfg=".white."                    cterm=bold")
-call add(hi_cmds, "Structure   ctermfg=45"                                     )
-call add(hi_cmds, "DefinedName ctermfg=153"                                    )
-call add(hi_cmds, "Function    ctermfg=228"                                    )
-call add(hi_cmds, "CTagsClass  ctermfg=143                          cterm=bold")
-
-"hi! link Class Normal
-"hi! link Enumerator Normal
-"hi! link EnumerationName Normal
-"hi! link Union Normal
-"hi! link GlobalConstant Normal
-"hi! link GlobalVariable Normal
-"hi! link LocalVariable Normal
 
 " Execute highlighting commands
 for hi_cmd in g:hi_cmds
@@ -547,15 +477,6 @@ if has ( "conceal" )
         au BufEnter *.cpp,*.c syn match cpp_multiply / \* / conceal cchar=✕
     augroup END
 endif
-
-""""""""""""""""""""""""""""""""""""""""
-"  Highlight Nth column in some langs  "
-""""""""""""""""""""""""""""""""""""""""
-
-augroup colorcol
-   autocmd!
-   au FileType python set colorcolumn=80
-augroup END
 
 """"""""""""""""""""
 "  Useful func(s)  "
