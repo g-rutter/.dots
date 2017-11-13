@@ -47,6 +47,7 @@ ln  -sv  $dots_dir/tmux.conf         ~/.tmux.conf
 ln  -sv  $dots_dir/bash_ps1          ~/.bash_ps1
 ln  -sv  $dots_dir/inputrc           ~/.inputrc
 ln  -sv  $dots_dir/gitconfig         ~/.gitconfig
+ln  -sv  $dots_dir/fish              ~/.config/fish
 
 ##################
 #  ssh symlinks  #
@@ -98,7 +99,7 @@ echo -e                  "####################""$reset_style"
 echo -e ""
 
 git submodule update --init --recursive --remote
-$dots_dir/fzf/install <<< ''
+echo -e "y\ny\ny\n" > $dots_dir/fzf/install
 
 ##################
 #  Vim symlinks  #

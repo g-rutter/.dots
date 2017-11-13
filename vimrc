@@ -1,4 +1,11 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                      Vim doesn't work well with fish                       "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Various settings                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "set autochdir                      " always switch to the current file directory
@@ -263,6 +270,8 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
 Plugin 'chrisbra/csv.vim'
+
+Plugin 'dag/vim-fish'
 
 if has('python')
     Plugin 'gregsexton/VimCalc'
