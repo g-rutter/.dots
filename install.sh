@@ -99,7 +99,7 @@ echo -e                  "####################""$reset_style"
 echo -e ""
 
 git submodule update --init --recursive --remote
-echo -e "y\ny\ny\n" > $dots_dir/fzf/install
+echo -e "y\ny\ny\n" | $dots_dir/fzf/install
 
 ##################
 #  Vim symlinks  #

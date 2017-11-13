@@ -1,6 +1,7 @@
 set PATH /opt/local/bin /opt/local/sbin $PATH
 
 fish_vi_key_bindings
+fzf_key_bindings
 
 #######################################################################
 #                               Aliases                               #
