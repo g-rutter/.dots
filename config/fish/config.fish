@@ -3,6 +3,8 @@ set PATH /opt/local/bin /opt/local/sbin $HOME/bin $PATH
 fish_vi_key_bindings
 fzf_key_bindings
 
+title "Local"
+
 #######################################################################
 #                               Aliases                               #
 #######################################################################
@@ -24,3 +26,7 @@ alias gitd="git diff"
 alias gitb="git branch -avv"
 alias gitr="git remote -v"
 alias gitl="git log"
+
+# Quick ssh and reset title aftwerwards
+alias scls1="ssh scls1; title 'Local'"
+alias scls2="ssh scls2; title 'Local'"

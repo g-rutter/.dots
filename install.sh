@@ -48,6 +48,7 @@ ln  -sv  $dots_dir/bash_ps1          ~/.bash_ps1
 ln  -sv  $dots_dir/inputrc           ~/.inputrc
 ln  -sv  $dots_dir/gitconfig         ~/.gitconfig
 ln  -sv  $dots_dir/config/fish       ~/.config/
+ln  -sv  $dots_dir/config/omf        ~/.config/
 
 ##################
 #  ssh symlinks  #
@@ -128,6 +129,14 @@ for DIR in spell bundle colors; do
    ln $ln_dir_options $vimdir/$DIR ~/.vim/$DIR
 
 done
+
+##########
+#  Fish  #
+##########
+
+if [[ $SHELL =~ fish$ ]]; then
+    curl -L https://get.oh-my.fish | fish
+fi 
 
 ############################
 #  Vundle and vim bundles  #
