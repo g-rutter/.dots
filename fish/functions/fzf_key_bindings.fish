@@ -1,1 +1,0 @@
-/Users/gilr/.dots/vim/bundle/fzf/shell/key-bindings.fish
