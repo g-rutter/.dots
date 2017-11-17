@@ -47,7 +47,7 @@ ln  -sv  $dots_dir/tmux.conf         ~/.tmux.conf
 ln  -sv  $dots_dir/bash_ps1          ~/.bash_ps1
 ln  -sv  $dots_dir/inputrc           ~/.inputrc
 ln  -sv  $dots_dir/gitconfig         ~/.gitconfig
-ln  -sv  $dots_dir/fish              ~/.config/fish
+ln  -sv  $dots_dir/config/fish       ~/.config/
 
 ##################
 #  ssh symlinks  #
@@ -105,6 +105,8 @@ echo -e "y\ny\ny\n" | $dots_dir/fzf/install
 #  Vim symlinks  #
 ##################
 
+vimdir="$dots_dir/config/vim/"
+
 echo -e ""
 echo -e "$message_colour""####################"
 echo -e                  "#  Setting up VIM  #"
@@ -116,14 +118,14 @@ mkdir -v ~/.vim/syntax
 mkdir -v ~/.vim/backup
 mkdir -v ~/.vim/undo
 
-ln -sv $dots_dir/vimrc          ~/.vimrc
-ln -sv $dots_dir/vim/lammps.vim ~/.vim/syntax/lammps.vim
+ln -sv $dots_dir/vimrc                 ~/.vimrc
+ln -sv $vimdir/lammps.vim ~/.vim/syntax/lammps.vim
 
 echo -e "$message_colour""\nMaking symlinks for vim subdirectories.""$reset_style"
 for DIR in spell bundle colors; do
 
    rm -rf ~/.vim/$DIR
-   ln $ln_dir_options $dots_dir/vim/$DIR ~/.vim/$DIR
+   ln $ln_dir_options $vimdir/$DIR ~/.vim/$DIR
 
 done
 
@@ -133,16 +135,16 @@ done
 
 echo -e "$message_colour""\nGrabbing vundle.""$reset_style"
 
-rm -rf $dots_dir/vim/bundle/vundle
-mkdir -vp $dots_dir/vim/bundle
-git clone https://github.com/VundleVim/Vundle.vim $dots_dir/vim/bundle/Vundle.vim
+rm -rf $vimdir/bundle/vundle
+mkdir -vp $vimdir/bundle
+git clone https://github.com/VundleVim/Vundle.vim $vimdir/bundle/Vundle.vim
 
 echo -e "$message_colour""\nLaunching Vim to install plugins. Press enter if required.""$reset_style"
 
 vim +BundleInstall +qall --noplugin
 
 # Build fzf for Vim
-$dots_dir/vim/bundle/fzf/install --all
+$vimdir/bundle/fzf/install --all
 
 echo -ne "$message_colour""\nCompile YouCompleteMe's support libs? (Takes a while) [y]: ""$reset_style"
 read answer
