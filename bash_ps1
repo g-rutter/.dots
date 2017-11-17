@@ -59,18 +59,5 @@ function prompt_command {
       let fillsize=$((${fillsize}-1))
    done
 
-#########################################################
-#  If this is an xterm, set the title to user@host:dir  #
-#########################################################
-
-   case "$TERM" in
-   xterm*|rxvt*)
-   bname=`basename "${PWD/$HOME/~}"`
-   echo -ne "\033]0;${bname}: ${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
-   ;;
-   *)
-   ;;
-   esac
-
 }
 PROMPT_COMMAND=prompt_command
