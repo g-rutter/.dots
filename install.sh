@@ -136,6 +136,7 @@ done
 
 if [[ $SHELL =~ fish$ ]]; then
     curl -L https://get.oh-my.fish | fish
+    fish -c "omf install"
 fi 
 
 ############################
