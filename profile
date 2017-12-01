@@ -160,11 +160,3 @@ then
 
     workon develop
 fi
-
-#############################
-#  Local-specific settings  #
-#############################
-
-if [ -a $HOME/.bashrc ]; then
-    source $HOME/.bashrc
-fi
