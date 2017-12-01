@@ -30,3 +30,9 @@ alias gitl="git log"
 # Quick ssh and reset title aftwerwards
 alias scls1="ssh scls1; title 'Local'"
 alias scls2="ssh scls2; title 'Local'"
+
+############
+#  Colors  #
+############
+
+set fish_color_operator 007B7B
