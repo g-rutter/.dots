@@ -5,15 +5,18 @@ fzf_key_bindings
 
 title "Local"
 
+if hash nvim 2>/dev/null
+    set EDITOR "nvim -p"
+else
+    set EDITOR "vim -p"
+end
+
+
 #######################################################################
 #                               Aliases                               #
 #######################################################################
 
-if hash nvim 2>/dev/null
-    alias v="nvim -p"
-else
-    alias v="vim -p"
-end
+alias v="$EDITOR"
 
 alias py="ipython --TerminalInteractiveShell.editing_mode=vi"
 
