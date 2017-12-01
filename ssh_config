@@ -26,6 +26,10 @@ Host scls3
 Host ec2
     Hostname mgmt.svr-01.use1.aws.sclgroup.cc
 
+Host PoC
+    Hostname 192.168.111.33
+    User root
+
 # Options common to all SCLS* hosts.
 Host scls?
     User gilr
