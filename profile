@@ -71,7 +71,7 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$
 ####################
 
 # Better git defaults
-alias gitb="git branch -av"
+alias gitb="git branch -avv"
 alias gits="git status"
 alias gitd="git diff"
 alias gitl="git log"
