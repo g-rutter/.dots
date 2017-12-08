@@ -445,15 +445,10 @@ augroup nontrailing_semicolons
     au BufEnter *.cpp,*.c let m = matchadd("semicolon", ';\ze[ \t]\+[^ \t\/$]')
 augroup END
 
-" Colour definitions
-let g:black=233
-let g:white=253
-let g:hi_cmds=[]
-
 "Make cursor line grey for high visibility and telling the active mode
 if exists('+cursorline')
     set cursorline                     " Highlight current cursor line.
-    hi CursorLine cterm=underline
+    hi CursorLine cterm=underline ctermbg=None
 
     augroup cursor
         autocmd!
@@ -462,11 +457,6 @@ if exists('+cursorline')
     augroup END
 
 endif
-
-" Execute highlighting commands
-for hi_cmd in g:hi_cmds
-    execute "hi ".hi_cmd
-endfor
 
 """""""""""""
 "  Conceal  "
