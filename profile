@@ -14,9 +14,6 @@ export LESS=-RFX
 
 export PATH="$PATH:$HOME/bin"
 
-export PBSdir="/home/theory/phrlaq/scripts/MD/PBS/"
-export MDdir="$HOME/scripts/MD/"
-
 export PYTHONSTARTUP="$HOME/.dots/python_interactive_startup.py"
 
 set -o vi #Work in Vi mode!
@@ -89,10 +86,8 @@ alias mkdir="mkdir -v"        #-v: Verbose
 alias pdfgrep="pdfgrep -n --color=auto"
 alias echo="echo -e"
 alias tmux="tmux -2"
-alias w3m="w3m -num -no-mouse -cookie"
 alias pause="echo \"The command you're looking for is called sleep.\""
 alias parallel="parallel --ungroup"
-alias xmgrace="xmgrace -hdevice EPS"
 #Shortcuts for moving around
 alias d="cd ~/Documents"      #Typing d will take you to your documents.
 alias dots="cd ~/.dots"
