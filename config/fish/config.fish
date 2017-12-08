@@ -19,6 +19,7 @@ end
 alias v="$EDITOR"
 
 alias py="ipython --TerminalInteractiveShell.editing_mode=vi"
+alias py3="ipython3-3.6 --TerminalInteractiveShell.editing_mode=vi"
 
 alias vimrc="v ~/.vimrc"
 alias tmuxrc="v ~/.tmux.conf"
