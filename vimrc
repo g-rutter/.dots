@@ -453,7 +453,7 @@ if exists('+cursorline')
     augroup cursor
         autocmd!
         au InsertLeave * hi CursorLine cterm=underline ctermbg=NONE
-        au InsertEnter * hi CursorLine cterm=none ctermbg=253
+        au InsertEnter * hi CursorLine cterm=none ctermbg=255
     augroup END
 
 endif
