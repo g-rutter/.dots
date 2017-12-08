@@ -141,6 +141,7 @@ mkcd () { #Make a new dir and cd into it.
 }
 
 tad () {
+    deactivate # Do not want my tmux session to be in tmux. It messes with PATH.
     tmux attach -d
     if [ "$?" -eq "1" ]; then
         tmux
