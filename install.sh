@@ -99,7 +99,7 @@ echo -e                  "#  Setting up FZF  #"
 echo -e                  "####################""$reset_style"
 echo -e ""
 
-git submodule update --init --recursive --remote
+git submodule update --init --recursive
 echo -e "y\ny\ny\n" | $dots_dir/fzf/install
 
 ##################
