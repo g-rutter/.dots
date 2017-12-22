@@ -1,17 +1,11 @@
 # Open an ssh tunnel to the MySQL database
 # using 'ssh scls1_tunnel -N'. This connects port 3313
 # on your local computer to port 3306 on SCLS1
-Host scls5_tunnel
-    Hostname 192.168.111.5
-    User gilr
-    ServerAliveInterval 60
-    LocalForward 3313 127.0.0.1:3306
-
 Host scls2_tunnel
     Hostname 192.168.111.2
     User gilr
     ServerAliveInterval 60
-    LocalForward 3314 127.0.0.1:3306
+    LocalForward 3314 127.0.0.1:3350
 
 # Lets you ssh into SCLS1 by typing $ ssh scls1
 Host scls1
@@ -47,6 +41,7 @@ Host s1
 Host s2
     Hostname 192.168.111.2
     ServerAliveInterval 60
+    # Provides connection to scls2 Jupyter notebook on 127.0.0.1:9802
     LocalForward 9802 127.0.0.1:9530
     User gilr
 
