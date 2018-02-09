@@ -55,3 +55,21 @@ Host aws_read_slave
     User gilr
     Hostname read_slave.mysql.int.cambridgeanalytica.org
     LocalForward 3317 127.0.0.1:3306
+
+Host mysql-bastion
+  HostName bastion.production.mysql.e.sclgroup.cc
+  User ubuntu
+  StrictHostKeyChecking no
+
+Host mysql-workstation1
+  HostName workstation1.production.mysql.e.sclgroup.cc
+  User ubuntu
+  ProxyCommand ssh mysql-bastion nc %h %p
+  StrictHostKeyChecking no
+
+Host mysql-workstation1-jupyter
+  HostName workstation1.production.mysql.e.sclgroup.cc
+  User ubuntu
+  ProxyCommand ssh mysql-bastion nc %h %p
+  StrictHostKeyChecking no
+  LocalForward 9806 127.0.0.1:9530
