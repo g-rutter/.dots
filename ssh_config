@@ -1,11 +1,28 @@
-# Open an ssh tunnel to the MySQL database
-# using 'ssh scls1_tunnel -N'. This connects port 3313
-# on your local computer to port 3306 on SCLS1
-Host scls2_tunnel
-    Hostname 192.168.111.2
+Host PoC
+    Hostname 192.168.111.33
+    User root
+
+# Options common to all SCLS* hosts.
+Host scls?
     User gilr
     ServerAliveInterval 60
-    LocalForward 3314 127.0.0.1:3350
+
+Host s1
+    Hostname 192.168.111.1
+    ServerAliveInterval 60
+
+    # Notebook
+    LocalForward 9801 127.0.0.1:9542
+    # Wiki
+    LocalForward 9803 127.0.0.1:80
+    # Notebook NSSF
+    LocalForward 9804 127.0.0.1:9039
+    # Master MySQL
+    LocalForward 3313 127.0.0.1:3350
+    # Slave MySQL
+    LocalForward 3314 127.0.0.1:3351
+
+    ExitOnForwardFailure yes
 
 # Lets you ssh into SCLS1 by typing $ ssh scls1
 Host scls1
@@ -19,23 +36,6 @@ Host scls3
 
 Host ec2
     Hostname mgmt.svr-01.use1.aws.sclgroup.cc
-
-Host PoC
-    Hostname 192.168.111.33
-    User root
-
-# Options common to all SCLS* hosts.
-Host scls?
-    User gilr
-    ServerAliveInterval 60
-
-Host s1
-    Hostname 192.168.111.1
-    ServerAliveInterval 60
-    # nb, wiki, then nb-nssf
-    LocalForward 9801 127.0.0.1:9542
-    LocalForward 9803 127.0.0.1:80
-    LocalForward 9804 127.0.0.1:9039
     User gilr
 
 Host s2
@@ -63,13 +63,13 @@ Host mysql-bastion
 
 Host mysql-workstation1
   HostName workstation1.production.mysql.e.sclgroup.cc
-  User ubuntu
-  ProxyCommand ssh mysql-bastion nc %h %p
+  User gilr
+  #ProxyCommand ssh mysql-bastion nc %h %p
   StrictHostKeyChecking no
 
 Host mysql-workstation1-jupyter
   HostName workstation1.production.mysql.e.sclgroup.cc
-  User ubuntu
-  ProxyCommand ssh mysql-bastion nc %h %p
+  User gilr
+  #ProxyCommand ssh mysql-bastion nc %h %p
   StrictHostKeyChecking no
   LocalForward 9806 127.0.0.1:9530
