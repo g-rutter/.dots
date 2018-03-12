@@ -269,8 +269,6 @@ Plugin 'vim-scripts/TagHighlight'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
-Plugin 'chrisbra/csv.vim'
-
 Plugin 'dag/vim-fish'
 
 if has('python')
