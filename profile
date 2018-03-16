@@ -161,4 +161,7 @@ then
     PIP_REQUIRE_VIRTUALENV=true
 
     workon develop
+elif [[ "$HOSTNAME" =~ .*production.mysql.e.sclgroup.cc ]]
+then
+    source /usr/local/bin/virtualenvwrapper.sh
 fi
