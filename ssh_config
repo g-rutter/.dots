@@ -73,3 +73,9 @@ Host mysql-workstation1-jupyter
   #ProxyCommand ssh mysql-bastion nc %h %p
   StrictHostKeyChecking no
   LocalForward 9806 127.0.0.1:9530
+
+Host docker_local
+    HostName localhost
+    User root
+    Port 2222
+    StrictHostKeychecking no
