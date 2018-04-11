@@ -80,3 +80,10 @@ Host docker_local
     User root
     Port 2222
     StrictHostKeychecking no
+
+Host docker_remote
+    HostName localhost
+    Port 2222
+    User root
+    ProxyCommand ssh mysql-workstation1 nc %h %p
+    StrictHostKeyChecking no
