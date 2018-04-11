@@ -353,7 +353,7 @@ highlight link ALEWarningSign SignColumn
 
 let g:ale_echo_msg_format = '[%linter%] %s'
 
-let ignore_pylint = "-d W0401,R0914,R0903,R1705,R0913,R0902,W503,W1202,W503,C0413"
+let ignore_pylint = "-d W0401,R0914,R0903,R1705,R0913,R0902,W503,W1202,W503,C0413,C0103"
 let good_names = "--good-names e,x,n,i,w"
 let g:ale_python_pylint_options = ignore_pylint . " " . good_names
 
