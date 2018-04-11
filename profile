@@ -12,7 +12,7 @@ export EDITOR="v"
 export PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
 export LESS=-RFX
 
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
 
 export PYTHONSTARTUP="$HOME/.dots/python_interactive_startup.py"
 
@@ -161,4 +161,7 @@ then
     PIP_REQUIRE_VIRTUALENV=true
 
     workon develop
+elif [[ "$HOSTNAME" =~ .*production.mysql.e.sclgroup.cc ]]
+then
+    source ~/.local/bin/virtualenvwrapper.sh
 fi

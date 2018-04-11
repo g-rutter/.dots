@@ -74,3 +74,9 @@ Host mysql-workstation1-jupyter
 
     # Master MySQL
     LocalForward 3313 127.0.0.1:3350
+
+Host docker_local
+    HostName localhost
+    User root
+    Port 2222
+    StrictHostKeychecking no
