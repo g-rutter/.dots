@@ -17,8 +17,6 @@ Host s1
     LocalForward 9803 127.0.0.1:80
     # Notebook NSSF
     LocalForward 9804 127.0.0.1:9039
-    # Master MySQL
-    LocalForward 3313 127.0.0.1:3350
     # Slave MySQL
     LocalForward 3314 127.0.0.1:3351
 
@@ -57,19 +55,35 @@ Host aws_read_slave
     LocalForward 3317 127.0.0.1:3306
 
 Host mysql-bastion
-  HostName bastion.production.mysql.e.sclgroup.cc
-  User ubuntu
-  StrictHostKeyChecking no
+    HostName bastion.production.mysql.e.sclgroup.cc
+    User ubuntu
+    StrictHostKeyChecking no
 
 Host mysql-workstation1
-  HostName workstation1.production.mysql.e.sclgroup.cc
-  User gilr
-  #ProxyCommand ssh mysql-bastion nc %h %p
-  StrictHostKeyChecking no
+    HostName workstation1.production.mysql.e.sclgroup.cc
+    User gilr
+
+    StrictHostKeyChecking no
 
 Host mysql-workstation1-jupyter
-  HostName workstation1.production.mysql.e.sclgroup.cc
-  User gilr
-  #ProxyCommand ssh mysql-bastion nc %h %p
-  StrictHostKeyChecking no
-  LocalForward 9806 127.0.0.1:9530
+    HostName workstation1.production.mysql.e.sclgroup.cc
+    User gilr
+    #ProxyCommand ssh mysql-bastion nc %h %p
+    StrictHostKeyChecking no
+    LocalForward 9806 127.0.0.1:9530
+
+    # Master MySQL
+    LocalForward 3313 127.0.0.1:3350
+
+Host docker_local
+    HostName localhost
+    User root
+    Port 2222
+    StrictHostKeychecking no
+
+Host docker_remote
+    HostName localhost
+    Port 2222
+    User root
+    ProxyCommand ssh mysql-workstation1 nc %h %p
+    StrictHostKeyChecking no

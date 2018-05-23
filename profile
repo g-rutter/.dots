@@ -163,5 +163,5 @@ then
     workon develop
 elif [[ "$HOSTNAME" =~ .*production.mysql.e.sclgroup.cc ]]
 then
-    source /usr/local/bin/virtualenvwrapper.sh
+    source ~/.local/bin/virtualenvwrapper.sh
 fi

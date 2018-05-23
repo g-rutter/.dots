@@ -122,6 +122,11 @@ mkdir -v ~/.vim/undo
 ln -sv $dots_dir/vimrc                 ~/.vimrc
 ln -sv $vimdir/lammps.vim ~/.vim/syntax/lammps.vim
 
+# vimrc symlink for neovim
+mkdir -p ~/.config/nvim
+ln -s $dots_dir/vimrc ~/.config/nvim/init.vim
+ln -s $dots_dir/config/vim/colors ~/.config/nvim/colors
+
 echo -e "$message_colour""\nMaking symlinks for vim subdirectories.""$reset_style"
 for DIR in spell bundle colors; do
 
