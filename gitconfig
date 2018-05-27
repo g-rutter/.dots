@@ -13,6 +13,7 @@
 	editor = vim
 	attributesfile = /home/gilr/.gitattributes
 	pager = cat
+	pager = less
 [color]
    branch = auto
    diff = auto
