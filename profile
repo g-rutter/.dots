@@ -74,11 +74,6 @@ alias gitd="git diff"
 alias gitl="git log"
 alias gitr="git remote -v"
 
-#mysql usage on scl servers
-alias mysqle="mysql --pass=$(cat ~/.mysql-passwd) -e"
-alias mysql_show="mysql --pass=$(cat ~/.mysql-passwd) -e \"SHOW PROCESSLIST\""
-alias mysql_sf="mysql --pass=$(cat ~/.mysql-passwd) -e \"SHOW FULL PROCESSLIST\""
-
 #Change default options for basic commands
 alias cp="cp -v"              #-v: Verbose
 alias mv="mv -v"              #-v: Verbose
