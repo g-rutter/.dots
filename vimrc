@@ -271,7 +271,7 @@ Plugin 'junegunn/fzf.vim'
 
 Plugin 'dag/vim-fish'
 
-if has('python')
+if has('python3')
     Plugin 'gregsexton/VimCalc'
     Plugin 'honza/vim-snippets'
     Plugin 'SirVer/ultisnips'
@@ -294,7 +294,7 @@ let g:airline_theme='tomorrow'
 "  Ultisnips  "
 """""""""""""""
 
-let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
