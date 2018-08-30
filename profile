@@ -67,6 +67,11 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$
 #  Custom aliases  #
 ####################
 
+# Allow aliases after sudo command
+# (Because only the first word of a command is checked for an alias, but if one
+# is found then the next work is checked for another alias.)
+alias sudo='sudo '
+
 # Better git defaults
 alias gitb="git branch -avv"
 alias gits="git status"
