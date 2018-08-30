@@ -1,9 +1,15 @@
 Host workstation1
     HostName workstation1.clear.ai
-    User ubuntu
+    User gil
     IdentityFile ~/.ssh/id_rsa
     StrictHostKeyChecking no
+
+    # Jupyter
     LocalForward 3001 localhost:8888
-    LocalForward 3002 localhost:7474
+    # HTTP connection neo4j
+    LocalForward 3004 localhost:7474
+    # Bolt connection
+    LocalForward 7687 localhost:7687
+
     # For local connection to neptune:
     LocalForward 8182 companieshouse.cgdlwjudqi5h.eu-west-1.neptune.amazonaws.com:8182
