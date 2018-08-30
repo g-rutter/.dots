@@ -138,25 +138,14 @@ tad () {
     fi
 }
 
+###############
+#  Functions  #
+###############
+
+export BAT_THEME="Monokai Extended Light"
+
 #######################################################################
 #                                 FZF                                 #
 #######################################################################
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-#################################################
-#  Load up my Python virtualenv on the servers  #
-#################################################
-
-if [[ "$HOSTNAME" =~ svr-0[0-9]\..*int.sclgroup\.cc|ip-10-160-180-7 ]]
-then
-    VIRTUAL_ENV_DISABLE_PROMPT=true
-    export WORKON_HOME=$HOME/.virtualenvs
-    source /usr/local/bin/virtualenvwrapper.sh
-    PIP_REQUIRE_VIRTUALENV=true
-
-    workon develop
-elif [[ "$HOSTNAME" =~ .*production.mysql.e.sclgroup.cc ]]
-then
-    source ~/.local/bin/virtualenvwrapper.sh
-fi
