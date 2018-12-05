@@ -19,6 +19,8 @@ export PYTHONSTARTUP="$HOME/.dots/python_interactive_startup.py"
 set -o vi #Work in Vi mode!
 unset SSH_ASKPASS #No gui interface when asking me for git password
 
+export BAT_THEME="Monokai Extended Light"
+
 if [[ `readonly | ack "COMMAND=" | wc -l` -eq 0 ]]; then
     PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
 fi
@@ -143,11 +145,14 @@ tad () {
     fi
 }
 
-###############
-#  Functions  #
-###############
 
-export BAT_THEME="Monokai Extended Light"
+aws-cerebro-login() {
+    export AWS_CLEARAI_MFAUSERNAME="grutte@clear.ai"
+    export AWS_CLEARAI_ENVIRONMENT="cerebro"
+    export AWS_CLEARAI_ROLE="ts_all_cbro_data-science_role"
+    export AWS_PROFILE="clear-mfa-cerebro"
+    ~/aws/util/iam-assume.sh
+}
 
 #######################################################################
 #                                 FZF                                 #
