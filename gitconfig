@@ -24,3 +24,5 @@
 [filter "clean_ipynb"]
 	clean = ~/scripts/ipynb_drop_output.py
 	smudge = cat
+[url "git@github.com:"]
+	insteadOf = "https://github.com/"

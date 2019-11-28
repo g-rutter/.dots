@@ -1,4 +1,4 @@
-set PATH $HOME/bin $PATH
+set PATH (go env GOPATH)/bin $HOME/bin $PATH
 
 fish_vi_key_bindings
 fzf_key_bindings
@@ -29,6 +29,8 @@ alias gitd="git diff"
 alias gitb="git branch -avv"
 alias gitr="git remote -v"
 alias gitl="git log"
+alias gitch="git checkout"
+alias gitco="git commit"
 
 ############
 #  Colors  #
