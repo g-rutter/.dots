@@ -1,4 +1,4 @@
-set PATH (go env GOPATH)/bin $HOME/bin $PATH
+set PATH $HOME/.cargo/bin (go env GOPATH)/bin $HOME/bin $PATH
 
 fish_vi_key_bindings
 fzf_key_bindings
