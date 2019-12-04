@@ -135,10 +135,6 @@ cab ed tabe ~/.dots
 
 "Switch to nth tab with <Leader>n
 for N in [1 , 2, 3, 4, 5, 6, 7, 8, 9]
-    "Removed bufmap because it puts delay before ^ cmd
-    "let bufmap="^[".N." :b ".N."<CR>"
-    "execute "noremap".bufmap
-
     let tabmap="<Leader>".N." ".N."gt"
     execute "noremap".tabmap
 endfor
@@ -168,9 +164,6 @@ execute 'vnoremap L L'.&l:scrolloff.'j'
 "Align visually selected text by a single character
 vnoremap <leader>a :<c-u>execute ":'<,'>Tabular /".nr2char(getchar())<cr>
 
-" Fix print commands in python 2 to be python 3 style.
-command! FixPrint %s/\(^ *\)print *\([a-zA-Z].*$\)/\1print(\2)/
-
 """"""""""""""""""""""""""""""""""""""""""""
 "  Insert line number in various langages  "
 """"""""""""""""""""""""""""""""""""""""""""
@@ -179,7 +172,7 @@ augroup linenr
     autocmd!
     au FileType cpp,c  noremap <Leader>p o<Esc>:s/^/\=printf('printf ("Line %d\n.");', line('.'))<Enter>:nohlsearch<CR>
     au FileType sh     noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
-    au FileType python noremap <Leader>p o<Esc>:s/^/\=printf('print "Line %d."', line('.'))<Enter>:nohlsearch<CR>
+    au FileType python noremap <Leader>p o<Esc>:s/^/\=printf('print("Line %d.")', line('.'))<Enter>:nohlsearch<CR>
     au FileType vim    noremap <Leader>p o<Esc>:s/^/\=printf('echo "Line %d."', line('.'))<Enter>:nohlsearch<CR>
 augroup END
 
@@ -225,6 +218,7 @@ vnoremap <silent> * :<C-U>
 \gvy/<C-R><C-R>=substitute(
 \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
 \gV:call setreg('"', old_reg, old_regtype)<CR>
+
 vnoremap <silent> # :<C-U>
 \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
 \gvy?<C-R><C-R>=substitute(
@@ -251,7 +245,6 @@ Plugin 'godlygeek/tabular'
 Plugin 'guns/xterm-color-table.vim'
 Plugin 'eapache/rainbow_parentheses.vim'
 Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'osyo-manga/vim-over'
 Plugin 'salsifis/vim-transpose'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Shougo/vimproc.vim'
@@ -261,17 +254,14 @@ Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'vim-scripts/a.vim'
 Plugin 'vim-scripts/CmdlineComplete.git'
 Plugin 'vim-scripts/InsertChar'
-Plugin 'vim-scripts/TagHighlight'
 
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
 Plugin 'dag/vim-fish'
 
-Plugin 'gregsexton/VimCalc'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
@@ -365,16 +355,9 @@ let g:ale_linters = {
 
 nnoremap <TAB> :<C-U>call InsertChar#insert(v:count1)<CR>
 nnoremap <Leader>g :GundoToggle<CR>
+let g:gundo_prefer_python3 = 1
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
-
-"For A.vim. No <Leader> mappings in insert mode please.
-augroup avim
-    autocmd!
-    au VimEnter * iunmap <Leader>is
-    au VimEnter * iunmap <Leader>ih
-    au VimEnter * iunmap <Leader>ihn
-augroup END
 
 """""""""
 "  FZF  "
