@@ -237,7 +237,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'w0rp/ale'
 
-"Plugin 'derekwyatt/vim-scala'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'benmills/vimux'
@@ -272,12 +271,6 @@ filetype plugin indent on "required!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Bundle settings                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""
-"  Airline  "
-"""""""""""""
-
-let g:airline_theme='afterglow'
-
 """""""""""""""
 "  Ultisnips  "
 """""""""""""""
