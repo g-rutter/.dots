@@ -276,7 +276,7 @@ filetype plugin indent on "required!
 "  Airline  "
 """""""""""""
 
-let g:airline_theme='tomorrow'
+let g:airline_theme='afterglow'
 
 """""""""""""""
 "  Ultisnips  "
@@ -419,7 +419,7 @@ endif
 "Set scheme:
 syntax on
 hi clear
-colorscheme Tomorrow
+colorscheme afterglow
 
 "Highlight semi-colons that don't terminate a line in C and C++:
 augroup nontrailing_semicolons
@@ -436,7 +436,7 @@ if exists('+cursorline')
     augroup cursor
         autocmd!
         au InsertLeave * hi CursorLine cterm=underline ctermbg=NONE
-        au InsertEnter * hi CursorLine cterm=none ctermbg=255
+        au InsertEnter * hi CursorLine cterm=none ctermbg=235
     augroup END
 
 endif
