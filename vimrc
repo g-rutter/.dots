@@ -116,12 +116,6 @@ nnoremap <Leader>!! :qall!<CR>
 nnoremap <Leader>Q :q<CR>
 nnoremap <Leader>Z ZZ
 
-" Enter command mode quickly
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
-
 " Clear search highlighting
 nnoremap <silent> <Leader>\ :nohlsearch<CR>
 
