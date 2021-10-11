@@ -51,7 +51,7 @@ alias ca="conda activate"
 alias drit="docker run -it"
 
 # I don't know where http_proxy is getting set... but the exceptions aren't being set there
-export no_proxy=.mavensecurities.com
+export no_proxy=localhost,127.0.0.1,.mavensecurities.com
 export https_proxy=http://proxy-ix.mavensecurities.com
 export http_proxy=http://proxy-ix.mavensecurities.com
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
