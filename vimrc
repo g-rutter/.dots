@@ -406,7 +406,7 @@ endif
 "Set scheme:
 syntax on
 hi clear
-colorscheme afterglow
+colorscheme molokai
 
 "Highlight semi-colons that don't terminate a line in C and C++:
 augroup nontrailing_semicolons
