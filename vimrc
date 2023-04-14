@@ -253,12 +253,6 @@ Plugin 'vim-scripts/InsertChar'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
-Plugin 'dag/vim-fish'
-
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
-Plugin 'Valloric/YouCompleteMe'
-
 call vundle#end()
 filetype plugin indent on "required!
 

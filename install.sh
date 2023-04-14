@@ -77,31 +77,6 @@ echo -e ""
 mkdir -v ~/bin
 sh -c "curl -L http://beyondgrep.com/ack-2.22-single-file > ~/bin/ack && chmod 0755 ~/bin/ack"
 
-############
-#  Vimcat  #
-############
-
-cp vimcat ~/bin/
-
-###########
-#  nbtxt  #
-###########
-
-ln -sv $dots_dir/nbtxt ~/bin/nbtxt
-
-######################
-#  FZF installation  #
-######################
-
-echo -e ""
-echo -e "$message_colour""####################"
-echo -e                  "#  Setting up FZF  #"
-echo -e                  "####################""$reset_style"
-echo -e ""
-
-git submodule update --init --recursive
-echo -e "y\ny\ny\n" | $dots_dir/fzf/install
-
 ##################
 #  Vim symlinks  #
 ##################
@@ -134,15 +109,6 @@ for DIR in spell bundle colors; do
    ln $ln_dir_options $vimdir/$DIR ~/.vim/$DIR
 
 done
-
-##########
-#  Fish  #
-##########
-
-if [[ $SHELL =~ fish$ ]]; then
-    curl -L https://get.oh-my.fish | fish
-    fish -c "omf install"
-fi 
 
 ############################
 #  Vundle and vim bundles  #
