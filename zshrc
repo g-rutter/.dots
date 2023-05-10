@@ -10,15 +10,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
@@ -28,42 +19,19 @@ ZSH_THEME="robbyrussell"
 # zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
- COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -74,43 +42,25 @@ plugins=(git vi-mode fzf)
 
 source $ZSH/oh-my-zsh.sh
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# User configuration
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-
-######################
-# User configuration #
-######################
+alias ca="conda activate"
+alias conde="conda deactivate"
+alias v="vim -p"
+alias drit="docker run -it"
+alias gs="gst"
+alias wp="which -a python"
+alias tmas="tmux new -A -s"
 
 bindkey -v
 unsetopt beep
-
 export EDITOR='vim'
-
-alias ca="conda activate"
-alias drit="docker run -it"
-alias v="vim -p"
-
-# I don't know where http_proxy is getting set... but the exceptions aren't being set there
-export no_proxy=localhost,127.0.0.1,.mavensecurities.com
-export https_proxy=http://proxy-ix.mavensecurities.com:80
-export http_proxy=http://proxy-ix.mavensecurities.com:80
-export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+# Don't close terminal on Ctrl-D (which sends eof)
+# I send this all the time by accident after using it inside a command...
+set -o ignoreeof
 
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
-
-ta () {
-    tmux attach -d
-    if [ "$?" -eq "1" ]; then
-        tmux
-    fi
-}
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -126,4 +76,13 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# When this file is found in the starting directory, launch a tmux session
+# Useful for giving each Pycharm project its own tmux session
+# First condition: Does the file exist?
+# Second condition: Is $TMUX an empty/unset variable?
+if [ -f .tmux_session_name ] && [ -z "${TMUX}" ]; then
+    tmux_session_name=$(<.tmux_session_name)
+    tmas $tmux_session_name
+fi
 
