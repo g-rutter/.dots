@@ -40,17 +40,17 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git vi-mode fzf)
 
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
+source $ZSH/oh-my-zsh.sh # User configuration
 
 alias ca="conda activate"
 alias conde="conda deactivate"
+alias conie="conda info --envs"
 alias v="vim -p"
 alias drit="docker run -it"
 alias gs="gst"
 alias wp="which -a python"
 alias tmas="tmux new -A -s"
+alias i3tree="conda run -n i3 py3tree"
 
 bindkey -v
 unsetopt beep
@@ -59,19 +59,24 @@ export EDITOR='vim'
 # I send this all the time by accident after using it inside a command...
 set -o ignoreeof
 
+alias k="kubectl"
+alias kns="kubectl ns"
+alias kctx="kubectl ctx"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$HOME/.local/bin"
+
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/gil.rutter/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$("$HOME/miniconda3/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/gil.rutter/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/gil.rutter/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/gil.rutter/miniconda3/bin:$PATH"
+        export PATH="$HOME/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
