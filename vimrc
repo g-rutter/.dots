@@ -111,10 +111,7 @@ nnoremap Q <nop>
 nnoremap gQ <nop>
 
 " save and quit-all shortcuts. c.f. ZZ (=:wq) and ZQ (=:q!)
-nnoremap <Leader>W :w<CR>
-nnoremap <Leader>!! :qall!<CR>
-nnoremap <Leader>Q :q<CR>
-nnoremap <Leader>Z ZZ
+nnoremap <Leader>w :w<CR>
 
 " Clear search highlighting
 nnoremap <silent> <Leader>\ :nohlsearch<CR>

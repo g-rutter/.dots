@@ -32,6 +32,9 @@ COMPLETION_WAITING_DOTS="true"
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
+export DISABLE_AUTO_TITLE="true"
+echo -en "\033]0;❤️\a"
+
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
