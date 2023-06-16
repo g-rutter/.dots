@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+ export PATH=$HOME/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -71,6 +71,9 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$HOME/.local/bin"
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
+# Disable terminal freezing on ctrl-s
+stty -ixon
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$("$HOME/miniconda3/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
@@ -88,10 +91,15 @@ unset __conda_setup
 
 # When this file is found in the starting directory, launch a tmux session
 # Useful for giving each Pycharm project its own tmux session
-# First condition: Does the file exist?
-# Second condition: Is $TMUX an empty/unset variable?
+# First condition: .tmux_session_name should exist
+# Second condition: $TMUX should be empty/unset
 if [ -f .tmux_session_name ] && [ -z "${TMUX}" ]; then
     tmux_session_name=$(<.tmux_session_name)
-    tmas $tmux_session_name
+    # Third condition: only attach if the session doesn't exist or is unattached
+    if [[ $(tmux ls | grep "^${tmux_session_name}.*(attached)$" | wc -c ) -eq 0 ]]; then
+        tmas $tmux_session_name
+    else
+        echo "Not auto-attaching. Attach with:\ntmas $tmux_session_name"
+    fi
 fi
 
