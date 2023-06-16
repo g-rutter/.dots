@@ -110,8 +110,9 @@ nnoremap <Leader>ut :UpdateTypesFile<CR>
 nnoremap Q <nop>
 nnoremap gQ <nop>
 
-" save and quit-all shortcuts. c.f. ZZ (=:wq) and ZQ (=:q!)
+" save and quit shortcuts
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
 
 " Clear search highlighting
 nnoremap <silent> <Leader>\ :nohlsearch<CR>
@@ -125,7 +126,7 @@ cab ev tabe ~/.vimrc
 cab ed tabe ~/.dots
 
 "Switch to nth tab with <Leader>n
-for N in [1 , 2, 3, 4, 5, 6, 7, 8, 9]
+for N in [1, 2, 3, 4, 5, 6, 7, 8, 9]
     let tabmap="<Leader>".N." ".N."gt"
     execute "noremap".tabmap
 endfor
