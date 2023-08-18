@@ -99,7 +99,12 @@ if [ -f .tmux_session_name ] && [ -z "${TMUX}" ]; then
     if [[ $(tmux ls | grep "^${tmux_session_name}.*(attached)$" | wc -c ) -eq 0 ]]; then
         tmas $tmux_session_name
     else
-        echo "Not auto-attaching. Attach with:\ntmas $tmux_session_name"
+        echo "Not auto-attaching to attached tmux session. Attach with:\ntmas $tmux_session_name"
     fi
 fi
 
+if [ -n "${TMUX}" ] && [ -f .conda_environment_name ]; then
+    conda activate $(<.conda_environment_name)
+fi
+
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
