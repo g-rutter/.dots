@@ -4,6 +4,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# The default version breaks curl https://github.com/curl/curl/issues/9884
+# Though curl is at fault (I think?) and should be fixed someday
+export no_proxy=10.0.0.0/8,127.0.0.1,172.16.0.0/12,192.168.0.0/16,localhost,.localdomain.com,.mavensecurities.com
+export NO_PROXY=10.0.0.0/8,127.0.0.1,172.16.0.0/12,192.168.0.0/16,localhost,.localdomain.com,.mavensecurities.com
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -55,6 +60,7 @@ alias gs="gst"
 alias wp="which -a python"
 alias tmas="tmux new -A -s"
 alias i3tree="conda run -n i3 py3tree"
+alias vdi-prod="ssh vdi-prod -t 'zsh -l'"
 
 bindkey -v
 unsetopt beep
@@ -93,18 +99,26 @@ unset __conda_setup
 # Useful for giving each Pycharm project its own tmux session
 # First condition: .tmux_session_name should exist
 # Second condition: $TMUX should be empty/unset
-if [ -f .tmux_session_name ] && [ -z "${TMUX}" ]; then
-    tmux_session_name=$(<.tmux_session_name)
+if [ -f .tmux-session-name ] && [ -z "${TMUX}" ]; then
+    tmux_session_name=$(<.tmux-session-name)
     # Third condition: only attach if the session doesn't exist or is unattached
-    if [[ $(tmux ls | grep "^${tmux_session_name}.*(attached)$" | wc -c ) -eq 0 ]]; then
+    if [[ $(tmux ls | grep "^${tmux_session_name}:.*(attached)$" | wc -c ) -eq 0 ]]; then
         tmas $tmux_session_name
     else
         echo "Not auto-attaching to attached tmux session. Attach with:\ntmas $tmux_session_name"
     fi
 fi
 
-if [ -n "${TMUX}" ] && [ -f .conda_environment_name ]; then
-    conda activate $(<.conda_environment_name)
+if [ -n "${TMUX}" ] && [ -f .conda-environment-name ]; then
+    conda activate $(<.conda-environment-name)
 fi
 
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
