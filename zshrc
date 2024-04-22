@@ -69,6 +69,9 @@ export EDITOR='vim'
 # I send this all the time by accident after using it inside a command...
 set -o ignoreeof
 
+# For the Python config library Hydra
+export HYDRA_FULL_ERROR=1
+
 alias k="kubectl"
 alias kns="kubectl ns"
 alias kctx="kubectl ctx"
@@ -122,3 +125,4 @@ export NVM_DIR="$HOME/.nvm"
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
+eval "$(gh copilot alias -- zsh)"
