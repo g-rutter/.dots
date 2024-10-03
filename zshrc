@@ -51,7 +51,23 @@ plugins=(git vi-mode fzf)
 
 source $ZSH/oh-my-zsh.sh # User configuration
 
-alias ca="conda activate"
+# deactivate until not in a conda env, then activate given environment:
+ca() {
+    # Check if an environment name is provided
+    if [ $# -eq 0 ]; then
+        echo "Usage: ca <environment_name>"
+        return 1
+    fi
+
+    # Deactivate current conda environment (if any)
+    while [ ! -z "$CONDA_DEFAULT_ENV" ]; do
+        conda deactivate
+    done
+
+    # Activate the specified environment
+    conda activate "$1"
+}
+
 alias conde="conda deactivate"
 alias conie="conda info --envs"
 alias v="vim -p"
