@@ -77,6 +77,8 @@ alias wp="which -a python"
 alias tmas="tmux new -A -s"
 alias i3tree="conda run -n i3 py3tree"
 alias vdi-prod="ssh vdi-prod -t 'zsh -l'"
+alias lcd="cd"  # Typo I often make
+alias urf="uv run --frozen"
 
 bindkey -v
 unsetopt beep
@@ -142,3 +144,7 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 eval "$(gh copilot alias -- zsh)"
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
