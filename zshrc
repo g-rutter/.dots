@@ -133,8 +133,12 @@ if [ -f .tmux-session-name ] && [ -z "${TMUX}" ]; then
     fi
 fi
 
-if [ -n "${TMUX}" ] && [ -f .conda-environment-name ]; then
-    conda activate $(<.conda-environment-name)
+if [ -n "${TMUX}" ] && [ -z "${VIRTUAL_ENV}" ] && (( CONDA_SHLVL == 0 )); then
+    if [ -f .venv/bin/activate ]; then
+        source .venv/bin/activate
+    elif [ -f .conda-environment-name ] && [ -z "${}" ]; then
+        conda activate $(<.conda-environment-name)
+    fi
 fi
 
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
