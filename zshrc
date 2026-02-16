@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
- export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:$PATH:"$PATH:/opt/nvim-linux-x86_64/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -8,6 +8,11 @@ export ZSH="$HOME/.oh-my-zsh"
 # Though curl is at fault (I think?) and should be fixed someday
 export no_proxy=10.0.0.0/8,127.0.0.1,172.16.0.0/12,192.168.0.0/16,localhost,.localdomain.com,.mavensecurities.com
 export NO_PROXY=10.0.0.0/8,127.0.0.1,172.16.0.0/12,192.168.0.0/16,localhost,.localdomain.com,.mavensecurities.com
+
+export CURL_CA_CERTS="/etc/ssl/certs/ca-certificates.crt"
+export HTTPLIB2_CA_CERTS="/etc/ssl/certs/ca-certificates.crt"
+export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
+export SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -80,6 +85,7 @@ alias wp="which -a python"
 alias tmas="tmux new -A -s"
 alias i3tree="conda run -n i3 py3tree"
 alias vdi-prod="ssh vdi-prod -t 'zsh -l'"
+alias ixqdsares01="ssh ixqdsares01 -t 'zsh -l'"
 alias lcd="cd"  # Typo I often make
 alias urf="uv run --frozen"
 
@@ -155,3 +161,24 @@ eval "$(gh copilot alias -- zsh)"
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+
+# Claude
+if [[ -f "claude_api_key" ]]; then
+    ANTHROPIC_AUTH_TOKEN="$(<claude_api_key)"
+    # The below start command exposes only the relevant env variables to Claude.
+    # Claude does not correctly handle Proxy env so vital these are removed
+    claude() {
+      env -i \
+        PATH="$PATH" \
+        HOME="$HOME" \
+        USER="$USER" \
+        ANTHROPIC_BASE_URL="https://llm-proxy.cs.mavensecurities.com" \
+        ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_AUTH_TOKEN" \
+        SSL_CERT_FILE="$SSL_CERT_FILE" \
+        NODE_EXTRA_CA_CERTS="$SSL_CERT_FILE" \
+        CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1 \
+        TERM="xterm-256color" \
+        claude "$@"
+    }
+fi
+

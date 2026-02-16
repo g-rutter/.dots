@@ -13,7 +13,6 @@ endif
 set nocompatible
 set backupdir=~/.vim/backup        " where to put backup files
 set backup                         " keep a backup file
-set browsedir=current              " which directory to use for the file browser
 set clipboard=                     " make yank work on Mac
 set history=500                    " keep N lines of command line history
 set iskeyword+=95                  " Now a word with an underscore will be seen as one word, e.g. big_output is one word.
@@ -112,7 +111,7 @@ nnoremap gQ <nop>
 
 " save and quit shortcuts
 nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
+"nnoremap <Leader>q :q<CR>
 
 " Clear search highlighting
 nnoremap <silent> <Leader>\ :nohlsearch<CR>
@@ -234,7 +233,6 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'benmills/vimux'
 Plugin 'godlygeek/tabular'
 Plugin 'guns/xterm-color-table.vim'
-Plugin 'eapache/rainbow_parentheses.vim'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'salsifis/vim-transpose'
 Plugin 'scrooloose/nerdcommenter'
@@ -267,32 +265,6 @@ let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit='horizontal'
-
-""""""""""""""""""""
-"  Rainbow parens  "
-""""""""""""""""""""
-
-augroup rainbowparens
-    autocmd!
-    au VimEnter * RainbowParenthesesActivate
-    au BufEnter * RainbowParenthesesLoadRound
-    au BufEnter * RainbowParenthesesLoadBraces
-augroup END
-
-let g:rbpt_colorpairs = [
-    \ ['gray'    , 'DarkOrchid3'],
-    \ [202           , 'SeaGreen3'  ],
-    \ [214           , 'RoyalBlue3' ],
-    \ ['red'       , 'RoyalBlue3' ],
-    \ ['blue'    , 'SeaGreen3'  ],
-    \ ['darkgreen'   , 'firebrick3' ],
-    \ ['darkcyan'    , 'RoyalBlue3' ],
-    \ ['darkred'     , 'SeaGreen3'  ],
-    \ ['darkmagenta' , 'DarkOrchid3'],
-    \ ['brown'       , 'firebrick3' ],
-\ ]
-
-let g:rbpt_max = 10
 
 """""""""""
 "  Vimux  "

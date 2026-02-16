@@ -1,4 +1,5 @@
 config/vim/bundle/
 !config/vim/bundle/vundle/
 config/fish/fishd.????????????
+claude_api_key
 *.DS_Store
