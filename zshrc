@@ -87,7 +87,6 @@ alias i3tree="conda run -n i3 py3tree"
 alias vdi-prod="ssh vdi-prod -t 'zsh -l'"
 alias ixqdsares01="ssh ixqdsares01 -t 'zsh -l'"
 alias lcd="cd"  # Typo I often make
-alias urf="uv run --frozen"
 
 bindkey -v
 unsetopt beep
@@ -161,6 +160,9 @@ eval "$(gh copilot alias -- zsh)"
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+alias urf="uv run --frozen"
+export UV_DEFAULT_INDEX="https://artifactory.mavensecurities.com/artifactory/api/pypi/mavenall-pypi-prod-eu/simple"
+export UV_NATIVE_TLS=true
 
 # Claude
 if [[ -f "claude_api_key" ]]; then
