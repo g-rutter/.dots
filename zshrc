@@ -165,8 +165,9 @@ export UV_DEFAULT_INDEX="https://artifactory.mavensecurities.com/artifactory/api
 export UV_NATIVE_TLS=true
 
 # Claude
-if [[ -f "claude_api_key" ]]; then
-    ANTHROPIC_AUTH_TOKEN="$(<claude_api_key)"
+if [[ -f "$HOME/.dots/claude_api_key" ]]; then
+    ANTHROPIC_AUTH_TOKEN="$(<$HOME/.dots/claude_api_key)"
+    SOURCEGRAPH_TOKEN="$(cat "$HOME/.dots/sourcegraph_api_key" 2>/dev/null)"
     # The below start command exposes only the relevant env variables to Claude.
     # Claude does not correctly handle Proxy env so vital these are removed
     claude() {
@@ -179,6 +180,7 @@ if [[ -f "claude_api_key" ]]; then
         SSL_CERT_FILE="$SSL_CERT_FILE" \
         NODE_EXTRA_CA_CERTS="$SSL_CERT_FILE" \
         CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1 \
+        SOURCEGRAPH_TOKEN="$SOURCEGRAPH_TOKEN" \
         TERM="xterm-256color" \
         claude "$@"
     }
