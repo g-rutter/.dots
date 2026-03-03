@@ -168,6 +168,8 @@ export UV_NATIVE_TLS=true
 if [[ -f "$HOME/.dots/claude_api_key" ]]; then
     ANTHROPIC_AUTH_TOKEN="$(<$HOME/.dots/claude_api_key)"
     SOURCEGRAPH_TOKEN="$(cat "$HOME/.dots/sourcegraph_api_key" 2>/dev/null)"
+    SRSE_V7_DEFAULTS="$HOME/.dots/srse.v7.defaults"
+    SRSE_V8_DEFAULTS="$HOME/.dots/srse.v8.defaults"
     # The below start command exposes only the relevant env variables to Claude.
     # Claude does not correctly handle Proxy env so vital these are removed
     claude() {
@@ -181,6 +183,8 @@ if [[ -f "$HOME/.dots/claude_api_key" ]]; then
         NODE_EXTRA_CA_CERTS="$SSL_CERT_FILE" \
         CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1 \
         SOURCEGRAPH_TOKEN="$SOURCEGRAPH_TOKEN" \
+        SRSE_V7_DEFAULTS="$SRSE_V7_DEFAULTS" \
+        SRSE_V8_DEFAULTS="$SRSE_V8_DEFAULTS" \
         TERM="xterm-256color" \
         claude "$@"
     }
