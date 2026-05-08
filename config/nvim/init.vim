@@ -1,1 +1,1 @@
-/Users/gil/.dots/vimrc
+../../vimrc
