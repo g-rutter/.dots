@@ -3,6 +3,7 @@ config/vim/bundle/
 config/fish/fishd.????????????
 claude_api_key
 sourcegraph_api_key
+litellm_api_key
 *.DS_Store
 srse.*.defaults
 
