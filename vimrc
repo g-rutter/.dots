@@ -246,11 +246,14 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-scripts/CmdlineComplete.git'
 Plugin 'vim-scripts/InsertChar'
 
-Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 filetype plugin indent on "required!
+
+" fzf is installed at ~/.fzf (cloned by the auto-infra deploy), not as a
+" Vundle bundle, so its vim plugin needs to be added to runtimepath here.
+set rtp+=~/.fzf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Bundle settings                               "

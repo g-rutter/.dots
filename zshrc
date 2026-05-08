@@ -55,7 +55,7 @@ echo -en "\033]0;❤️\a"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode fzf)
+plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh # User configuration
 
@@ -203,3 +203,8 @@ if [[ -f "$HOME/.dots/litellm_api_key" ]]; then
     }
 fi
 
+
+# fzf: prepend so it wins over any older distro fzf (e.g. /usr/bin/fzf
+# 0.29 on jammy doesn't support --zsh).
+export PATH="$HOME/.fzf/bin:$PATH"
+command -v fzf >/dev/null && eval "$(fzf --zsh)"
