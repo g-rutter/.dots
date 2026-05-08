@@ -1,0 +1,33 @@
+{
+  "model": "opus[1m]",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": false,
+    "maven-mcp@maven-securities-marketplace": true,
+    "spiderrock@gil-plugins": true,
+    "dispersion-data@gil-plugins": true,
+    "dispersion-k8s@gil-plugins": true
+  },
+  "extraKnownMarketplaces": {
+    "maven-securities-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "git@git.mavensecurities.com:Maven/mavgpt.prompts.git"
+      },
+      "autoUpdate": true
+    },
+    "gil-plugins": {
+      "source": {
+        "source": "git",
+        "url": "git@git.mavensecurities.com:gil-rutter/claude-plugins.git"
+      },
+      "autoUpdate": true
+    }
+  },
+  "effortLevel": "medium",
+  "theme": "light",
+  "editorMode": "vim"
+}
