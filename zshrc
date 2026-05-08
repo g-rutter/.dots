@@ -155,7 +155,6 @@ export NVM_DIR="$HOME/.nvm"
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
-eval "$(gh copilot alias -- zsh)"
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
 eval "$(uv generate-shell-completion zsh)"
@@ -165,8 +164,8 @@ export UV_DEFAULT_INDEX="https://artifactory.mavensecurities.com/artifactory/api
 export UV_NATIVE_TLS=true
 
 # Claude
-if [[ -f "$HOME/.dots/claude_api_key" ]]; then
-    ANTHROPIC_AUTH_TOKEN="$(<$HOME/.dots/claude_api_key)"
+if [[ -f "$HOME/.dots/litellm_api_key" ]]; then
+    LITELLM_API_KEY="$(<$HOME/.dots/litellm_api_key)"
     SOURCEGRAPH_TOKEN="$(cat "$HOME/.dots/sourcegraph_api_key" 2>/dev/null)"
     SRSE_V7_DEFAULTS="$HOME/.dots/srse.v7.defaults"
     SRSE_V8_DEFAULTS="$HOME/.dots/srse.v8.defaults"
@@ -178,7 +177,7 @@ if [[ -f "$HOME/.dots/claude_api_key" ]]; then
         HOME="$HOME" \
         USER="$USER" \
         ANTHROPIC_BASE_URL="https://llm-proxy.cs.mavensecurities.com" \
-        ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_AUTH_TOKEN" \
+        ANTHROPIC_AUTH_TOKEN="$LITELLM_API_KEY" \
         SSL_CERT_FILE="$SSL_CERT_FILE" \
         NODE_EXTRA_CA_CERTS="$SSL_CERT_FILE" \
         CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1 \
@@ -187,6 +186,20 @@ if [[ -f "$HOME/.dots/claude_api_key" ]]; then
         SRSE_V8_DEFAULTS="$SRSE_V8_DEFAULTS" \
         TERM="xterm-256color" \
         claude "$@"
+    }
+
+    opencode() {
+      env -i \
+        PATH="$PATH" \
+        HOME="$HOME" \
+        USER="$USER" \
+        TERM="xterm-256color" \
+        OPENAI_API_KEY="$LITELLM_API_KEY" \
+        OPENAI_BASE_URL="https://llm-proxy.cs.mavensecurities.com" \
+        SOURCEGRAPH_TOKEN="$SOURCEGRAPH_TOKEN" \
+        SSL_CERT_FILE="$SSL_CERT_FILE" \
+        NODE_EXTRA_CA_CERTS="$SSL_CERT_FILE" \
+        "$HOME/.opencode/bin/opencode" "$@"
     }
 fi
 
