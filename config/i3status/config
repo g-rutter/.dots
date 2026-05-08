@@ -1,0 +1,25 @@
+general {
+    colors = true
+    interval = 1
+    separator = " | "
+}
+
+order += "cpu_usage"
+order += "memory"
+order += "time"
+
+cpu_usage {
+    format = "%usage"
+    degraded_threshold = 25
+}
+
+memory {
+    format = "%used/%total"
+    threshold_degraded = "10%"
+}
+
+time {
+    format = "%Y-%m-%d %H:%M:%S"
+}
+
+
