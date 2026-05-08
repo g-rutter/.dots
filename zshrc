@@ -59,31 +59,11 @@ plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh # User configuration
 
-# deactivate until not in a conda env, then activate given environment:
-ca() {
-    # Check if an environment name is provided
-    if [ $# -eq 0 ]; then
-        echo "Usage: ca <environment_name>"
-        return 1
-    fi
-
-    # Deactivate current conda environment (if any)
-    while [ ! -z "$CONDA_DEFAULT_ENV" ]; do
-        conda deactivate
-    done
-
-    # Activate the specified environment
-    conda activate "$1"
-}
-
-alias conde="conda deactivate"
-alias conie="conda info --envs"
 alias v="vim -p"
 alias drit="docker run -it"
 alias gs="gst"
 alias wp="which -a python"
 alias tmas="tmux new -A -s"
-alias i3tree="conda run -n i3 py3tree"
 alias vdi-prod="ssh vdi-prod -t 'zsh -l'"
 alias ixqdsares01="ssh ixqdsares01 -t 'zsh -l'"
 alias lcd="cd"  # Typo I often make
@@ -109,21 +89,6 @@ bindkey '^N' history-beginning-search-forward
 # Disable terminal freezing on ctrl-s
 stty -ixon
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("$HOME/miniconda3/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 # When this file is found in the starting directory, launch a tmux session
 # Useful for giving each Pycharm project its own tmux session
 # First condition: .tmux_session_name should exist
@@ -138,11 +103,9 @@ if [ -f .tmux-session-name ] && [ -z "${TMUX}" ]; then
     fi
 fi
 
-if [ -n "${TMUX}" ] && [ -z "${VIRTUAL_ENV}" ] && (( CONDA_SHLVL == 0 )); then
+if [ -n "${TMUX}" ] && [ -z "${VIRTUAL_ENV}" ]; then
     if [ -f .venv/bin/activate ]; then
         source .venv/bin/activate
-    elif [ -f .conda-environment-name ] && [ -z "${}" ]; then
-        conda activate $(<.conda-environment-name)
     fi
 fi
 
