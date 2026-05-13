@@ -124,7 +124,7 @@ eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 alias urf="uv run --frozen"
 export UV_DEFAULT_INDEX="https://artifactory.mavensecurities.com/artifactory/api/pypi/mavenall-pypi-prod-eu/simple"
-export UV_NATIVE_TLS=true
+export UV_SYSTEM_CERTS=true
 
 # Claude
 if [[ -f "$HOME/.dots/litellm_api_key" ]]; then
