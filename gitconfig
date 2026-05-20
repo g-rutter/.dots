@@ -26,3 +26,5 @@
 	smudge = cat
 [url "git@github.com:"]
 	insteadOf = "https://github.com/"
+[safe]
+	directory = /mnt/vast/dispersion/dev/config/dispersion_config
