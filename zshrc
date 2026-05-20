@@ -179,3 +179,6 @@ source "/home/gil.rutter@mavensecurities.com/repos/k8s-deployments/util/packages
 # User completions (added by validate-app --install-tools)
 fpath=(/home/gil.rutter@mavensecurities.com/.zsh/completions $fpath)
 autoload -Uz compinit && compinit
+
+# Per-host overrides written by auto-infra (last so it wins over earlier exports).
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
