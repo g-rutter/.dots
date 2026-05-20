@@ -9,10 +9,17 @@ export ZSH="$HOME/.oh-my-zsh"
 export no_proxy=10.0.0.0/8,127.0.0.1,172.16.0.0/12,192.168.0.0/16,localhost,.localdomain.com,.mavensecurities.com
 export NO_PROXY=10.0.0.0/8,127.0.0.1,172.16.0.0/12,192.168.0.0/16,localhost,.localdomain.com,.mavensecurities.com
 
-export CURL_CA_CERTS="/etc/ssl/certs/ca-certificates.crt"
-export HTTPLIB2_CA_CERTS="/etc/ssl/certs/ca-certificates.crt"
-export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
-export SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt"
+# Distros disagree on the bundle filename; pick the first that exists.
+for _ca in /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-bundle.crt; do
+    if [[ -f $_ca ]]; then
+        export CURL_CA_CERTS=$_ca
+        export HTTPLIB2_CA_CERTS=$_ca
+        export REQUESTS_CA_BUNDLE=$_ca
+        export SSL_CERT_FILE=$_ca
+        break
+    fi
+done
+unset _ca
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
