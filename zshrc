@@ -180,8 +180,12 @@ export PATH="$HOME/.fzf/bin:$PATH"
 command -v fzf >/dev/null && eval "$(fzf --zsh)"
 
 # validate-app completion (bash script via bashcompinit)
-autoload -Uz bashcompinit && bashcompinit
-source "/home/gil.rutter@mavensecurities.com/repos/k8s-deployments/util/packages/validate-app/validate-app-completion.bash"
+_validate_app_completion="/home/gil.rutter@mavensecurities.com/repos/k8s-deployments/util/packages/validate-app/validate-app-completion.bash"
+if [[ -f $_validate_app_completion ]]; then
+    autoload -Uz bashcompinit && bashcompinit
+    source "$_validate_app_completion"
+fi
+unset _validate_app_completion
 
 # User completions (added by validate-app --install-tools)
 fpath=(/home/gil.rutter@mavensecurities.com/.zsh/completions $fpath)
