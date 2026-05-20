@@ -171,3 +171,11 @@ fi
 # 0.29 on jammy doesn't support --zsh).
 export PATH="$HOME/.fzf/bin:$PATH"
 command -v fzf >/dev/null && eval "$(fzf --zsh)"
+
+# validate-app completion (bash script via bashcompinit)
+autoload -Uz bashcompinit && bashcompinit
+source "/home/gil.rutter@mavensecurities.com/repos/k8s-deployments/util/packages/validate-app/validate-app-completion.bash"
+
+# User completions (added by validate-app --install-tools)
+fpath=(/home/gil.rutter@mavensecurities.com/.zsh/completions $fpath)
+autoload -Uz compinit && compinit
