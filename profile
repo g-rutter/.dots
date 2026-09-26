@@ -12,7 +12,7 @@ export EDITOR="v"
 export PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
 export LESS=-RFX
 
-export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH:$HOME/bin"
 
 export PYTHONSTARTUP="$HOME/.dots/python_interactive_startup.py"
 

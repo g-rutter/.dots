@@ -88,7 +88,7 @@ export HYDRA_FULL_ERROR=1
 alias k="kubectl"
 alias kns="kubectl ns"
 alias kctx="kubectl ctx"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH:$HOME/.local/bin"
+export PATH="$HOME/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
