@@ -8,7 +8,7 @@ echo -ne "\033]0; $HOSTNAME \007"
 #  Settings  #
 ##############
 
-export EDITOR="v"
+export EDITOR="vim"
 export PLATFORM=`uname -s | tr '[A-Z]' '[a-z]'`
 export LESS=-RFX
 
