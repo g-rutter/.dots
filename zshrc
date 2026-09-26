@@ -55,7 +55,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Set simple window title (overridden by tmux)
 export DISABLE_AUTO_TITLE="true"
-echo -en "\033]0;❤️ ${$(hostname)%%.*}\a"
+echo -en "\033]0;${$(hostname)%%.*}\a"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/

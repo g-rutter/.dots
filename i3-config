@@ -201,3 +201,7 @@ exec --no-startup-id setxkbmap -layout gb
 bindsym $mod+p exec notify-send tree "$(bash -i -c "conda run -n i3 py3tree -f")" >test.log 2>test.err
 popup_during_fullscreen smart
 
+for_window [class="^dev\.zed\.Zed$"] title_format "💚 %title"
+for_window [class="^Gnome-terminal$"] title_format "❤️ %title"
+for_window [all] title_window_icon padding 3px
+for_window [class="^(Slack|Gnome-terminal|dev\.zed\.Zed)$"] title_window_icon off
