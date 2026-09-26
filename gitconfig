@@ -2,7 +2,11 @@
 	nw = Gil Rutter
 [user]
 	name = Gil Rutter
-	email = g.o.rutter@gmail.com
+	email = gil.rutter@mavensecurities.com
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
+	path = ~/.dots/gitconfig-personal
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+	path = ~/.dots/gitconfig-personal
 [credential]
 	helper = cache --timeout=3600
 [merge]
@@ -21,10 +25,6 @@
    status = auto
 [push]
 	default = simple
-[filter "clean_ipynb"]
-	clean = ~/scripts/ipynb_drop_output.py
-	smudge = cat
-[url "git@github.com:"]
-	insteadOf = "https://github.com/"
 [safe]
 	directory = /mnt/vast/dispersion/dev/config/dispersion_config
+	directory = /mnt/vast/dispersion/prod/config/dispersion_config
