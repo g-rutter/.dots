@@ -90,9 +90,8 @@ export NVM_DIR="$HOME/.nvm"
 
 autoload -Uz compinit
 zstyle ':completion:*' menu select
-fpath+=~/.zfunc
 
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
+autoload -Uz compinit; compinit
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 alias urf="uv run --frozen"
