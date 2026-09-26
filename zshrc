@@ -31,6 +31,9 @@ echo -en "\033]0;${$(hostname)%%.*}\a"
 
 plugins=(git vi-mode)
 
+# User completions (added by validate-app --install-tools)
+fpath=(/home/gil.rutter@mavensecurities.com/.zsh/completions $fpath)
+
 source $ZSH/oh-my-zsh.sh # User configuration
 
 alias v="vim -p"
@@ -52,6 +55,7 @@ set -o ignoreeof
 export HYDRA_FULL_ERROR=1
 
 alias k="kubectl"
+compdef k=kubectl
 alias kns="kubectl ns"
 alias kctx="kubectl ctx"
 export PATH="$HOME/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -86,10 +90,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-autoload -Uz compinit
 zstyle ':completion:*' menu select
 
-autoload -Uz compinit; compinit
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 alias urf="uv run --frozen"
@@ -150,10 +152,6 @@ if [[ -f $_validate_app_completion ]]; then
     source "$_validate_app_completion"
 fi
 unset _validate_app_completion
-
-# User completions (added by validate-app --install-tools)
-fpath=(/home/gil.rutter@mavensecurities.com/.zsh/completions $fpath)
-autoload -Uz compinit && compinit
 
 # Per-host overrides written by auto-infra (last so it wins over earlier exports).
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
