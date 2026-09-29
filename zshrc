@@ -55,7 +55,7 @@ set -o ignoreeof
 export HYDRA_FULL_ERROR=1
 
 alias k="kubectl"
-compdef k=kubectl
+(( $+commands[kubectl] )) && compdef k=kubectl
 alias kns="kubectl ns"
 alias kctx="kubectl ctx"
 export PATH="$HOME/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
