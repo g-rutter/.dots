@@ -1,0 +1,45 @@
+[
+  {
+    "context": "Workspace",
+  },
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "space w": "workspace::Save",
+      "space q": "pane::CloseActiveItem",
+      "ctrl-t": "project_symbols::Toggle"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-p": ["terminal::SendKeystroke", "ctrl-p"],
+      "ctrl-n": ["terminal::SendKeystroke", "ctrl-n"],
+      "ctrl-t": ["terminal::SendKeystroke", "ctrl-t"]
+    }
+  },
+  {
+    "context": "AcpThread > Editor && use_modifier_to_send",
+    "unbind": {
+      "ctrl-enter": "agent::Chat"
+    }
+  },
+  {
+    "context": "AcpThread > Editor",
+    "unbind": {
+      "ctrl-enter": "agent::ChatWithFollow"
+    }
+  },
+  {
+    "context": "!AcpThread > Editor && mode == full",
+    "unbind": {
+      "ctrl-enter": "assistant::InlineAssist"
+    }
+  },
+  {
+    "context": "Terminal",
+    "unbind": {
+      "ctrl-enter": "assistant::InlineAssist"
+    }
+  }
+]

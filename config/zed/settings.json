@@ -1,0 +1,84 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "cli_default_open_behavior": "new_window",
+  "title_bar": {
+    "show_branch_status_icon": false,
+    "show_menus": false,
+    "button_layout": "platform_default"
+  },
+  "vim": {
+    "toggle_relative_line_numbers": true,
+    "use_smartcase_find": false
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "vim_mode": true,
+  "use_smartcase_search": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "macOS Classic Light",
+    "dark": "One Dark",
+  },
+  "window_title_format": "${remoteName}${separator}${projectName}",
+  "window_title_separator": "/",
+  "ssh_connections": [
+    {
+      "host": "qv-prod",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/gil.rutter@mavensecurities.com"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "ixqdsares01",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/gil.rutter@mavensecurities.com"
+          ]
+        },
+        {
+          "paths": [
+            "/home/gil.rutter@mavensecurities.com/repos/qv"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "vdi-prod",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/gil.rutter@mavensecurities.com/repos/dispersion"
+          ]
+        },
+        {
+          "paths": [
+            "/home/gil.rutter@mavensecurities.com/repos/dispersion_config"
+          ]
+        }
+      ]
+    }
+  ],
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 200
+    }
+  },
+}
