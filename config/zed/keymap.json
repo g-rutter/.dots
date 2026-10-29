@@ -41,5 +41,11 @@
     "unbind": {
       "ctrl-enter": "assistant::InlineAssist"
     }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-?": "agent::ToggleFocus"
+    }
   }
 ]
