@@ -26,10 +26,10 @@
   "buffer_font_size": 15,
   "theme": {
     "mode": "system",
-    "light": "macOS Classic Light",
+    "light": "One Light",
     "dark": "One Dark",
   },
-  "window_title_format": "${remoteName}${separator}${projectName}",
+  "window_title_format": "${remoteName}${separator}${projectName}[${branch}]",
   "window_title_separator": "/",
   "ssh_connections": [
     {
@@ -56,6 +56,11 @@
           "paths": [
             "/home/gil.rutter@mavensecurities.com/repos/qv"
           ]
+        },
+        {
+          "paths": [
+            "/home/gil.rutter@mavensecurities.com/repos/spiderrock-datasets"
+          ]
         }
       ]
     },
@@ -71,6 +76,11 @@
         {
           "paths": [
             "/home/gil.rutter@mavensecurities.com/repos/dispersion_config"
+          ]
+        },
+        {
+          "paths": [
+            "/home/gil.rutter@mavensecurities.com/repos/qv"
           ]
         }
       ]
