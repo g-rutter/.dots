@@ -25,6 +25,7 @@
    status = auto
 [push]
 	default = simple
+	autoSetupRemote = true
 [safe]
 	directory = /mnt/vast/dispersion/dev/config/dispersion_config
 	directory = /mnt/vast/dispersion/prod/config/dispersion_config
