@@ -70,11 +70,20 @@ stty -ixon
 # Useful for giving each Pycharm project its own tmux session
 # First condition: .tmux_session_name should exist
 # Second condition: $TMUX should be empty/unset
-if [ -f .tmux-session-name ] && [ -z "${TMUX}" ]; then
-    tmux_session_name=$(<.tmux-session-name)
+# Otherwise, if inside a git repo, use the repo root path (with ~ for $HOME) as the session name
+if [ -z "${TMUX}" ]; then
+    if [ -f .tmux-session-name ]; then
+        tmux_session_name=$(<.tmux-session-name)
+    elif git_root=$(git rev-parse --show-toplevel 2>/dev/null); then
+        # tmux replaces '.' and ':' with '_' in session names
+        tmux_session_name=${${git_root/#$HOME/\~}//[.:]/_}
+    fi
+    unset git_root
+fi
+if [ -n "${tmux_session_name}" ]; then
     # Third condition: only attach if the session doesn't exist or is unattached
     if [[ $(tmux ls | grep "^${tmux_session_name}:.*(attached)$" | wc -c ) -eq 0 ]]; then
-        tmas $tmux_session_name
+        tmas "$tmux_session_name"
     else
         echo "Not auto-attaching to attached tmux session. Attach with:\ntmas $tmux_session_name"
     fi
@@ -101,6 +110,7 @@ export UV_SYSTEM_CERTS=true
 # Claude
 if [[ -f "$HOME/.dots/litellm_api_key" ]]; then
     LITELLM_API_KEY="$(<$HOME/.dots/litellm_api_key)"
+    LITELLM_BASE_URL="https://llm-proxy.cs.mavensecurities.com"
     SOURCEGRAPH_TOKEN="$(cat "$HOME/.dots/sourcegraph_api_key" 2>/dev/null)"
     SRSE_V7_DEFAULTS="$HOME/.dots/srse.v7.defaults"
     SRSE_V8_DEFAULTS="$HOME/.dots/srse.v8.defaults"
@@ -111,7 +121,7 @@ if [[ -f "$HOME/.dots/litellm_api_key" ]]; then
         PATH="$PATH" \
         HOME="$HOME" \
         USER="$USER" \
-        ANTHROPIC_BASE_URL="https://llm-proxy.cs.mavensecurities.com" \
+        ANTHROPIC_BASE_URL="$LITELLM_BASE_URL" \
         ANTHROPIC_AUTH_TOKEN="$LITELLM_API_KEY" \
         SSL_CERT_FILE="$SSL_CERT_FILE" \
         NODE_EXTRA_CA_CERTS="$SSL_CERT_FILE" \
@@ -126,16 +136,23 @@ if [[ -f "$HOME/.dots/litellm_api_key" ]]; then
 
     opencode() {
       env -i \
+        \
+        OPENCODE_ENABLE_EXA=1 \
+        \
         PATH="$PATH" \
         HOME="$HOME" \
         USER="$USER" \
         TERM="xterm-256color" \
+        \
         OPENAI_API_KEY="$LITELLM_API_KEY" \
-        OPENAI_BASE_URL="https://llm-proxy.cs.mavensecurities.com" \
+        OPENAI_BASE_URL="$LITELLM_BASE_URL" \
+        \
         SOURCEGRAPH_TOKEN="$SOURCEGRAPH_TOKEN" \
+        \
         SSL_CERT_FILE="$SSL_CERT_FILE" \
         NODE_EXTRA_CA_CERTS="$SSL_CERT_FILE" \
-        "$HOME/.opencode/bin/opencode" "$@"
+        \
+        opencode "$@"
     }
 fi
 
