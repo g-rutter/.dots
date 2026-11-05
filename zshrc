@@ -131,7 +131,7 @@ if [[ -f "$HOME/.dots/litellm_api_key" ]]; then
         SRSE_V7_DEFAULTS="$SRSE_V7_DEFAULTS" \
         SRSE_V8_DEFAULTS="$SRSE_V8_DEFAULTS" \
         TERM="xterm-256color" \
-        claude "$@"
+        claude --settings "$HOME/.dots/claude/settings.json" "$@"
     }
 
     opencode() {

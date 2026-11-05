@@ -2,7 +2,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "opus[1m]",
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
@@ -13,7 +13,7 @@
     "spiderrock@gil-plugins": true,
     "dispersion-data@gil-plugins": true,
     "dispersion-k8s@gil-plugins": true,
-    "srse-v8-migrate@gil-plugins": true
+    "srse-v8-migrate@gil-plugins": false
   },
   "extraKnownMarketplaces": {
     "maven-securities-marketplace": {
@@ -34,5 +34,59 @@
   "effortLevel": "high",
   "skipWorkflowUsageWarning": true,
   "theme": "light",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "attribution": {
+    "pr": ""
+  },
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: Maven Securities — inferred from git host (git.mavensecurities.com) and repo org (dispersion)",
+      "**Cloud provider(s)**: AWS S3 (bucket names observed: dispersion-data-historical-dev, dispersion-data-historical-prod) and Kubernetes (namespaces observed via kubectl -n flags in this project)",
+      "**Repository visibility**: Not queryable via gh (origin host git.mavensecurities.com is not a supported/plain owner/repo shape) — assume private per shipped default heuristic (internal corporate git host, no public indicators)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured — repo .gitignore excludes secrets.yaml, .env, and an unusual redacted name, suggesting local secret files are kept out of git but no secrets manager identified",
+      "**Default / protected branches**: master (default branch per repo facts); protection status not queryable via gh (origin host not supported) — unverified",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Host containment**: None configured — assume Claude Code runs on an ordinary developer machine with open internet",
+      "**Source control**: git.mavensecurities.com/dispersion/dispersion (origin) only — no additional orgs configured",
+      "**Trusted internal domains**: git.mavensecurities.com, artifactory.mavensecurities.com, llm-proxy.cs.mavensecurities.com, registry.mavensecurities.com, wiki.mavensecurities.com (per this repo's remote, contacted hosts, and README reference)",
+      "**Trusted cloud buckets**: dispersion-data-historical-dev (config-derived — not a confirmed upload destination; uploads of local data still require confirmation)",
+      "**Key internal services**: Matador, SRSE, OMS, Quartz, Grafana (per CLAUDE.md Key External Integrations)",
+      "**Internal package registry**: artifactory.mavensecurities.com",
+      "**Sensitive data locations & audiences**: matador-prod.json, utils/k8s-debug.py, and any file matching .gitignore secrets patterns (secrets.yaml, .env, redacted unusual name) — share only with audiences cleared at the Maven Securities internal bar",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: dispersion-data-historical-prod (S3 bucket, 'prod' segment); DISPERSION_ENVIRONMENT=PROD configs; any namespace/host containing 'prod' or 'production' as a whole segment",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries 'prod' or 'production' as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development — financial trading system (dispersion) at Maven Securities",
+      "**Trusted repo**: git.mavensecurities.com/dispersion/dispersion (this repo's working directory and origin remote) — treat as private per shipped default, confidential material OK, secrets never cleared by visibility",
+      "**Org-specific CLIs**: mav-log, kubectl, uv, tmas, ordergateway (observed in this project and/or shell history)",
+      "Routine under ~/repos/dispersion/ prefix: pytest, black, pre-commit, mypy, uv sync, git operations scoped to the dispersion origin remote"
+    ],
+    "soft_deny": [
+      "$defaults",
+      "Bash(aws s3 rm:*) in dispersion-data-historical-prod",
+      "kubectl destructive operations (delete/drain/cordon) against any namespace"
+    ]
+  },
+  "env": {
+    "DISABLE_TELEMETRY": "1"
+  },
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "pluginConfigs": {
+    "cc-plugin-agents-md@builtin": {
+      "options": {
+        "instructionFiles": "claude-md-or-agents-md"
+      }
+    }
+  },
+  "tui": "default",
+  "workflowKeywordTriggerEnabled": false
 }
