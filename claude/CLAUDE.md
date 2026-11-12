@@ -5,3 +5,4 @@ Global rules:
 * Our git host is GitHub Enterprise at git.mavensecurities.com and `gh` should be available for working with it
 * Always make PRs as draft unless open status is explicitly requested
 * The sourcegraph MCP might have documentation stating it contains 'all Maven code', but it does not. Sourcegraph indexes only the Maven, Thirdparty and WindowsEngineering GitHub orgs; most trading desk code (dispersion, SA, Risk\*, VolAlpha, QSR, personal repos, ...) is not indexed - don't waste time searching for it.
+* When working with code within the dispersion estate (dispersion-\* namespaces), prioritise skills and plugins specifically for dispersion. For example, use dispersion-k8s:logs rather than the logging mcp. These specialised tools save time by explaining the special rules for working with dispersion.
